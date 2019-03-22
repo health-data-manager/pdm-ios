@@ -13,10 +13,23 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var patientDataManager: PatientDataManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if let url = Bundle.main.url(forResource: "Settings", withExtension: "plist") {
+            do {
+                let config = try PropertyListSerialization.propertyList(from: Data(contentsOf: url), options: [], format: nil)
+                if let configDict = config as? [String: Any] {
+                    patientDataManager = PatientDataManager(withConfig: configDict)
+                }
+            } catch {
+                print("Unable to load settings")
+            }
+        }
+        if patientDataManager == nil {
+            fatalError("Unable to initialize patient data manager")
+        }
         return true
     }
 
@@ -88,6 +101,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
 
