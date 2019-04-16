@@ -228,6 +228,7 @@
 				TargetAttributes = {
 					2E234291224291C300045E3A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
 								enabled = 1;
@@ -236,10 +237,12 @@
 					};
 					2E2342A8224291C500045E3A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 2E234291224291C300045E3A;
 					};
 					2E2342B3224291C500045E3A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 2E234291224291C300045E3A;
 					};
 				};
@@ -489,7 +492,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-ui";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -508,7 +511,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-ui";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -528,7 +531,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-uiTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pdm-ui.app/pdm-ui";
 			};
@@ -549,7 +552,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-uiTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pdm-ui.app/pdm-ui";
 			};
@@ -569,7 +572,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-uiUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "pdm-ui";
 			};
@@ -589,7 +592,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-uiUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "pdm-ui";
 			};
