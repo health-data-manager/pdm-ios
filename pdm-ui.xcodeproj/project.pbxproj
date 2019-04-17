@@ -20,6 +20,8 @@
 		2E2342CD2242935700045E3A /* HealthRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */; };
 		2E2342CF2242936600045E3A /* HealthRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342CE2242936600045E3A /* HealthRecordViewController.swift */; };
 		2E2342D12242937700045E3A /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342D02242937700045E3A /* InitialViewController.swift */; };
+		2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC5226783B600A9A7D6 /* PDMTheme.swift */; };
+		2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC6226783B600A9A7D6 /* PDMButton.swift */; };
 		2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5A87BA2244C06000E225D5 /* MessageBundle.swift */; };
 		2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E5A87BC2245188B00E225D5 /* Settings.plist */; };
 /* End PBXBuildFile section */
@@ -62,6 +64,8 @@
 		2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordTableViewController.swift; sourceTree = "<group>"; };
 		2E2342CE2242936600045E3A /* HealthRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordViewController.swift; sourceTree = "<group>"; };
 		2E2342D02242937700045E3A /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		2E395EC5226783B600A9A7D6 /* PDMTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMTheme.swift; sourceTree = "<group>"; };
+		2E395EC6226783B600A9A7D6 /* PDMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMButton.swift; sourceTree = "<group>"; };
 		2E5A87BA2244C06000E225D5 /* MessageBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBundle.swift; sourceTree = "<group>"; };
 		2E5A87BC2245188B00E225D5 /* Settings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +132,8 @@
 				2E2342CE2242936600045E3A /* HealthRecordViewController.swift */,
 				2E2342C6224292DC00045E3A /* PatientDataManager.swift */,
 				2E5A87BA2244C06000E225D5 /* MessageBundle.swift */,
+				2E395EC6226783B600A9A7D6 /* PDMButton.swift */,
+				2E395EC5226783B600A9A7D6 /* PDMTheme.swift */,
 				2E2342A4224291C500045E3A /* Info.plist */,
 				2E23429C224291C300045E3A /* pdm_ui.xcdatamodeld */,
 			);
@@ -301,10 +307,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E2342CF2242936600045E3A /* HealthRecordViewController.swift in Sources */,
+				2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */,
 				2E2342D12242937700045E3A /* InitialViewController.swift in Sources */,
 				2E23429E224291C300045E3A /* pdm_ui.xcdatamodeld in Sources */,
 				2E2342C7224292DC00045E3A /* PatientDataManager.swift in Sources */,
 				2E234298224291C300045E3A /* LoginViewController.swift in Sources */,
+				2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */,
 				2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */,
 				2E2342CD2242935700045E3A /* HealthRecordTableViewController.swift in Sources */,
 				2E234296224291C300045E3A /* AppDelegate.swift in Sources */,
