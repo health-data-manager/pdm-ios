@@ -120,6 +120,7 @@
 		2E234294224291C300045E3A /* pdm-ui */ = {
 			isa = PBXGroup;
 			children = (
+				2E395EC92267882500A9A7D6 /* Backend */,
 				2E2342C82242931600045E3A /* pdm-ui.entitlements */,
 				2E234295224291C300045E3A /* AppDelegate.swift */,
 				2E234297224291C300045E3A /* LoginViewController.swift */,
@@ -130,8 +131,6 @@
 				2E2342D02242937700045E3A /* InitialViewController.swift */,
 				2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */,
 				2E2342CE2242936600045E3A /* HealthRecordViewController.swift */,
-				2E2342C6224292DC00045E3A /* PatientDataManager.swift */,
-				2E5A87BA2244C06000E225D5 /* MessageBundle.swift */,
 				2E395EC6226783B600A9A7D6 /* PDMButton.swift */,
 				2E395EC5226783B600A9A7D6 /* PDMTheme.swift */,
 				2E2342A4224291C500045E3A /* Info.plist */,
@@ -164,6 +163,15 @@
 				2E2342CA2242931600045E3A /* HealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2E395EC92267882500A9A7D6 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				2E2342C6224292DC00045E3A /* PatientDataManager.swift */,
+				2E5A87BA2244C06000E225D5 /* MessageBundle.swift */,
+			);
+			path = Backend;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

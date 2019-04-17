@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     patientDataManager = PatientDataManager(withConfig: configDict)
                 }
             } catch {
-                print("Unable to load settings")
+                print("Unable to load settings (did you edit a copy of Settings-Example.plist saved as Settings.plist?)")
             }
         }
         if patientDataManager == nil {

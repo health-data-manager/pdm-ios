@@ -8,6 +8,13 @@
 import Foundation
 import HealthKit
 
+enum PatientDataManagerError: Error {
+    case internalError
+    case serverReturnedError(Int)
+    case couldNotUnderstandResponse
+    case loginFailed
+}
+
 // The "actual" PatientDataManager. This is intended to be a singleton that represents the connection to the PatientDataManager web server.
 class PatientDataManager {
     // It's probably possible to create this list via reflection but conceptually we should limit it to documents we can handle anyway
@@ -28,20 +35,12 @@ class PatientDataManager {
     var patientId: String?
 
     init?(withConfig config: [String: Any]) {
-        guard let urlString = config["RootURL"] as? String else {
-            return nil
-        }
-        guard let rootURL = URL(string: urlString) else {
-            return nil
-        }
-        guard let clientId = config["ClientID"] as? String else {
-            return nil
-        }
-        guard let clientSecret = config["ClientSecret"] as? String else {
-            return nil
-        }
-        guard let patientId = config["PatientID"] as? String else {
-            return nil
+        guard let urlString = config["RootURL"] as? String,
+            let rootURL = URL(string: urlString),
+            let clientId = config["ClientID"] as? String,
+            let clientSecret = config["ClientSecret"] as? String,
+            let patientId = config["PatientID"] as? String else {
+                return nil
         }
         self.rootURL = rootURL
         self.clientId = clientId
@@ -49,6 +48,11 @@ class PatientDataManager {
         self.patientId = patientId
     }
 
+    func user(_ user: String, signInWithPassword password: String, completionHandler: @escaping (Error?) -> Void) {
+        // This is currently unimplemented and therefore never completes.
+    }
+
+    // Logs in with the client secret
     func clientLogin(completionHandler: @escaping (Error?) -> Void) {
         guard let url = URL(string: "oauth/token", relativeTo: rootURL) else {
             fatalError("could not create oauth URL")
@@ -59,41 +63,42 @@ class PatientDataManager {
         request.httpBody = "client_id=\(clientId)&client_secret=\(clientSecret)&grant_type=client_credentials".data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                self.handleClientError(error)
+                completionHandler(error)
                 return
             }
-            guard let httpResponse = response as? HTTPURLResponse,
-                (200...299).contains(httpResponse.statusCode) else {
-                    self.handleServerError(response)
-                    return
+            guard let httpResponse = response as? HTTPURLResponse else {
+                // Huh?
+                completionHandler(PatientDataManagerError.internalError)
+                return
+            }
+            guard (200...299).contains(httpResponse.statusCode) else {
+                completionHandler(PatientDataManagerError.serverReturnedError(httpResponse.statusCode))
+                return
             }
             // Decode the JSON response
             if let mimeType = httpResponse.mimeType, mimeType == "application/json", let data = data {
                 do {
                     let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
-                    if let jsonResponseDictionary = jsonResponse as? [String: Any] {
-                        if jsonResponseDictionary["token_type"] as? String == "bearer" {
-                            self.bearerToken = jsonResponseDictionary["access_token"] as? String
-                            if self.bearerToken != nil {
-                                completionHandler(nil)
-                            }
-                            print("Successfully logged in: \(String(describing: self.bearerToken))")
-                        }
+                    guard let jsonResponseDictionary = jsonResponse as? [String: Any],
+                        jsonResponseDictionary["token_type"] as? String == "bearer" else {
+                            completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
+                            return
+                    }
+                    self.bearerToken = jsonResponseDictionary["access_token"] as? String
+                    if self.bearerToken != nil {
+                        completionHandler(nil)
+                        return
+                    } else {
+                        completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
+                        return
                     }
                 } catch {
-                    print("Could not log in: \(error)")
+                    completionHandler(error)
+                    return
                 }
             }
         }
         task.resume()
-    }
-
-    func handleClientError(_ error: Error?) {
-        print("Internal client error")
-    }
-
-    func handleServerError(_ response: URLResponse?) {
-        print("Error response from server")
     }
 
     func uploadHealthRecord(_ record: HKClinicalRecord, completionCallback: @escaping (Error?) -> Void) {
@@ -117,13 +122,16 @@ class PatientDataManager {
             request.httpBody = try bundle.createJsonData()
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    self.handleClientError(error)
+                    completionCallback(error)
                     return
                 }
-                guard let httpResponse = response as? HTTPURLResponse,
-                    (200...299).contains(httpResponse.statusCode) else {
-                        self.handleServerError(response)
-                        return
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    completionCallback(PatientDataManagerError.internalError)
+                    return
+                }
+                guard (200...299).contains(httpResponse.statusCode) else {
+                    completionCallback(PatientDataManagerError.serverReturnedError(httpResponse.statusCode))
+                    return
                 }
                 completionCallback(nil)
             }
