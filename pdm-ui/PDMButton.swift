@@ -13,7 +13,13 @@ import UIKit
 class PDMButton: UIButton {
     @IBInspectable var pdmButtonActive = true {
         didSet {
-            setupButtonStyle()
+            updateStyle()
+        }
+    }
+
+    override var isEnabled: Bool {
+        didSet(value) {
+            updateStyle()
         }
     }
 
@@ -31,15 +37,19 @@ class PDMButton: UIButton {
         setupButtonStyle()
     }
 
-    func setupButtonStyle() {
+    internal func setupButtonStyle() {
         layer.cornerRadius = 8
         contentEdgeInsets.left = 10
         contentEdgeInsets.top = 10
         contentEdgeInsets.right = 10
         contentEdgeInsets.bottom = 10
+        updateStyle()
+    }
+
+    internal func updateStyle() {
         if pdmButtonActive {
-            backgroundColor = PDMTheme.activeBackgroundColor
-            tintColor = PDMTheme.activeTintColor
+            backgroundColor = isEnabled ? PDMTheme.activeBackgroundColor : PDMTheme.disabledActiveBackgroundColor
+            tintColor = isEnabled ? PDMTheme.activeTintColor : PDMTheme.disabledActiveTintColor
         } else {
             backgroundColor = PDMTheme.basicBackgroundColor
             tintColor = PDMTheme.basicTintColor

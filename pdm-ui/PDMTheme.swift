@@ -11,6 +11,8 @@ import UIKit
 class PDMTheme {
     static let activeBackgroundColor = UIColor(red: 66.0/255.0, green: 140.0/255.0, blue: 227.0/255.0, alpha: 1.0)
     static let activeTintColor = UIColor.white
+    static let disabledActiveBackgroundColor = UIColor(red: 66.0/255.0, green: 140.0/255.0, blue: 227.0/255.0, alpha: 0.25)
+    static let disabledActiveTintColor = UIColor.black
     static let basicBackgroundColor = UIColor.clear
     static let basicTintColor = UIColor(white: 0.341, alpha: 1.0)
 }
