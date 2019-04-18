@@ -23,6 +23,7 @@
 		2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC5226783B600A9A7D6 /* PDMTheme.swift */; };
 		2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC6226783B600A9A7D6 /* PDMButton.swift */; };
 		2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */; };
+		2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F5226908BD009FF808 /* PDMCheckbox.swift */; };
 		2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5A87BA2244C06000E225D5 /* MessageBundle.swift */; };
 		2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E5A87BC2245188B00E225D5 /* Settings.plist */; };
 /* End PBXBuildFile section */
@@ -68,6 +69,7 @@
 		2E395EC5226783B600A9A7D6 /* PDMTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMTheme.swift; sourceTree = "<group>"; };
 		2E395EC6226783B600A9A7D6 /* PDMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMButton.swift; sourceTree = "<group>"; };
 		2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		2E5088F5226908BD009FF808 /* PDMCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMCheckbox.swift; sourceTree = "<group>"; };
 		2E5A87BA2244C06000E225D5 /* MessageBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBundle.swift; sourceTree = "<group>"; };
 		2E5A87BC2245188B00E225D5 /* Settings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +136,7 @@
 				2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */,
 				2E2342CE2242936600045E3A /* HealthRecordViewController.swift */,
 				2E395EC6226783B600A9A7D6 /* PDMButton.swift */,
+				2E5088F5226908BD009FF808 /* PDMCheckbox.swift */,
 				2E395EC5226783B600A9A7D6 /* PDMTheme.swift */,
 				2E2342A4224291C500045E3A /* Info.plist */,
 				2E5A87BC2245188B00E225D5 /* Settings.plist */,
@@ -321,6 +324,7 @@
 				2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */,
 				2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */,
 				2E2342D12242937700045E3A /* InitialViewController.swift in Sources */,
+				2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */,
 				2E23429E224291C300045E3A /* pdm_ui.xcdatamodeld in Sources */,
 				2E2342C7224292DC00045E3A /* PatientDataManager.swift in Sources */,
 				2E234298224291C300045E3A /* LoginViewController.swift in Sources */,
