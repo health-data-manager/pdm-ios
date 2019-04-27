@@ -34,6 +34,11 @@ class PatientDataManager {
     var bearerToken: String?
     var patientId: String?
 
+    // Generated URLs.
+    var oauthTokenURL: URL {
+        return rootURL.appendingPathComponent("oauth/token")
+    }
+
     init?(withConfig config: [String: Any]) {
         guard let urlString = config["RootURL"] as? String,
             let rootURL = URL(string: urlString),
@@ -48,19 +53,57 @@ class PatientDataManager {
         self.patientId = patientId
     }
 
-    func user(_ user: String, signInWithPassword password: String, completionHandler: @escaping (Error?) -> Void) {
-        // This is currently unimplemented and therefore never completes.
+    func signInAsUser(email: String, password: String, completionHandler: @escaping (Error?) -> Void) {
+        // This uses the same token login the client login would use
+        do {
+            try HTTP.postTo(oauthTokenURL, withJSON: [ "email": email, "password": password, "grant_type": "password" ], completionHandler: { data, response, error in
+                if let error = error {
+                    if let data = data, let httpFormError = error as? HTTPFormError {
+                        switch httpFormError {
+                        case .serverError(let statusCode):
+                            if statusCode == 401 {
+                                // This could be a login failure
+                                do {
+                                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                                    guard let jsonResponseDictionary = jsonResponse as? [String: Any] else {
+                                        completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
+                                        return
+                                    }
+                                    if let jsonError = jsonResponseDictionary["error"] as? String, jsonError == "invalid_grant" {
+                                        completionHandler(PatientDataManagerError.loginFailed)
+                                    }
+                                } catch {
+                                    // Do nothing and fall through
+                                }
+                            }
+                            fallthrough
+                        default:
+                            // Otherwise we do nothing
+                            break
+                        }
+                    }
+                    completionHandler(error)
+                    return
+                }
+                // Otherwise, for now, assume OK
+                completionHandler(nil)
+            })
+        } catch {
+            // This means that the JSON we generated was bad, which should not be possible
+            completionHandler(PatientDataManagerError.internalError)
+        }
     }
 
     // Logs in with the client secret
     func clientLogin(completionHandler: @escaping (Error?) -> Void) {
-        guard let url = URL(string: "oauth/token", relativeTo: rootURL) else {
-            fatalError("could not create oauth URL")
+        guard let request = URLRequest.httpPostRequestTo(oauthTokenURL, withFormValues: [
+                "client_id": clientId,
+                "client_secret": clientSecret,
+                "grant_type": "client_credentials"
+            ]) else {
+                completionHandler(PatientDataManagerError.internalError)
+                return
         }
-        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60.0)
-        request.httpMethod = "POST"
-        request.addValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "client_id=\(clientId)&client_secret=\(clientSecret)&grant_type=client_credentials".data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completionHandler(error)

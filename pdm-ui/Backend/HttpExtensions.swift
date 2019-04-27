@@ -2,9 +2,9 @@
 //  HttpExtensions.swift
 //  pdm-ui
 //
-//  Created by Potter, Dan on 4/22/19.
 //  Copyright © 2019 MITRE. All rights reserved.
 //
+// A small little library to deal with common HTTP transactions
 
 import Foundation
 
