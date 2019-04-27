@@ -26,6 +26,8 @@
 		2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F5226908BD009FF808 /* PDMCheckbox.swift */; };
 		2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5A87BA2244C06000E225D5 /* MessageBundle.swift */; };
 		2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E5A87BC2245188B00E225D5 /* Settings.plist */; };
+		2EA93702226E406400513F9D /* HttpExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA93701226E406400513F9D /* HttpExtensions.swift */; };
+		2EA93704226F60E100513F9D /* HttpExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA93703226F60E100513F9D /* HttpExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		2E5088F5226908BD009FF808 /* PDMCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMCheckbox.swift; sourceTree = "<group>"; };
 		2E5A87BA2244C06000E225D5 /* MessageBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBundle.swift; sourceTree = "<group>"; };
 		2E5A87BC2245188B00E225D5 /* Settings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		2EA93701226E406400513F9D /* HttpExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpExtensions.swift; sourceTree = "<group>"; };
+		2EA93703226F60E100513F9D /* HttpExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,7 @@
 			children = (
 				2E2342AD224291C500045E3A /* pdm_uiTests.swift */,
 				2E2342AF224291C500045E3A /* Info.plist */,
+				2EA93703226F60E100513F9D /* HttpExtensionsTests.swift */,
 			);
 			path = "pdm-uiTests";
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				2E2342C6224292DC00045E3A /* PatientDataManager.swift */,
+				2EA93701226E406400513F9D /* HttpExtensions.swift */,
 				2E5A87BA2244C06000E225D5 /* MessageBundle.swift */,
 			);
 			path = Backend;
@@ -323,6 +329,7 @@
 				2E2342CF2242936600045E3A /* HealthRecordViewController.swift in Sources */,
 				2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */,
 				2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */,
+				2EA93702226E406400513F9D /* HttpExtensions.swift in Sources */,
 				2E2342D12242937700045E3A /* InitialViewController.swift in Sources */,
 				2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */,
 				2E23429E224291C300045E3A /* pdm_ui.xcdatamodeld in Sources */,
@@ -340,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E2342AE224291C500045E3A /* pdm_uiTests.swift in Sources */,
+				2EA93704226F60E100513F9D /* HttpExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
