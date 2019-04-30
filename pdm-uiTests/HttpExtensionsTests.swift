@@ -33,7 +33,7 @@ class HttpExtensionsTests: XCTestCase {
     }
 
     func testHttpForm() {
-        let form = HttpForm()
+        let form = HTTPForm()
         form.addValue("value", for: "key")
         form.addValue("middle", for: "Key")
         form.addValue("other", for: "key")
