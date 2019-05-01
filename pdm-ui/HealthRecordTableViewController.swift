@@ -10,9 +10,6 @@ import UIKit
 import HealthKit
 
 class HealthRecordTableViewController: UITableViewController {
-    var healthStore: HKHealthStore?
-    var availableRecordTypes: Set<HKSampleType>?
-
     var healthRecords = [HKClinicalRecord]()
 
     override func viewDidLoad() {
@@ -26,25 +23,26 @@ class HealthRecordTableViewController: UITableViewController {
 
         // The assumption here is that we have the health store ready
         // Unfortunately each available type must be requested individually
-        if availableRecordTypes != nil {
-            for recordType in availableRecordTypes! {
-                let query = HKSampleQuery(sampleType: recordType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
-                    // Results will come in off the main thread
-                    guard let actualSamples = samples else {
-                        // TODO: Report the error somewhere
-                        print("*** An error occurred: \(error?.localizedDescription ?? "nil") ***")
-                        return
-                    }
+        guard let pdm = patientDataManager, let healthKit = pdm.healthKit else {
+            return
+        }
+        for recordType in healthKit.availableTypes {
+            let query = HKSampleQuery(sampleType: recordType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+                // Results will come in off the main thread
+                guard let actualSamples = samples else {
+                    // TODO: Report the error somewhere
+                    print("*** An error occurred: \(error?.localizedDescription ?? "nil") ***")
+                    return
+                }
 
-                    let records = actualSamples as? [HKClinicalRecord]
-                    if records != nil {
-                        DispatchQueue.main.async {
-                            self.addRecords(records!)
-                        }
+                let records = actualSamples as? [HKClinicalRecord]
+                if records != nil {
+                    DispatchQueue.main.async {
+                        self.addRecords(records!)
                     }
                 }
-                healthStore!.execute(query)
             }
+            healthKit.healthStore.execute(query)
         }
     }
 

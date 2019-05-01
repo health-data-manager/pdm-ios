@@ -18,20 +18,11 @@ enum PatientDataManagerError: Error {
 
 // The PatientDataManager object. This is intended to be a singleton that represents the connection to the PatientDataManager web server. Conceptually multiple instances could exist that provide connections to different PDMs.
 class PatientDataManager {
-    // It's probably possible to create this list via reflection but conceptually we should limit it to documents we can handle anyway
-    static let supportedTypes = [
-        HKClinicalTypeIdentifier.allergyRecord,
-        HKClinicalTypeIdentifier.conditionRecord,
-        HKClinicalTypeIdentifier.immunizationRecord,
-        HKClinicalTypeIdentifier.labResultRecord,
-        HKClinicalTypeIdentifier.medicationRecord,
-        HKClinicalTypeIdentifier.procedureRecord,
-        HKClinicalTypeIdentifier.vitalSignRecord
-    ]
-
-    var rootURL: URL
-    var clientId: String
-    var clientSecret: String
+    let rootURL: URL
+    let clientId: String
+    let clientSecret: String
+    // Optional HealthKit support. If the current device does not support HealthKit, this will be nil.
+    let healthKit: PDMHealthKit?
     var bearerToken: String?
     var userBearerToken: String?
     var user: User?
@@ -55,6 +46,7 @@ class PatientDataManager {
         self.rootURL = rootURL
         self.clientId = clientId
         self.clientSecret = clientSecret
+        self.healthKit = PDMHealthKit()
     }
 
     func signInAsUser(email: String, password: String, completionHandler: @escaping (Error?) -> Void) {

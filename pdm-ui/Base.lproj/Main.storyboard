@@ -77,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddN-hW-ZkY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="18.440779610194905"/>
+            <point key="canvasLocation" x="114" y="18"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -163,12 +163,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="992.79999999999995" y="26.53673163418291"/>
+            <point key="canvasLocation" x="993" y="18"/>
         </scene>
-        <!--Initial View Controller-->
+        <!--Connect To Health Kit View Controller-->
         <scene sceneID="1CS-wp-M2B">
             <objects>
-                <viewController id="3dG-5s-UAs" customClass="InitialViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3dG-5s-UAs" customClass="ConnectToHealthKitViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bG9-bJ-06g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,6 +182,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TL-5A-ouP" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
                                 <rect key="frame" x="16" y="282" width="343" height="38"/>
                                 <state key="normal" title="Retry"/>
+                                <connections>
+                                    <action selector="retryCheckAccess:" destination="3dG-5s-UAs" eventType="primaryActionTriggered" id="goj-oE-hh4"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This text should explain what is happening here." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEU-Cj-JoO">
                                 <rect key="frame" x="16" y="140" width="343" height="41"/>
@@ -221,13 +224,13 @@
                     </view>
                     <connections>
                         <outlet property="loadingLabel" destination="xYT-vw-FI4" id="hO9-4h-uhw"/>
-                        <outlet property="retryButton" destination="7TL-5A-ouP" id="Rpd-R6-kJy"/>
+                        <outlet property="retryButton" destination="7TL-5A-ouP" id="Aeh-2h-1cD"/>
                         <segue destination="pUm-jJ-gng" kind="show" identifier="Main" id="7X8-wq-NRy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5AF-Cq-2Oa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1728.8" y="26.53673163418291"/>
+            <point key="canvasLocation" x="1772" y="18"/>
         </scene>
         <!--Patient Data Manager-->
         <scene sceneID="TAV-6c-MaV">
@@ -382,7 +385,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0xt-Og-Ruy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-802.39999999999998" y="18.440779610194905"/>
+            <point key="canvasLocation" x="-793" y="18"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="20w-8a-5Dc">
@@ -527,7 +530,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rxr-UA-Tvg" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="993" y="-667"/>
+            <point key="canvasLocation" x="993" y="-750"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
