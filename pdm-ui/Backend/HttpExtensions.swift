@@ -74,6 +74,56 @@ class HTTP {
     }
 }
 
+class MIMEType {
+    static let applicationFormEncoded = "application/x-www-form-urlencoded"
+    static let applicationJson = "application/json"
+    static let applicationJsonUTF8 = "application/json; charset=UTF-8"
+    let type: String
+    let attributes: [String: String]
+
+    init(_ type: String) {
+        let endOfType = type.firstIndex(of: ";") ?? type.endIndex
+        self.type = String(type[..<endOfType])
+        var attributes = [String: String]()
+        if endOfType < type.endIndex {
+            var attributeSection = type[type.index(after: endOfType)...]
+            repeat {
+                let nextAttributeIndex = attributeSection.firstIndex(of: ";") ?? attributeSection.endIndex
+                let attrib = String(attributeSection[..<nextAttributeIndex])
+                let equalsIndex = attrib.firstIndex(of: "=") ?? attrib.endIndex
+                let name = attrib[..<equalsIndex]
+                let value = equalsIndex < attrib.endIndex ? attrib[attrib.index(after: equalsIndex)...] : ""
+                attributes[String(name.trimmingCharacters(in: .whitespacesAndNewlines))] = value.trimmingCharacters(in: .whitespacesAndNewlines)
+                if nextAttributeIndex < attributeSection.endIndex {
+                    attributeSection = attributeSection[attributeSection.index(after: nextAttributeIndex)...]
+                } else {
+                    break
+                }
+            } while true
+        }
+        self.attributes = attributes
+    }
+
+    /**
+     Gets the part of a string that is just the type. Remember substrings should be short-lived. If you intend to keep it, you'll need a "real" string.
+
+     - Parameter type: the string type
+     - Returns: just the type part of a MIME type
+     */
+    static func getTypeFrom(_ type: String) -> Substring {
+        let endOfType = type.firstIndex(of: ";") ?? type.endIndex
+        return type[..<endOfType]
+    }
+
+    static func isJSON(_ type: String) -> Bool {
+        // TODO (maybe): Support other JSON MIME types
+        return getTypeFrom(type) == applicationJson
+    }
+}
+
+/**
+ An HTTP form. Note that form values are not maintained in any specific order.
+ */
 class HTTPForm {
     // Taken from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
     static let formAllowedCharacters = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.!~*'()")
@@ -108,7 +158,9 @@ class HTTPForm {
         task.resume()
     }
 
-    // Handles creating a POST request and starting it and dealing with basic error handling
+    /**
+     Handles creating a POST request and starting it and dealing with basic error handling
+     */
     func postTo(_ url: URL, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         guard let request = URLRequest.httpPostRequestTo(url, withForm: self) else {
             completionHandler(nil, nil, HTTPFormError.couldNotFormatForm)
@@ -127,6 +179,27 @@ class HTTPForm {
             case let .multiple(formValues):
                 for formValue in formValues {
                     result.appendApplicationFormValue(key: key, value: formValue)
+                }
+            }
+        }
+        return result
+    }
+
+    /**
+     Sorts the keys to be in alphabetical order before creating the form encoding. This is intended primarily for debugging, where having the keys be in an effectively random error makes this difficult.
+     */
+    func toSortedApplicationFormEncoded() -> String {
+        var result = ""
+        let sortedKeys = values.keys.sorted()
+        for key in sortedKeys {
+            if let value = values[key] {
+                switch value {
+                case let .single(formValue):
+                    result.appendApplicationFormValue(key: key, value: formValue)
+                case let .multiple(formValues):
+                    for formValue in formValues {
+                        result.appendApplicationFormValue(key: key, value: formValue)
+                    }
                 }
             }
         }
@@ -158,8 +231,6 @@ extension String {
 }
 
 extension URLRequest {
-    static var applicationFormEncoded = "application/x-www-form-urlencoded"
-
     static func httpGetRequestTo(_ url: URL, withForm form: HTTPForm) -> URLRequest? {
         guard let finalURL = URL(string: "?" + form.toApplicationFormEncoded(), relativeTo: url) else {
             return nil

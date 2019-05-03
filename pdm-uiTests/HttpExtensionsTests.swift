@@ -19,6 +19,19 @@ class HttpExtensionsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testMIMETypeWithoutAttributes() {
+        let type = MIMEType("application/json")
+        XCTAssertEqual(type.type, "application/json")
+        XCTAssertEqual(type.attributes.count, 0)
+    }
+
+    func testMIMETypeWithAttributes() {
+        let type = MIMEType("application/json; charset=UTF-8")
+        XCTAssertEqual(type.type, "application/json")
+        XCTAssertEqual(type.attributes.count, 1)
+        XCTAssertEqual(type.attributes["charset"], "UTF-8")
+    }
+
     func testFormValueAdd() {
         var f = FormValue.single("example")
         f.add(value: "other")
@@ -37,7 +50,7 @@ class HttpExtensionsTests: XCTestCase {
         form.addValue("value", for: "key")
         form.addValue("middle", for: "Key")
         form.addValue("other", for: "key")
-        XCTAssertEqual("key=value&key=other&Key=middle", form.toApplicationFormEncoded())
+        XCTAssertEqual("Key=middle&key=value&key=other", form.toSortedApplicationFormEncoded())
     }
 
     func testFormEncoding() {

@@ -19,19 +19,30 @@ class PatientDataManagerTests: XCTestCase {
     }
 
     func testDecodeErrors() {
-        let json = """
-            {"errors":{"email":["is invalid"],"password":["is too short"]}}
-"""
-        do {
-            guard let errors = try PatientDataManager.decodeErrors(json.data(using: .utf8)!) else {
-                XCTFail("Parsing failed")
-                return
-            }
-            XCTAssertEqual(errors.count, 2)
-            XCTAssertEqual(errors["email"], ["is invalid"])
-            XCTAssertEqual(errors["password"], ["is too short"])
-        } catch {
-            XCTFail("Unexpected error \(error)")
+        let json = [
+            "errors": [
+                "email": ["is invalid"],
+                "password":["is too short"]
+            ]
+        ]
+        guard let errors = PatientDataManager.decodeErrors(json: json) else {
+            XCTFail("Parsing failed")
+            return
         }
+        XCTAssertEqual(errors.count, 2)
+        XCTAssertEqual(errors["email"], ["is invalid"])
+        XCTAssertEqual(errors["password"], ["is too short"])
+    }
+
+    // This is more of a sanity check than anything else
+    func testGeneratedURLs() {
+        guard let localhost = URL(string: "http://localhost/") else {
+            XCTFail("URL generation failed?")
+            return
+        }
+        let pdm = PatientDataManager(rootURL: localhost, clientId: "id", clientSecret: "secret")
+        XCTAssertEqual("http://localhost/oauth/token", pdm.oauthTokenURL.absoluteString)
+        XCTAssertEqual("http://localhost/users", pdm.usersURL.absoluteString)
+        XCTAssertEqual("http://localhost/api/v1/profiles", pdm.profilesURL.absoluteString)
     }
 }

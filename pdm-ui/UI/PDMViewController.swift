@@ -27,7 +27,13 @@ extension UIViewController {
         present(alert, animated: true, completion: completionHandler)
     }
 
-    func createLoadingAlert(_ message: String) -> UIAlertController {
+    /**
+     Generates a loading alert, but does not present it. At present this returns a UIViewController, a future version might make this a more specific version.
+
+     - Parameter message: the message to display while loading
+     - Returns: a view controller that displays an activity indicator
+     */
+    func createLoadingAlert(_ message: String) -> UIViewController {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.style = .gray
@@ -36,7 +42,16 @@ extension UIViewController {
         return alert
     }
 
+    /**
+     Helper function to present an error alert. This may be called from any thread - if not called from the main thread, this will be dispatched to the main queue.
+
+     - Parameters:
+         - error: the error to display
+         - title: the title to display, may be nil to not include a title
+         - dismissLabel: the text to display on the dismiss button, defaults to OK
+     */
     func presentErrorAlert(_ error: Error, title: String?, dismissLabel: String="OK") {
+        // Go ahead and decode the message in whatever thread we're in
         var message: String?
         if let pdmError = error as? PatientDataManagerError {
             switch(pdmError) {
@@ -46,6 +61,37 @@ extension UIViewController {
                 message = "An internal error occurred while generating the request."
             case .loginFailed:
                 message = "Login failed (email and password were not accepted)."
+            case .notLoggedIn:
+                message = "Request cannot be completed because the client is not logged into the server."
+            case .formInvalid(let errors):
+                var m = "Form fields contained errors:\n"
+                for (field, fieldErrors) in errors {
+                    if fieldErrors.isEmpty {
+                        m.append(" - \(field) contains unspecified errors\n")
+                    } else if fieldErrors.count == 1 {
+                        m.append(" - \(field): \(fieldErrors[0])\n")
+                    } else {
+                        m.append(" - \(field):\n")
+                        for fieldError in fieldErrors {
+                            m.append("     - \(fieldError)\n")
+                        }
+                    }
+                }
+                print("Decoded errors to \(m)")
+                message = m
+            case .noResultFromServer:
+                message = "No object was returned by the server."
+            }
+        } else if let restError = error as? RESTError {
+            switch(restError) {
+            case .unhandledRedirect:
+                message = "The response was redirected to another resource that was not loaded."
+            case .unauthorized:
+                message = "The server rejected the request because the client is not logged in (may have timed out)."
+            case .forbidden:
+                message = "Access to the requested resource was forbidden."
+            case .missing:
+                message = "The requested resource is missing."
             case .serverReturnedError(let statusCode):
                 switch(statusCode) {
                 case 200..<300:
@@ -77,26 +123,32 @@ extension UIViewController {
                 }
                 // Regardless, append the status code to the message
                 message?.append(" (HTTP \(statusCode))")
-            case .formInvalid(let errors):
-                var m = "Form fields contained errors:\n"
-                for (field, fieldErrors) in errors {
-                    if fieldErrors.isEmpty {
-                        m.append(" - \(field) contains unspecified errors\n")
-                    } else if fieldErrors.count == 1 {
-                        m.append(" - \(field): \(fieldErrors[0])\n")
-                    } else {
-                        m.append(" - \(field):\n")
-                        for fieldError in fieldErrors {
-                            m.append("     - \(fieldError)\n")
-                        }
-                    }
+            case .internalError:
+                message = "An internal error occurred."
+            case .couldNotEncodeRequest(let causedBy):
+                if let causedByError = causedBy {
+                    message = "Could not encode the request: \(String(describing: causedByError))"
+                } else {
+                    message = "Could not encode the request"
                 }
-                print("Decoded errors to \(m)")
-                message = m
+            case .couldNotParseResponse:
+                message = "Could not parse the response"
+            case .responseNotJSON:
+                message = "Expected JSON from the server but did not receive it"
+            case .responseJSONInvalid:
+                message = "JSON response from server was not of the expected type"
             }
         } else {
             message = "An error occurred: \(error.localizedDescription)"
         }
-        presentAlert(message ?? "An unknown error occurred.", title: title, dismissLabel: dismissLabel)
+        // And now that we have it:
+        let nonOptionalMessage = message ?? "An unknown error occurred."
+        if Thread.isMainThread {
+            presentAlert(nonOptionalMessage, title: title, dismissLabel: dismissLabel)
+        } else {
+            DispatchQueue.main.async {
+                self.presentAlert(nonOptionalMessage, title: title, dismissLabel: dismissLabel)
+            }
+        }
     }
 }

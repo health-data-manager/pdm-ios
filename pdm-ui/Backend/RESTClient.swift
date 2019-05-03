@@ -1,0 +1,259 @@
+//
+//  RESTClient.swift
+//  pdm-ui
+//
+//  Copyright © 2019 MITRE. All rights reserved.
+//
+
+import Foundation
+
+/// Errors that can be generated when sending/parsing REST requests
+enum RESTError: Error {
+    /// An internal error occurred (generally this means that a URL could not be generated)
+    case internalError
+    /// Indicates that something prevented the request from being encoded
+    case couldNotEncodeRequest(Error?)
+    /// Indicate that the response could not be parsed as an expected document type
+    case couldNotParseResponse
+    /// The response was expected to be JSON, but JSON was not received
+    case responseNotJSON
+    /// While the response could be parsed as JSON, the JSON received was not correct
+    case responseJSONInvalid
+    /// Authorization was denied (potentially indicating that a bearer token has expired, 401 Unauthorized)
+    case unauthorized
+    /// The request was denied by the server (403 Forbidden)
+    case forbidden
+    /// A resource was missing (404 Not Found)
+    case missing
+    /// An unhandled redirect of some form
+    case unhandledRedirect(Int)
+    /// The server returned some variety of HTTP error code not handled above
+    case serverReturnedError(Int)
+}
+
+/**
+ Class that provides a bunch of handlers for dealing with sending REST requests that send and receive JSON documents.
+ */
+class RESTClient {
+    /// Headers that will be sent with every request
+    var defaultHeaders = [String: String]()
+
+    /// A bearer token. If set, this will be sent with every request in the Authorization header. While the bearer token can be retrieved, because of the way it's set, it has to take a substring and allocate a new string.
+    var bearerToken: String? {
+        get {
+            if let token = defaultHeaders["Authorization"] {
+                if token.starts(with: "Bearer ") {
+                    return String(token[token.index(token.startIndex, offsetBy: 7)...])
+                }
+            }
+            // Otherwise there isn't one
+            return nil
+        }
+        set(value) {
+            if var value = value {
+                if !value.starts(with: "Bearer ") {
+                    value = "Bearer " + value
+                }
+                defaultHeaders["Authorization"] = value
+            } else {
+                defaultHeaders.removeValue(forKey: "Authorization")
+            }
+        }
+    }
+    /**
+     Basic function to send a GET request to a given URL.
+
+     - Parameters:
+         - url: the URL to send the request to
+         - queryItems: an optional set of query items that will be used to generate a query string in the given URL
+         - completionHandler: closure to invoke when the form completes
+         - data: the data from the response if any
+         - response: the response from the server if any (may be `nil` if an error prevented the response from being received)
+         - error: the error if any, if `nil` then `response` will be non-`nil` but there may be no data for some response types
+     */
+    func get(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ data: Data?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
+        var finalURL = url
+        if let queryItems = queryItems {
+            var components = URLComponents()
+            components.queryItems = queryItems
+            guard let generatedURL = components.url(relativeTo: url) else {
+                completionHandler(nil, nil, RESTError.couldNotEncodeRequest(nil))
+                return
+            }
+            finalURL = generatedURL
+        }
+        handleRequest(method: "GET", url: finalURL, data: nil, mimeType: nil, completionHandler: completionHandler)
+    }
+
+    func getJSON(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ jsonResponse: Any?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
+        get(from: url, withQueryItems: queryItems) { (data, response, error) in
+            guard let data = data, let mimeType = response?.mimeType, MIMEType.isJSON(mimeType) else {
+                // If there is no data, or the response isn't JSON, just return whatever we have
+                completionHandler(nil, response, error ?? RESTError.responseNotJSON)
+                return
+            }
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                // If here, we're good
+                completionHandler(jsonResponse, response, error)
+                return
+            } catch {
+                // If here, we should pass the error on
+                completionHandler(nil, response, error)
+                return
+            }
+        }
+    }
+
+    func getJSONObject(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ jsonDictionary: [String: Any]?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
+        getJSON(from: url, withQueryItems: queryItems) { (jsonResponse, response, error) in
+            guard let jsonDictionary = jsonResponse as? [String: Any] else {
+                completionHandler(nil, response, error ?? RESTError.couldNotParseResponse)
+                return
+            }
+            completionHandler(jsonDictionary, response, error)
+        }
+    }
+
+    /**
+     Send a POST request with JSON that expects any content back.
+
+     - Parameters:
+     - url: the URL to get data from
+     - json: JSON object to send (will be serialized via JSONSerialization)
+     - completionHandler: the handler to call when the request completes
+     - data: the data returned if any
+     - response: the returned HTTP response, may only be `nil` if error is not `nil`
+     - error: an error if one occurred. Note that this can be set in some "success" conditions as it will be set if the HTTP response was itself an error.
+     */
+    func post(to url: URL, withJSON json: Any, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
+            handleRequest(method: "POST", url: url, data: jsonData, mimeType: MIMEType.applicationJsonUTF8, completionHandler: completionHandler)
+        } catch {
+            completionHandler(nil, nil, RESTError.couldNotEncodeRequest(error))
+        }
+    }
+
+    /**
+     Send a POST request with JSON that expects a JSON object back.
+
+     - Parameters:
+     - url: the URL to get data from
+     - json: JSON object to send (will be serialized via JSONSerialization)
+     - completionHandler: the handler to call when the request completes
+     - jsonResponse: the parsed JSON object, may only be `nil` if error is not `nil`
+     - response: the returned HTTP response, may only be `nil` if error is not `nil`
+     - error: an error if one occurred. Note that if `nil` then both the response and JSON must not be `nil`. However, if non-`nil`, then the response may still be non-`nil` if the error indicates an error dealing with the response, and the JSON may be non-`nil` if the response contained JSON. (Some HTTP errors will still return JSON describing the error.)
+     */
+    func postJSON(_ json: Any, to url: URL, completionHandler: @escaping (_ jsonResponse: Any?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
+        post(to: url, withJSON: json) { (data, response, error) in
+            if let data = data {
+                // If we have data, try and parse it
+                do {
+                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                    completionHandler(jsonResponse, response, error)
+                } catch {
+                    completionHandler(nil, response, error)
+                }
+            }
+        }
+    }
+
+    /**
+     A common requirement is to POST a JSON request and get a JSON object back. This handles that and guarantees that any parsed response is a JSON dictionary, setting an error if it is not.
+     */
+    func postJSONExpectingObject(_ json: Any, to url: URL, completionHandler: @escaping (_ jsonResponse: [String: Any]?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
+        postJSON(json, to: url) { (json, response, error) in
+            // Always try and convert the JSON object to a dictionary if we can
+            guard let jsonDictionary = json as? [String: Any] else {
+                // Return either the appropriate error (if there was one) or set response not valid
+                completionHandler(nil, response, error ?? RESTError.responseJSONInvalid)
+                return
+            }
+            // If there was an error, just let it be passed through as-is
+            completionHandler(jsonDictionary, response, error)
+        }
+    }
+
+    /**
+     Generates a request object. Handles filling out a bunch of the standard fields.
+     */
+    func generateRequest(method: String, url: URL, data: Data?, mimeType: String?) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.httpBody = data
+        if let mimeType = mimeType {
+            request.addValue(mimeType, forHTTPHeaderField: "Content-type")
+        }
+        for (header, value) in defaultHeaders {
+            request.addValue(value, forHTTPHeaderField: header)
+        }
+        return request
+    }
+
+    /**
+     Handles generating and executing a request.
+     */
+    func handleRequest(method: String, url: URL, data: Data?, mimeType: String?, completionHandler: @escaping (_ data: Data?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
+        let request = generateRequest(method: method, url: url, data: data, mimeType: mimeType)
+        // FOR DEBUGGING
+        print(">> \(method) \(url)")
+        if let headers = request.allHTTPHeaderFields {
+            for (header, value) in headers {
+                print("     \(header): \(value)")
+            }
+        }
+        if let data = data {
+            if let mimeType = mimeType {
+                print("   Sending \(mimeType):")
+            }
+            print("   \(String(data: data, encoding: .utf8) ?? "could not encode data")")
+        }
+        // END DEBUGGING
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            self.handleHTTPURLResponse(data: data, response: response, error: error, completionHandler: completionHandler)
+        }
+        task.resume()
+    }
+
+    /// Function for handling a response. Note that this is called by the various utilities that send requests. The completionHandler will ALWAYS be called by this method and cannot be left out.
+    func handleHTTPURLResponse(data: Data?, response: URLResponse?, error: Error?, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        if let error = error {
+            completionHandler(nil, nil, error)
+            return
+        }
+        guard let httpResponse = response as? HTTPURLResponse else {
+            completionHandler(nil, nil, RESTError.internalError)
+            return
+        }
+        // FOR DEBUGGING
+        print("<< HTTP \(httpResponse.statusCode)")
+        if let mimeType = httpResponse.mimeType {
+            print("   Received \(mimeType)")
+            if let data = data, let dataAsString = String(data: data, encoding: .utf8) {
+                print("   \(dataAsString)")
+            } else {
+                print("   (could not decode response")
+            }
+        }
+        // END DEBUGGING
+        // Handle various "standard errors"
+        switch httpResponse.statusCode {
+        case (100..<300):
+            completionHandler(data, httpResponse, nil)
+        case (300..<400):
+            // This is a redirect of some form
+            completionHandler(data, httpResponse, RESTError.unhandledRedirect(httpResponse.statusCode))
+        case 401:
+            completionHandler(data, httpResponse, RESTError.unauthorized)
+        case 403:
+            completionHandler(data, httpResponse, RESTError.forbidden)
+        case 404:
+            completionHandler(data, httpResponse, RESTError.missing)
+        default:
+            // Anything else, just return as-is
+            completionHandler(data, httpResponse, RESTError.serverReturnedError(httpResponse.statusCode))
+        }
+    }
+}

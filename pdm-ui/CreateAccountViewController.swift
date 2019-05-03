@@ -122,24 +122,18 @@ class CreateAccountViewController: UIViewController {
         present(alert, animated: true, completion: {
             dispatchGroup.leave()
         })
-        do {
-            try pdm.createNewUserAccount(firstName: firstName, lastName: lastName, email: email, password: password, passwordConfirmation: passwordConfirmation) { (error, user) in
-                dispatchGroup.notify(queue: DispatchQueue.main) {
-                    self.dismiss(animated: false) {
-                        if let error = error {
-                            self.presentErrorAlert(error, title: "Error creating account")
-                        } else if user == nil {
-                            self.presentAlert("Did not receive a user from the server.", title: "Error creating account")
-                        } else {
-                            self.accountCreated()
-                        }
+        pdm.createNewUserAccount(firstName: firstName, lastName: lastName, email: email, password: password, passwordConfirmation: passwordConfirmation) { (user, error) in
+            dispatchGroup.notify(queue: DispatchQueue.main) {
+                self.dismiss(animated: false) {
+                    if let error = error {
+                        self.presentErrorAlert(error, title: "Error creating account")
+                    } else if user == nil {
+                        self.presentAlert("Did not receive a user from the server.", title: "Error creating account")
+                    } else {
+                        self.accountCreated()
                     }
                 }
             }
-        } catch {
-            // This is an internal error indicating the JSON could not be created for some reason
-            presentAlert("Unable to generate account creation request", title: "Internal error")
-            return
         }
     }
 

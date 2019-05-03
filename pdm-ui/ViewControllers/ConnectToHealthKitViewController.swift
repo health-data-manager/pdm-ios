@@ -24,7 +24,7 @@ class ConnectToHealthKitViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         guard let pdm = patientDataManager, let healthKit = pdm.healthKit else {
             // If neither are available, we can't do anything, and need to just skip ahead
-            segueToMain()
+            segueToHome()
             return
         }
 
@@ -49,7 +49,7 @@ class ConnectToHealthKitViewController: UIViewController {
     func loadHealthRecords() {
         loadingLabel.text = "Loading Patient Data Manager..."
         // Segue to the actual UI
-        performSegue(withIdentifier: "Main", sender: self)
+        segueToHome()
     }
 
     func failInternalError(_ message: String) {
@@ -57,8 +57,8 @@ class ConnectToHealthKitViewController: UIViewController {
         retryButton.isHidden = false
     }
 
-    func segueToMain() {
-        performSegue(withIdentifier: "Main", sender: self)
+    func segueToHome() {
+        performSegue(withIdentifier: "Home", sender: self)
     }
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
