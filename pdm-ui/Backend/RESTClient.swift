@@ -42,8 +42,9 @@ class RESTClient {
     var bearerToken: String? {
         get {
             if let token = defaultHeaders["Authorization"] {
-                if token.starts(with: "Bearer ") {
-                    return String(token[token.index(token.startIndex, offsetBy: 7)...])
+                let header = "Bearer "
+                if token.starts(with: header) {
+                    return String(token[header.endIndex.samePosition(in: token)!...])
                 }
             }
             // Otherwise there isn't one
@@ -60,6 +61,7 @@ class RESTClient {
             }
         }
     }
+
     /**
      Basic function to send a GET request to a given URL.
 
@@ -70,23 +72,25 @@ class RESTClient {
          - data: the data from the response if any
          - response: the response from the server if any (may be `nil` if an error prevented the response from being received)
          - error: the error if any, if `nil` then `response` will be non-`nil` but there may be no data for some response types
+
+     - Returns: the data task, if one was created, otherwise nil. When `nil` is returned, the callback handler will have been called with a specific error prior to the function completing.
      */
-    func get(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ data: Data?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
+    @discardableResult func get(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ data: Data?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask? {
         var finalURL = url
         if let queryItems = queryItems {
             var components = URLComponents()
             components.queryItems = queryItems
             guard let generatedURL = components.url(relativeTo: url) else {
                 completionHandler(nil, nil, RESTError.couldNotEncodeRequest(nil))
-                return
+                return nil
             }
             finalURL = generatedURL
         }
-        handleRequest(method: "GET", url: finalURL, data: nil, mimeType: nil, completionHandler: completionHandler)
+        return handleRequest(method: "GET", url: finalURL, data: nil, mimeType: nil, completionHandler: completionHandler)
     }
 
-    func getJSON(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ jsonResponse: Any?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
-        get(from: url, withQueryItems: queryItems) { (data, response, error) in
+    @discardableResult func getJSON(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ jsonResponse: Any?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask? {
+        return get(from: url, withQueryItems: queryItems) { (data, response, error) in
             guard let data = data, let mimeType = response?.mimeType, MIMEType.isJSON(mimeType) else {
                 // If there is no data, or the response isn't JSON, just return whatever we have
                 completionHandler(nil, response, error ?? RESTError.responseNotJSON)
@@ -105,8 +109,8 @@ class RESTClient {
         }
     }
 
-    func getJSONObject(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ jsonDictionary: [String: Any]?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
-        getJSON(from: url, withQueryItems: queryItems) { (jsonResponse, response, error) in
+    @discardableResult func getJSONObject(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ jsonDictionary: [String: Any]?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask? {
+        return getJSON(from: url, withQueryItems: queryItems) { (jsonResponse, response, error) in
             guard let jsonDictionary = jsonResponse as? [String: Any] else {
                 completionHandler(nil, response, error ?? RESTError.couldNotParseResponse)
                 return
@@ -119,19 +123,22 @@ class RESTClient {
      Send a POST request with JSON that expects any content back.
 
      - Parameters:
-     - url: the URL to get data from
-     - json: JSON object to send (will be serialized via JSONSerialization)
-     - completionHandler: the handler to call when the request completes
-     - data: the data returned if any
-     - response: the returned HTTP response, may only be `nil` if error is not `nil`
-     - error: an error if one occurred. Note that this can be set in some "success" conditions as it will be set if the HTTP response was itself an error.
+         - url: the URL to get data from
+         - json: JSON object to send (will be serialized via JSONSerialization)
+         - completionHandler: the handler to call when the request completes
+         - data: the data returned if any
+         - response: the returned HTTP response, may only be `nil` if error is not `nil`
+         - error: an error if one occurred. Note that this can be set in some "success" conditions as it will be set if the HTTP response was itself an error.
+
+     - Returns: the data task, if one was created, otherwise nil. When `nil` is returned, the callback handler will have been called with a specific error prior to the function completing.
      */
-    func post(to url: URL, withJSON json: Any, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+    @discardableResult func post(to url: URL, withJSON json: Any, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) -> URLSessionDataTask? {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
-            handleRequest(method: "POST", url: url, data: jsonData, mimeType: MIMEType.applicationJsonUTF8, completionHandler: completionHandler)
+            return handleRequest(method: "POST", url: url, data: jsonData, mimeType: MIMEType.applicationJsonUTF8, completionHandler: completionHandler)
         } catch {
             completionHandler(nil, nil, RESTError.couldNotEncodeRequest(error))
+            return nil
         }
     }
 
@@ -139,15 +146,17 @@ class RESTClient {
      Send a POST request with JSON that expects a JSON object back.
 
      - Parameters:
-     - url: the URL to get data from
-     - json: JSON object to send (will be serialized via JSONSerialization)
-     - completionHandler: the handler to call when the request completes
-     - jsonResponse: the parsed JSON object, may only be `nil` if error is not `nil`
-     - response: the returned HTTP response, may only be `nil` if error is not `nil`
-     - error: an error if one occurred. Note that if `nil` then both the response and JSON must not be `nil`. However, if non-`nil`, then the response may still be non-`nil` if the error indicates an error dealing with the response, and the JSON may be non-`nil` if the response contained JSON. (Some HTTP errors will still return JSON describing the error.)
+         - url: the URL to get data from
+         - json: JSON object to send (will be serialized via JSONSerialization)
+         - completionHandler: the handler to call when the request completes
+         - jsonResponse: the parsed JSON object, may only be `nil` if error is not `nil`
+         - response: the returned HTTP response, may only be `nil` if error is not `nil`
+         - error: an error if one occurred. Note that if `nil` then both the response and JSON must not be `nil`. However, if non-`nil`, then the response may still be non-`nil` if the error indicates an error dealing with the response, and the JSON may be non-`nil` if the response contained JSON. (Some HTTP errors will still return JSON describing the error.)
+
+     - Returns: the data task, if one was created, otherwise nil. When `nil` is returned, the callback handler will have been called with a specific error prior to the function completing.
      */
-    func postJSON(_ json: Any, to url: URL, completionHandler: @escaping (_ jsonResponse: Any?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
-        post(to: url, withJSON: json) { (data, response, error) in
+    @discardableResult func postJSON(_ json: Any, to url: URL, completionHandler: @escaping (_ jsonResponse: Any?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask? {
+        return post(to: url, withJSON: json) { (data, response, error) in
             if let data = data {
                 // If we have data, try and parse it
                 do {
@@ -162,9 +171,11 @@ class RESTClient {
 
     /**
      A common requirement is to POST a JSON request and get a JSON object back. This handles that and guarantees that any parsed response is a JSON dictionary, setting an error if it is not.
+
+     - Returns: the data task, if one was created, otherwise nil. When `nil` is returned, the callback handler will have been called with a specific error prior to the function completing.
      */
-    func postJSONExpectingObject(_ json: Any, to url: URL, completionHandler: @escaping (_ jsonResponse: [String: Any]?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
-        postJSON(json, to: url) { (json, response, error) in
+    @discardableResult func postJSONExpectingObject(_ json: Any, to url: URL, completionHandler: @escaping (_ jsonResponse: [String: Any]?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask? {
+        return postJSON(json, to: url) { (json, response, error) in
             // Always try and convert the JSON object to a dictionary if we can
             guard let jsonDictionary = json as? [String: Any] else {
                 // Return either the appropriate error (if there was one) or set response not valid
@@ -195,7 +206,7 @@ class RESTClient {
     /**
      Handles generating and executing a request.
      */
-    func handleRequest(method: String, url: URL, data: Data?, mimeType: String?, completionHandler: @escaping (_ data: Data?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) {
+    func handleRequest(method: String, url: URL, data: Data?, mimeType: String?, completionHandler: @escaping (_ data: Data?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask {
         let request = generateRequest(method: method, url: url, data: data, mimeType: mimeType)
         // FOR DEBUGGING
         print(">> \(method) \(url)")
@@ -215,6 +226,7 @@ class RESTClient {
             self.handleHTTPURLResponse(data: data, response: response, error: error, completionHandler: completionHandler)
         }
         task.resume()
+        return task
     }
 
     /// Function for handling a response. Note that this is called by the various utilities that send requests. The completionHandler will ALWAYS be called by this method and cannot be left out.

@@ -40,6 +40,7 @@
 		2ED98950227B6F320034B4B6 /* PatientHealthRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */; };
 		2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98951227CAC8D0034B4B6 /* RESTClient.swift */; };
 		2ED98954227CEAF70034B4B6 /* PDMProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */; };
+		2ED989562280ACB20034B4B6 /* RESTClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED989552280ACB20034B4B6 /* RESTClientTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthRecordViewController.swift; sourceTree = "<group>"; };
 		2ED98951227CAC8D0034B4B6 /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
 		2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProfileTests.swift; sourceTree = "<group>"; };
+		2ED989552280ACB20034B4B6 /* RESTClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClientTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				2EA93703226F60E100513F9D /* HttpExtensionsTests.swift */,
 				2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */,
 				2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */,
+				2ED989552280ACB20034B4B6 /* RESTClientTests.swift */,
 			);
 			path = "pdm-uiTests";
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				2E2342AE224291C500045E3A /* pdm_uiTests.swift in Sources */,
 				2ED98954227CEAF70034B4B6 /* PDMProfileTests.swift in Sources */,
 				2EA93704226F60E100513F9D /* HttpExtensionsTests.swift in Sources */,
+				2ED989562280ACB20034B4B6 /* RESTClientTests.swift in Sources */,
 				2EA937102278AC6700513F9D /* PatientDataManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
