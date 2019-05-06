@@ -63,8 +63,14 @@ class PDMProfileTests: XCTestCase {
                  "telephone_use": null
             ]
         ])
-        XCTAssertEqual(actualResult.count, 2)
-        // Use XCTAssert and related functions to verify your tests produce the correct results.[]
+        XCTAssertNotNil(actualResult)
+        if let result = actualResult {
+            XCTAssertEqual(result.count, 2)
+            let profile = result[0]
+            XCTAssertEqual(profile.profileId, 127826653)
+            let secondProfile = result[1]
+            XCTAssertEqual(secondProfile.profileId, 127826652)
+        }
     }
 
     func testParseJSON() {
@@ -98,9 +104,22 @@ class PDMProfileTests: XCTestCase {
                 // Check values
                 XCTAssertEqual(profile.profileId, 127826653)
                 XCTAssertEqual(profile.userId, 1010081157)
+                XCTAssertEqual(profile.patientId, UUID(uuidString: "c2871c97-ded2-4780-b59b-ba9a18012f99"))
                 XCTAssertEqual(profile.name, "Test User")
                 XCTAssertEqual(profile.firstName, "Test")
                 XCTAssertEqual(profile.lastName, "User")
+                XCTAssertEqual(profile.gender, "male")
+                XCTAssertNil(profile.dateOfBirth)
+                XCTAssertEqual(profile.createdAt, Date(timeIntervalSince1970: 1552678349.539))
+                XCTAssertEqual(profile.updatedAt, Date(timeIntervalSince1970: 1552678349.539))
+                XCTAssertNil(profile.middleName)
+                XCTAssertNil(profile.street)
+                XCTAssertNil(profile.city)
+                XCTAssertNil(profile.state)
+                XCTAssertNil(profile.zip)
+                XCTAssertNil(profile.relationship)
+                XCTAssertNil(profile.telephone)
+                XCTAssertNil(profile.telephoneUse)
             }
         } catch {
             XCTFail("Failed to create JSON")

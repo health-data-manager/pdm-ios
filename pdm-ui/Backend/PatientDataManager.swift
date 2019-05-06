@@ -277,11 +277,11 @@ class PatientDataManager {
                 completionHandler(nil, error)
                 return
             }
-            guard let jsonList = json as? [Any] else {
-                completionHandler(nil, RESTError.responseJSONInvalid)
-                return
+            guard let jsonList = json as? [Any],
+                let profiles = PDMProfile.profilesFromJSON(json: jsonList) else {
+                    completionHandler(nil, RESTError.responseJSONInvalid)
+                    return
             }
-            let profiles = PDMProfile.profilesFromJSON(json: jsonList)
             // First is nil if the collection is empty, which is fine: if it's empty, we should set this to nil anyway
             self.activeProfile = profiles.first
             completionHandler(profiles, nil)

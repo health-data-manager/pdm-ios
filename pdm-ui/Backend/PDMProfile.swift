@@ -27,6 +27,10 @@ class PDMProfile {
     var relationship: String?
     var telephone: String?
     var telephoneUse: String?
+    /// Created at timestamp
+    var createdAt: Date?
+    /// Updated at timestamp
+    var updatedAt: Date?
 
     /**
      Initializes with just the required parameters
@@ -67,6 +71,7 @@ class PDMProfile {
         self.lastName = json["last_name"] as? String
         self.gender = json["gender"] as? String
         let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions.insert(.withFractionalSeconds)
         if let dobString = json["dob"] as? String {
             self.dateOfBirth = dateFormatter.date(from: dobString)
         }
@@ -76,10 +81,25 @@ class PDMProfile {
         self.relationship = json["relationship"] as? String
         self.telephone = json["telephone"] as? String
         self.telephoneUse = json["telephone_use"] as? String
+        if let createdAtString = json["created_at"] as? String {
+            print("Attempting to parse \(createdAtString)")
+            self.createdAt = dateFormatter.date(from: createdAtString)
+        }
+        if let updatedAtString = json["updated_at"] as? String {
+            self.updatedAt = dateFormatter.date(from: updatedAtString)
+        }
     }
 
-    static func profilesFromJSON(json: [Any]) -> [PDMProfile] {
-        // Always return *something*
+    /**
+     Parse a list of profiles from a given JSON array (as returned from JSONSerialization.jsonObject).
+
+     - Parameter json: the JSON to use
+     - Returns: the list of loaded profiles or `nil` if no profile loaded successfully (as this likely indicates some underlying error like a list of some other set of JSON objects being passed in). Note that an empty list is possible if given an empty list.
+     */
+    static func profilesFromJSON(json: [Any]) -> [PDMProfile]? {
+        if json.isEmpty {
+            return []
+        }
         var result = [PDMProfile]()
         for jsonObj in json {
             if let jsonDict = jsonObj as? [String: Any] {
@@ -88,7 +108,7 @@ class PDMProfile {
                 }
             }
         }
-        return result
+        return result.isEmpty ? nil : result
     }
 
     static func profilesFromJSON(data: Data) throws -> [PDMProfile]? {
