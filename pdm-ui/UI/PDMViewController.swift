@@ -55,14 +55,6 @@ extension UIViewController {
         var message: String?
         if let pdmError = error as? PatientDataManagerError {
             switch(pdmError) {
-            case .couldNotUnderstandResponse:
-                message = "Could not understand response from server."
-            case .internalError:
-                message = "An internal error occurred while generating the request."
-            case .loginFailed:
-                message = "Login failed (email and password were not accepted)."
-            case .notLoggedIn:
-                message = "Request cannot be completed because the client is not logged into the server."
             case .formInvalid(let errors):
                 var m = "Form fields contained errors:\n"
                 for (field, fieldErrors) in errors {
@@ -79,65 +71,11 @@ extension UIViewController {
                 }
                 print("Decoded errors to \(m)")
                 message = m
-            case .noResultFromServer:
-                message = "No object was returned by the server."
+            default:
+                message = pdmError.localizedDescription
             }
         } else if let restError = error as? RESTError {
-            switch(restError) {
-            case .unhandledRedirect:
-                message = "The response was redirected to another resource that was not loaded."
-            case .unauthorized:
-                message = "The server rejected the request because the client is not logged in (may have timed out)."
-            case .forbidden:
-                message = "Access to the requested resource was forbidden."
-            case .missing:
-                message = "The requested resource is missing."
-            case .serverReturnedError(let statusCode):
-                switch(statusCode) {
-                case 200..<300:
-                    message = "The server returned success but the response could not be handled properly."
-                case 300..<400:
-                    message = "The server returned a redirect that was not followed."
-                case 400:
-                    message = "The server could not understand the app's request."
-                case 401:
-                    message = "The request was not authorized."
-                case 403:
-                    message = "The server rejected the client request."
-                case 404:
-                    message = "The server could not find the requested resource."
-                case 402, 405..<500:
-                    message = "The server could not handle the request."
-                case 500:
-                    message = "An internal error occurred within the PDM server."
-                case 501:
-                    message = "The PDM server does not recognize the app's request."
-                case 502:
-                    message = "The server, or a proxy server prior to the server, could not forward the request to the proper destination."
-                case 503:
-                    message = "The server could not handle the request at this time."
-                case 504:
-                    message = "The request timed out before the final server responded."
-                default:
-                    message = "An HTTP error occurred."
-                }
-                // Regardless, append the status code to the message
-                message?.append(" (HTTP \(statusCode))")
-            case .internalError:
-                message = "An internal error occurred."
-            case .couldNotEncodeRequest(let causedBy):
-                if let causedByError = causedBy {
-                    message = "Could not encode the request: \(String(describing: causedByError))"
-                } else {
-                    message = "Could not encode the request"
-                }
-            case .couldNotParseResponse:
-                message = "Could not parse the response"
-            case .responseNotJSON:
-                message = "Expected JSON from the server but did not receive it"
-            case .responseJSONInvalid:
-                message = "JSON response from server was not of the expected type"
-            }
+            message = restError.localizedDescription
         } else {
             message = "An error occurred: \(error.localizedDescription)"
         }

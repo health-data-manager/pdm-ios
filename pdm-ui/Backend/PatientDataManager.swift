@@ -9,7 +9,7 @@ import Foundation
 import HealthKit
 
 /// Various errors that can occur within the Patient Data Manager.
-enum PatientDataManagerError: Error {
+enum PatientDataManagerError: Error, LocalizedError {
     /// Some form of internal error prevented the request from being completed
     case internalError
 
@@ -22,11 +22,38 @@ enum PatientDataManagerError: Error {
     /// The user is not logged in so the given request does not make sense
     case notLoggedIn
 
+    /// There is no active patient profile
+    case noActiveProfile
+
     /// A form contained validation errors
     case formInvalid([String: [String]])
 
     /// A result was expected from the server but nothing was returned
     case noResultFromServer
+
+    /// A request was made that requires HealthKit but HealthKit is not available on this device
+    case healthKitNotAvailable
+
+    public var errorDescription: String? {
+        switch self {
+        case .internalError:
+            return NSLocalizedString("An internal error occurred", comment: "Internal Error")
+        case .couldNotUnderstandResponse:
+            return NSLocalizedString("Could not understand response from server.", comment: "Could not understand response")
+        case .loginFailed:
+            return NSLocalizedString("Login failed (email and password were not accepted).", comment: "Login failed")
+        case .notLoggedIn:
+            return NSLocalizedString("Request cannot be completed because the client is not logged into the server.", comment: "Not logged in")
+        case .noActiveProfile:
+            return NSLocalizedString("There is no active patient profile.", comment: "No active profile")
+        case .formInvalid(_):
+            return NSLocalizedString("The server rejected the request because of errors in the provided values.", comment: "Form invalid")
+        case .noResultFromServer:
+            return NSLocalizedString("No object was returned by the server.", comment: "No result from server")
+        case .healthKitNotAvailable:
+            return NSLocalizedString("HealthKit is not available on this device.", comment: "HealthKit not available")
+}
+    }
 }
 
 /**

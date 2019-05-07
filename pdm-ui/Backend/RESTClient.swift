@@ -8,27 +8,97 @@
 import Foundation
 
 /// Errors that can be generated when sending/parsing REST requests
-enum RESTError: Error {
+enum RESTError: Error, LocalizedError {
     /// An internal error occurred (generally this means that a URL could not be generated)
     case internalError
+
     /// Indicates that something prevented the request from being encoded
     case couldNotEncodeRequest(Error?)
+
     /// Indicate that the response could not be parsed as an expected document type
     case couldNotParseResponse
+
     /// The response was expected to be JSON, but JSON was not received
     case responseNotJSON
+
     /// While the response could be parsed as JSON, the JSON received was not correct
     case responseJSONInvalid
+
     /// Authorization was denied (potentially indicating that a bearer token has expired, 401 Unauthorized)
     case unauthorized
+
     /// The request was denied by the server (403 Forbidden)
     case forbidden
+
     /// A resource was missing (404 Not Found)
     case missing
+
     /// An unhandled redirect of some form
     case unhandledRedirect(Int)
+
     /// The server returned some variety of HTTP error code not handled above
     case serverReturnedError(Int)
+
+    public var errorDescription: String? {
+        switch self {
+        case .internalError:
+            return NSLocalizedString("An internal error prevented the request from being generated", comment: "Internal error")
+        case .couldNotEncodeRequest(let causedBy):
+            if let causedBy = causedBy {
+                return String(format: NSLocalizedString("Could not encode the request due to an error: %@", comment: "Could not encode request"), causedBy.localizedDescription)
+            } else {
+                return NSLocalizedString("Could not encode the request.", comment: "Could not encode request")
+}
+        case .couldNotParseResponse:
+            return NSLocalizedString("Could not parse the result", comment: "Could not parse result")
+        case .responseNotJSON:
+            return NSLocalizedString("The response from the server was expected to be JSON, but it was not", comment: "Response not JSON")
+        case .responseJSONInvalid:
+            return NSLocalizedString("The response from the server was expected to be a specific JSON object, but it was a different JSON object", comment: "Response JSON Invalid")
+        case .unauthorized:
+            return NSLocalizedString("The server rejected the request because the client is not correctly logged in.", comment: "Unauthorized")
+        case .forbidden:
+            return NSLocalizedString("The server rejected the request because the client is forbidden from accessing it.", comment: "Forbidden")
+        case .missing:
+            return NSLocalizedString("The server indicated that the requested resource was not found.", comment: "Missing")
+        case .unhandledRedirect(let statusCode):
+            return String(format: NSLocalizedString("The server responded with a redirect (%d) that was never handled.", comment: "Unhandled redirect"), statusCode)
+        case .serverReturnedError(let statusCode):
+            var message: String
+            switch(statusCode) {
+            case 200..<300:
+                message = NSLocalizedString("The server returned success but the response could not be handled properly.", comment: "HTTP 2xx")
+            case 300..<400:
+                message = NSLocalizedString("The server returned a redirect that was not followed.", comment: "HTTP 3xx")
+            case 400:
+                message = NSLocalizedString("The server could not understand the app's request.", comment: "HTTP 400")
+            case 401:
+                message = NSLocalizedString("The request was not authorized.", comment: "HTTP 401")
+            case 403:
+                message = NSLocalizedString("The server rejected the client request.", comment: "HTTP 403")
+            case 404:
+                message = NSLocalizedString("The server could not find the requested resource.", comment: "HTTP 404")
+            case 402, 405..<500:
+                message = NSLocalizedString("The server could not handle the request.", comment: "HTTP 4xx")
+            case 500:
+                message = NSLocalizedString("An internal error occurred within the PDM server.", comment: "HTTP 500")
+            case 501:
+                message = NSLocalizedString("The PDM server does not recognize the app's request.", comment: "HTTP 501")
+            case 502:
+                message = NSLocalizedString("The server, or a proxy server prior to the server, could not forward the request to the proper destination.", comment: "HTTP 502")
+            case 503:
+                message = NSLocalizedString("The server could not handle the request at this time.", comment: "HTTP 503")
+            case 504:
+                message = NSLocalizedString("The request timed out before the final server responded.", comment: "HTTP 504")
+            case 505..<600:
+                message = NSLocalizedString("An error occurred within the server.", comment: "HTTP 5xx")
+            default:
+                message = NSLocalizedString("An HTTP error occurred.", comment: "HTTP ???")
+            }
+            // And return with the error code
+            return String(format: NSLocalizedString("%@ (HTTP %d)", comment: "HTTP format"), message, statusCode)
+        }
+    }
 }
 
 /**
