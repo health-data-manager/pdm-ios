@@ -8,7 +8,5 @@
 	<string>CLIENT ID HERE</string>
 	<key>ClientSecret</key>
 	<string>CLIENT SECRET HERE</string>
-	<key>PatientID</key>
-	<string>PATIENT ID HERE (will be removed in a future version)</string>
 </dict>
 </plist>

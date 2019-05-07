@@ -5,10 +5,11 @@
 //  Copyright © 2019 MITRE. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 /**
- The home view controller.
+ The home view controller. This manages the tab navigation, but doesn't do much else.
  */
 class HomeViewController: UITabBarController {
 
@@ -16,59 +17,6 @@ class HomeViewController: UITabBarController {
         super.viewDidLoad()
         self.selectedIndex = 1
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // Load the patient data now
-        loadPatientData()
-    }
-
-    func loadPatientData() {
-        print("Loading patient data...")
-        guard let pdm = patientDataManager else {
-            presentAlert("Please check the patient data manager configuration. (This is an internal error.)", title: "No patient data manager")
-            return
-        }
-        let group = DispatchGroup()
-        group.enter()
-        present(createLoadingAlert("Loading..."), animated: true) {
-            group.leave()
-        }
-        /*
-        pdm.getUserInformation() { (user, error) in
-            if let error = error {
-                group.notify(queue: DispatchQueue.main) {
-                    self.dismiss(animated: false) {
-                        self.presentErrorAlert(error, title: "Could not load user data")
-                    }
-                }
-            } else {
-                // If we have the user, next get the profiles
- */
-                pdm.getUserProfiles() { (profiles, error) in
-                    if let error = error {
-                        group.notify(queue: DispatchQueue.main) {
-                            self.dismiss(animated: false) {
-                                self.presentErrorAlert(error, title: "Could not load profile data")
-                            }
-                        }
-                    } else {
-                        guard let activeProfile = pdm.activeProfile else {
-                            // Don't have an active profile
-                            self.dismiss(animated: false) {
-                                self.presentAlert("Unable to load a profile for your account. Health information has to be linked to a profile.", title: "Could not load profile data")
-                            }
-                            return
-                        }
-                        print("Received profile for \(activeProfile.name)")
-                        self.dismiss(animated: true)
-                    }
-                }
-        /*
-            }
-        }*/
-    }
-    
 
     /*
     // MARK: - Navigation

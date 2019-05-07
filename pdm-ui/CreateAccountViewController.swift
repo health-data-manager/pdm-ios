@@ -124,12 +124,35 @@ class CreateAccountViewController: UIViewController {
         })
         pdm.createNewUserAccount(firstName: firstName, lastName: lastName, email: email, password: password, passwordConfirmation: passwordConfirmation) { (user, error) in
             dispatchGroup.notify(queue: DispatchQueue.main) {
-                self.dismiss(animated: false) {
-                    if let error = error {
+                if let error = error {
+                    self.dismiss(animated: false) {
                         self.presentErrorAlert(error, title: "Error creating account")
-                    } else if user == nil {
+                    }
+                } else if user == nil {
+                    self.dismiss(animated: false) {
                         self.presentAlert("Did not receive a user from the server.", title: "Error creating account")
-                    } else {
+                    }
+                } else {
+                    self.loginWithNewAccount(email: email, password: password)
+                }
+            }
+        }
+    }
+
+    func loginWithNewAccount(email: String, password: String) {
+        guard let pdm = patientDataManager else {
+            presentAlert("No patient data manager", title: "nil")
+            return
+        }
+        pdm.signInAsUser(email: email, password: password) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.dismiss(animated: false) {
+                        self.presentErrorAlert(error, title: "Error logging in to new account")
+                    }
+                } else {
+                    // Looks all good
+                    self.dismiss(animated: true) {
                         self.accountCreated()
                     }
                 }
@@ -138,6 +161,7 @@ class CreateAccountViewController: UIViewController {
     }
 
     func accountCreated() {
+        // Once the account was created, we can then log in using the credentials
         // Segue to the main UI
         performSegue(withIdentifier: "AccountCreated", sender: self)
     }

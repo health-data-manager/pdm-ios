@@ -18,11 +18,14 @@ class RESTClientTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testGetBearerToken() {
+    func testBearerToken() {
         let client = RESTClient()
         client.bearerToken = "A Token"
         XCTAssertEqual(client.defaultHeaders["Authorization"], "Bearer A Token")
         XCTAssertEqual(client.bearerToken, "A Token")
+        client.bearerToken = nil
+        XCTAssertNil(client.defaultHeaders["Authorization"])
+        XCTAssertNil(client.bearerToken)
     }
 
 }

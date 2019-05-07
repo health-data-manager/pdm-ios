@@ -76,6 +76,7 @@ class HTTP {
 
 class MIMEType {
     static let applicationFormEncoded = "application/x-www-form-urlencoded"
+    static let applicationFormEncodedUTF8 = "application/x-www-form-urlencoded; charset=UTF-8"
     static let applicationJson = "application/json"
     static let applicationJsonUTF8 = "application/json; charset=UTF-8"
     let type: String

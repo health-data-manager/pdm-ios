@@ -25,8 +25,14 @@ class MessageBundle {
                 addEntry(jsonDict, fullUrl: fhir.sourceURL?.absoluteString ?? "")
             }
         } else {
-            // FIXME: Raise an error
             throw MessageBundleError.missingFhirData
+        }
+    }
+
+    /// Adds as many records as possible, potentially raising an error if the record JSON cannot be converted.
+    func addRecordsAsEntry(_ records: [HKClinicalRecord]) throws {
+        for record in records {
+            try addRecordAsEntry(record)
         }
     }
 
@@ -58,11 +64,15 @@ class MessageBundle {
         ], fullUrl: "")
     }
 
-    func createJsonData() throws -> Data {
-        return try JSONSerialization.data(withJSONObject: [
+    func createJSON() -> [String: Any] {
+        return [
             "resourceType": "Bundle",
             "type": "message",
             "entry": entries
-        ], options: [])
+        ]
+    }
+
+    func createJSONAsData() throws -> Data {
+        return try JSONSerialization.data(withJSONObject: createJSON(), options: [])
     }
 }

@@ -22,7 +22,7 @@
 		2E2342CB2242931600045E3A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2342CA2242931600045E3A /* HealthKit.framework */; };
 		2E2342CD2242935700045E3A /* HealthRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */; };
 		2E2342CF2242936600045E3A /* HealthRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342CE2242936600045E3A /* HealthRecordViewController.swift */; };
-		2E2342D12242937700045E3A /* ConnectToHealthKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342D02242937700045E3A /* ConnectToHealthKitViewController.swift */; };
+		2E2342D12242937700045E3A /* InitializePDMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342D02242937700045E3A /* InitializePDMViewController.swift */; };
 		2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC5226783B600A9A7D6 /* PDMTheme.swift */; };
 		2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC6226783B600A9A7D6 /* PDMButton.swift */; };
 		2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */; };
@@ -83,7 +83,7 @@
 		2E2342CA2242931600045E3A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordTableViewController.swift; sourceTree = "<group>"; };
 		2E2342CE2242936600045E3A /* HealthRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordViewController.swift; sourceTree = "<group>"; };
-		2E2342D02242937700045E3A /* ConnectToHealthKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectToHealthKitViewController.swift; sourceTree = "<group>"; };
+		2E2342D02242937700045E3A /* InitializePDMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializePDMViewController.swift; sourceTree = "<group>"; };
 		2E395EC5226783B600A9A7D6 /* PDMTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMTheme.swift; sourceTree = "<group>"; };
 		2E395EC6226783B600A9A7D6 /* PDMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMButton.swift; sourceTree = "<group>"; };
 		2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -134,10 +134,10 @@
 			isa = PBXGroup;
 			children = (
 				2E17CFFA2279529C00AF2FBC /* AccountInfoViewController.swift */,
-				2E2342D02242937700045E3A /* ConnectToHealthKitViewController.swift */,
 				2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */,
 				2E2342CE2242936600045E3A /* HealthRecordViewController.swift */,
 				2E17CFFF227B6DE900AF2FBC /* HomeViewController.swift */,
+				2E2342D02242937700045E3A /* InitializePDMViewController.swift */,
 				2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */,
 			);
 			path = ViewControllers;
@@ -219,10 +219,10 @@
 			isa = PBXGroup;
 			children = (
 				2E2342C6224292DC00045E3A /* PatientDataManager.swift */,
-				2EA9370D2278914000513F9D /* PDMHealthKit.swift */,
 				2EA93701226E406400513F9D /* HttpExtensions.swift */,
-				2ED98951227CAC8D0034B4B6 /* RESTClient.swift */,
 				2E5A87BA2244C06000E225D5 /* MessageBundle.swift */,
+				2EA9370D2278914000513F9D /* PDMHealthKit.swift */,
+				2ED98951227CAC8D0034B4B6 /* RESTClient.swift */,
 				2E17CFFC227A207A00AF2FBC /* PDMProfile.swift */,
 				2EA937052277580700513F9D /* PDMUser.swift */,
 			);
@@ -389,7 +389,7 @@
 				2E17D000227B6DE900AF2FBC /* HomeViewController.swift in Sources */,
 				2EA93702226E406400513F9D /* HttpExtensions.swift in Sources */,
 				2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */,
-				2E2342D12242937700045E3A /* ConnectToHealthKitViewController.swift in Sources */,
+				2E2342D12242937700045E3A /* InitializePDMViewController.swift in Sources */,
 				2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */,
 				2EA9370C2277949000513F9D /* PDMViewController.swift in Sources */,
 				2EA937062277580700513F9D /* PDMUser.swift in Sources */,

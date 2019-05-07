@@ -52,24 +52,38 @@ enum PatientDataManagerError: Error, LocalizedError {
             return NSLocalizedString("No object was returned by the server.", comment: "No result from server")
         case .healthKitNotAvailable:
             return NSLocalizedString("HealthKit is not available on this device.", comment: "HealthKit not available")
-}
+        }
     }
+}
+
+extension Notification.Name {
+    /// A notification that is sent out when the PDM health records have changed and should be reloaded
+    static let healthRecordsChanged = Notification.Name("pdmHealthRecordsChanged")
 }
 
 /**
  The PatientDataManager object. This is intended to be a singleton that represents the connection to the PatientDataManager web server. Conceptually multiple instances could exist that provide connections to different PDMs.
  */
 class PatientDataManager {
+    /// The root server URL, configured when the PDM object is created
     let rootURL: URL
+
+    /// The client ID, configured when the PDM object is created.
     let clientId: String
+
+    /// The client secret, configured when the PDM object is created.
     let clientSecret: String
-    /**
-     Optional HealthKit support. If the current device does not support HealthKit, this will be `nil`.
-     */
+
+    /// Optional HealthKit support. If the current device does not support HealthKit, this will be `nil`.
     let healthKit: PDMHealthKit?
-    var clientBearerToken: String?
-    var userBearerToken: String?
+
+    /// Client for user requests
     let userClient = RESTClient()
+
+    /// Client for FHIR requests (sending records to the PDM)
+    let fhirClient = RESTClient()
+
+    /// The current user information. This does not appear to be exposed via the PDM backend REST API so this should probably not be relied on.
     var user: PDMUser?
     /**
      The currently active profile. While there can be multiple users associated with an account, health information is only shown from a single active profile.
@@ -78,23 +92,22 @@ class PatientDataManager {
      */
     var activeProfile: PDMProfile?
 
+    /// For now, this is the server records as a pretty-printed JSON string. In the future this will be properly pasred.
+    var serverRecords: String?
+
     // Generated URLs.
 
-    /**
-     The OAuth token URL (relative to the root URL)
-     */
+    /// The OAuth token URL (relative to the root URL)
     var oauthTokenURL: URL {
         return rootURL.appendingPathComponent("oauth/token")
     }
 
+    /// The URL for logging in as a user
     var usersURL: URL {
         return rootURL.appendingPathComponent("users")
     }
 
-    var editUserURL: URL {
-        return rootURL.appendingPathComponent("users/edit")
-    }
-
+    /// The URL for retrieving profiles
     var profilesURL: URL {
         return rootURL.appendingPathComponent("api/v1/profiles")
     }
@@ -165,7 +178,6 @@ class PatientDataManager {
                 completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
                 return
             }
-            self.userBearerToken = accessToken
             self.userClient.bearerToken = accessToken
             // Completed successfully
             completionHandler(nil)
@@ -177,7 +189,6 @@ class PatientDataManager {
      */
     func signOut(completionHandler: @escaping (Error?) -> Void) {
         user = nil
-        userBearerToken = nil
         userClient.bearerToken = nil
         // For now, just instantly "complete"
         completionHandler(nil)
@@ -193,6 +204,7 @@ class PatientDataManager {
                 "password_confirmation": passwordConfirmation ?? password
             ]
         ], to: usersURL) { json, response, error in
+            print("Received account create response")
             guard let json = json, let response = response else {
                 completionHandler(nil, error ?? PatientDataManagerError.couldNotUnderstandResponse)
                 return
@@ -220,53 +232,40 @@ class PatientDataManager {
     }
 
     // Logs in with the client secret
-    func clientLogin(completionHandler: @escaping (Error?) -> Void) {
-        guard let request = URLRequest.httpPostRequestTo(oauthTokenURL, withFormValues: [
-                "client_id": clientId,
-                "client_secret": clientSecret,
-                "grant_type": "client_credentials"
-            ]) else {
-                completionHandler(PatientDataManagerError.internalError)
-                return
-        }
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    func fhirClientLogin(completionHandler: @escaping (Error?) -> Void) {
+        fhirClient.postForm([
+            URLQueryItem(name: "client_id", value: clientId),
+            URLQueryItem(name: "client_secret", value: clientSecret),
+            URLQueryItem(name: "grant_type", value: "client_credentials")
+        ], to: oauthTokenURL) { data, response, error in
             if let error = error {
                 completionHandler(error)
                 return
             }
-            guard let httpResponse = response as? HTTPURLResponse else {
-                // Huh?
-                completionHandler(PatientDataManagerError.internalError)
+            guard let response = response, let mimeType = response.mimeType, MIMEType.isJSON(mimeType), let data = data else {
+                completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
                 return
             }
-            guard (200...299).contains(httpResponse.statusCode) else {
-                completionHandler(RESTError.serverReturnedError(httpResponse.statusCode))
-                return
-            }
-            // Decode the JSON response
-            if let mimeType = httpResponse.mimeType, mimeType == "application/json", let data = data {
-                do {
-                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
-                    guard let jsonResponseDictionary = jsonResponse as? [String: Any],
-                        jsonResponseDictionary["token_type"] as? String == "bearer" else {
-                            completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
-                            return
-                    }
-                    self.clientBearerToken = jsonResponseDictionary["access_token"] as? String
-                    if self.clientBearerToken != nil {
-                        completionHandler(nil)
-                        return
-                    } else {
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let jsonResponseDictionary = jsonResponse as? [String: Any],
+                    jsonResponseDictionary["token_type"] as? String == "bearer" else {
                         completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
                         return
-                    }
-                } catch {
-                    completionHandler(error)
+                }
+                guard let bearerToken = jsonResponseDictionary["access_token"] as? String else {
+                    self.fhirClient.bearerToken = nil
+                    completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
                     return
                 }
+                self.fhirClient.bearerToken = bearerToken
+                completionHandler(nil)
+                return
+            } catch {
+                completionHandler(error)
+                return
             }
         }
-        task.resume()
     }
 
     /*
@@ -335,44 +334,78 @@ class PatientDataManager {
         }
     }
 
-    func uploadHealthRecord(_ record: HKClinicalRecord, completionCallback: @escaping (Error?) -> Void) {
+    @discardableResult func uploadHealthRecords(_ records: [HKClinicalRecord], completionCallback: @escaping (Error?) -> Void) -> URLSessionDataTask? {
+        guard fhirClient.hasBearerToken else {
+            completionCallback(PatientDataManagerError.notLoggedIn)
+            return nil
+        }
         let url = rootURL.appendingPathComponent("api/v1/$process-message")
         // The data should be a single resource which needs to be wrapped into a bundle
         let bundle = MessageBundle()
-        if let pID = user?.id {
-            bundle.addPatientId(String(pID))
+        guard let pID = activeProfile?.profileId else {
+            completionCallback(PatientDataManagerError.noActiveProfile)
+            return nil
         }
+        bundle.addPatientId(String(pID))
         do {
-            try bundle.addRecordAsEntry(record)
-            var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60.0)
-            request.httpMethod = "POST"
-            guard let token = clientBearerToken else {
-                completionCallback(PatientDataManagerError.notLoggedIn)
-                return
+            try bundle.addRecordsAsEntry(records)
+            return fhirClient.post(to: url, withJSON: bundle.createJSON()) { data, response, error in
+                completionCallback(error)
             }
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-            request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            request.httpBody = try bundle.createJsonData()
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    completionCallback(error)
-                    return
-                }
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    completionCallback(PatientDataManagerError.internalError)
-                    return
-                }
-                guard (200...299).contains(httpResponse.statusCode) else {
-                    completionCallback(RESTError.serverReturnedError(httpResponse.statusCode))
-                    return
-                }
-                completionCallback(nil)
-            }
-            task.resume()
         } catch {
             // Q: Is this really an error?
             completionCallback(error)
+            return nil
+        }
+    }
+
+    /// Attempts to upload any health records.
+    func uploadHealthRecordsFromHealthKit(completionCallback: @escaping (Error?) -> Void) {
+        guard let healthKit = healthKit else {
+            completionCallback(PatientDataManagerError.healthKitNotAvailable)
             return
+        }
+        healthKit.queryAllHealthRecords() { records, error in
+            if let error = error {
+                completionCallback(error)
+                return
+            }
+            guard let records = records else {
+                completionCallback(PatientDataManagerError.internalError)
+                return
+            }
+            self.uploadHealthRecords(records, completionCallback: completionCallback)
+        }
+    }
+
+    /**
+     Load health records from the patient data manager.
+     */
+    @discardableResult func loadHealthRecords(completionCallback: @escaping ([String: Any]?, Error?) -> Void) -> URLSessionDataTask? {
+        guard userClient.hasBearerToken else {
+            completionCallback(nil, PatientDataManagerError.notLoggedIn)
+            return nil
+        }
+        guard let profile = activeProfile else {
+            completionCallback(nil, PatientDataManagerError.noActiveProfile)
+            return nil
+        }
+        return userClient.getJSONObject(from: rootURL.appendingPathComponent("api/v1/Patient/\(profile.profileId)/$everything")) { data, response, error in
+            if let error = error {
+                completionCallback(nil, error)
+            } else {
+                guard let json = data else {
+                    completionCallback(nil, PatientDataManagerError.noResultFromServer)
+                    return
+                }
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: json, options: [.prettyPrinted,.sortedKeys])
+                    self.serverRecords = String(data: jsonData, encoding: .utf8)
+                } catch {
+                    self.serverRecords = nil
+                }
+                completionCallback(json, nil)
+            }
         }
     }
 

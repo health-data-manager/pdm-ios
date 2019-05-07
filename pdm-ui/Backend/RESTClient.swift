@@ -48,7 +48,7 @@ enum RESTError: Error, LocalizedError {
                 return String(format: NSLocalizedString("Could not encode the request due to an error: %@", comment: "Could not encode request"), causedBy.localizedDescription)
             } else {
                 return NSLocalizedString("Could not encode the request.", comment: "Could not encode request")
-}
+            }
         case .couldNotParseResponse:
             return NSLocalizedString("Could not parse the result", comment: "Could not parse result")
         case .responseNotJSON:
@@ -130,6 +130,9 @@ class RESTClient {
                 defaultHeaders.removeValue(forKey: "Authorization")
             }
         }
+    }
+    var hasBearerToken: Bool {
+        return defaultHeaders["Authorization"] != nil
     }
 
     /**
@@ -213,6 +216,26 @@ class RESTClient {
     }
 
     /**
+     Send a POST request with a traditional URL encoded form that expects any content back.
+
+     - Parameters:
+     - url: the URL to get data from
+     - json: JSON object to send (will be serialized via JSONSerialization)
+     - completionHandler: the handler to call when the request completes
+     - data: the data returned if any
+     - response: the returned HTTP response, may only be `nil` if error is not `nil`
+     - error: an error if one occurred. Note that this can be set in some "success" conditions as it will be set if the HTTP response was itself an error.
+
+     - Returns: the data task, if one was created, otherwise nil. When `nil` is returned, the callback handler will have been called with a specific error prior to the function completing.
+     */
+    @discardableResult func postForm(_ queryItems: [URLQueryItem], to url: URL, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) -> URLSessionDataTask? {
+        var components = URLComponents()
+        components.queryItems = queryItems
+        let data = components.query?.data(using: .utf8)
+        return handleRequest(method: "POST", url: url, data: data, mimeType: MIMEType.applicationFormEncodedUTF8, completionHandler: completionHandler)
+    }
+
+    /**
      Send a POST request with JSON that expects a JSON object back.
 
      - Parameters:
@@ -227,14 +250,16 @@ class RESTClient {
      */
     @discardableResult func postJSON(_ json: Any, to url: URL, completionHandler: @escaping (_ jsonResponse: Any?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask? {
         return post(to: url, withJSON: json) { (data, response, error) in
-            if let data = data {
-                // If we have data, try and parse it
-                do {
-                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
-                    completionHandler(jsonResponse, response, error)
-                } catch {
-                    completionHandler(nil, response, error)
-                }
+            guard let data = data else {
+                completionHandler(nil, response, error ?? RESTError.responseNotJSON)
+                return
+            }
+            // If we have data, try and parse it
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                completionHandler(jsonResponse, response, error)
+            } catch {
+                completionHandler(nil, response, error)
             }
         }
     }
@@ -302,10 +327,14 @@ class RESTClient {
     /// Function for handling a response. Note that this is called by the various utilities that send requests. The completionHandler will ALWAYS be called by this method and cannot be left out.
     func handleHTTPURLResponse(data: Data?, response: URLResponse?, error: Error?, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         if let error = error {
+            // FOR DEBUGGING:
+            print("<< ERROR \(error)")
             completionHandler(nil, nil, error)
             return
         }
         guard let httpResponse = response as? HTTPURLResponse else {
+            // FOR DEBUGGING:
+            print("<< ERROR: not an HTTPURLResponse")
             completionHandler(nil, nil, RESTError.internalError)
             return
         }

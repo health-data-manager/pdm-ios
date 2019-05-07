@@ -64,7 +64,7 @@ class HealthRecordViewController: UIViewController {
     func uploadToPatientDataManager() {
         if let app = UIApplication.shared.delegate as? AppDelegate {
             if let pdm = app.patientDataManager {
-                pdm.uploadHealthRecord(healthRecord, completionCallback: { (error: Error?) -> Void in
+                pdm.uploadHealthRecords([healthRecord], completionCallback: { (error: Error?) -> Void in
                     DispatchQueue.main.async {
                         if (error != nil) {
                             print("An error occurred.")

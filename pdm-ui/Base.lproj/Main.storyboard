@@ -165,10 +165,10 @@
             </objects>
             <point key="canvasLocation" x="993" y="18"/>
         </scene>
-        <!--Connect To Health Kit View Controller-->
+        <!--InitializePDM View Controller-->
         <scene sceneID="1CS-wp-M2B">
             <objects>
-                <viewController id="3dG-5s-UAs" customClass="ConnectToHealthKitViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3dG-5s-UAs" customClass="InitializePDMViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bG9-bJ-06g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,7 +183,7 @@
                                 <rect key="frame" x="16" y="282" width="343" height="30"/>
                                 <state key="normal" title="Retry"/>
                                 <connections>
-                                    <action selector="retryCheckAccess:" destination="3dG-5s-UAs" eventType="primaryActionTriggered" id="goj-oE-hh4"/>
+                                    <action selector="retry:" destination="3dG-5s-UAs" eventType="primaryActionTriggered" id="Wbm-t2-e8r"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This text should explain what is happening here." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEU-Cj-JoO">
@@ -198,7 +198,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Wh-v2G">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Wh-v2G">
                                 <rect key="frame" x="16" y="213" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
@@ -223,8 +223,11 @@
                         <viewLayoutGuide key="safeArea" id="NWe-fk-1YZ"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="z5W-Wh-v2G" id="aq0-YK-41B"/>
+                        <outlet property="descriptionLabel" destination="tEU-Cj-JoO" id="XrE-8M-Yrz"/>
                         <outlet property="loadingLabel" destination="xYT-vw-FI4" id="hO9-4h-uhw"/>
                         <outlet property="retryButton" destination="7TL-5A-ouP" id="Aeh-2h-1cD"/>
+                        <outlet property="titleLabel" destination="QYg-c6-4XA" id="Cc2-B4-MEf"/>
                         <segue destination="NKh-ni-LcR" kind="showDetail" identifier="Home" id="sDh-JN-vse"/>
                     </connections>
                 </viewController>
@@ -314,10 +317,27 @@
                     <view key="view" contentMode="scaleToFill" id="A7n-0D-W4J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Health Record" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Sd3-ec-rx1">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fEA-GZ-hZ7" firstAttribute="bottom" secondItem="Sd3-ec-rx1" secondAttribute="bottom" id="6r1-G9-Ojm"/>
+                            <constraint firstItem="Sd3-ec-rx1" firstAttribute="leading" secondItem="fEA-GZ-hZ7" secondAttribute="leading" id="Kun-jo-BGv"/>
+                            <constraint firstItem="fEA-GZ-hZ7" firstAttribute="trailing" secondItem="Sd3-ec-rx1" secondAttribute="trailing" id="aap-2x-TtY"/>
+                            <constraint firstItem="Sd3-ec-rx1" firstAttribute="top" secondItem="fEA-GZ-hZ7" secondAttribute="top" id="uAX-As-tex"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="fEA-GZ-hZ7"/>
                     </view>
                     <navigationItem key="navigationItem" id="euy-Bi-bIW"/>
+                    <connections>
+                        <outlet property="healthRecordText" destination="Sd3-ec-rx1" id="qdr-7I-LwL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xxB-7G-EPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

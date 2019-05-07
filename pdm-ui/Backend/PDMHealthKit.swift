@@ -8,6 +8,10 @@
 import Foundation
 import HealthKit
 
+enum PDMHealthKitError: Error {
+    case multipleQueryErrors([Error])
+}
+
 // Provides a connection to HealthKit via the PDM.
 // Note that HealthKit may not be available on all devices.
 // It is noteably not available on the iPad.
@@ -25,6 +29,9 @@ class PDMHealthKit {
 
     let healthStore: HKHealthStore
     let availableTypes: Set<HKClinicalType>
+
+    // The query dispatch queue. Note that it is intentionally serial: it is mostly used for adding data to collections.
+    private let queryDispatchQueue = DispatchQueue(label: "org.mitre.PDM.queryQueue", attributes: [])
 
     // Possibly creates the health kit connection. This depends on health data being available through HealthKit.
     init?() {
@@ -55,5 +62,50 @@ class PDMHealthKit {
     // Sends a request to HealthKit for the various supported record types.
     func requestHealthRecordAccess(completion: @escaping (Bool, Error?) -> Void) {
         healthStore.requestAuthorization(toShare: nil, read: availableTypes, completion: completion)
+    }
+
+    // Request all available health records
+    func queryAllHealthRecords(completionCallback: @escaping ([HKClinicalRecord]?, Error?) -> Void) {
+        // Because we have to run multiple queries, we need a dispatch group to known when they're all done
+        let group = DispatchGroup()
+        // The records we want to return
+        var records = [HKClinicalRecord]()
+        // Any errors
+        var errors = [Error]()
+        for recordType in availableTypes {
+            let query = HKSampleQuery(sampleType: recordType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+                defer {
+                    // No matter what happens, we leave the group
+                    group.leave()
+                }
+                if let error = error {
+                    // Add the error to the list of errors
+                    self.queryDispatchQueue.async(flags: .barrier) {
+                        errors.append(error)
+                    }
+                    return
+                }
+                guard let samples = samples, let resultingRecords = samples as? [HKClinicalRecord] else {
+                    // If there were no samples just skip?
+                    return
+                }
+                self.queryDispatchQueue.async(flags: .barrier) {
+                    records.append(contentsOf: resultingRecords)
+                }
+            }
+            // Enter the group
+            group.enter()
+            healthStore.execute(query)
+        }
+        group.notify(queue: DispatchQueue.main) {
+            switch errors.count {
+            case 0:
+                completionCallback(records, nil)
+            case 1:
+                completionCallback(nil, errors[0])
+            default:
+                completionCallback(nil, PDMHealthKitError.multipleQueryErrors(errors))
+            }
+        }
     }
 }

@@ -10,12 +10,14 @@ import UIKit
 
 class PatientHealthRecordViewController: UIViewController {
 
+    @IBOutlet weak var healthRecordText: UITextView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if let pdm = patientDataManager {
+            healthRecordText.text = pdm.serverRecords
+        }
     }
-    
 
     /*
     // MARK: - Navigation

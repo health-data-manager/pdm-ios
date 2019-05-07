@@ -82,7 +82,6 @@ class PDMProfile {
         self.telephone = json["telephone"] as? String
         self.telephoneUse = json["telephone_use"] as? String
         if let createdAtString = json["created_at"] as? String {
-            print("Attempting to parse \(createdAtString)")
             self.createdAt = dateFormatter.date(from: createdAtString)
         }
         if let updatedAtString = json["updated_at"] as? String {
