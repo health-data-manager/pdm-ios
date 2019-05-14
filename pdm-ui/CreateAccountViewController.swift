@@ -17,11 +17,30 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var passwordConfirmationField: UITextField!
     @IBOutlet weak var createAccountButton: PDMButton!
     @IBOutlet weak var passwordStatusLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { notification in
+            // Handle keyboard showing
+            guard let userInfo = notification.userInfo else { return }
+            guard let keyboardInfo = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
+            let keyboardSize = keyboardInfo.cgRectValue.size
+            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+            self.scrollView.contentInset = contentInsets
+            self.scrollView.scrollIndicatorInsets = contentInsets
+        }
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { notification in
+            // Handle keyboard hiding
+            self.scrollView.contentInset = UIEdgeInsets.zero
+            self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+        }
         updateCreateAccountButtonState()
     }
     
