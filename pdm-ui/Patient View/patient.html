@@ -25,24 +25,27 @@ html { font-family: "San Francisco", sans-serif; font-size: 14px; }
 .boxes {
     display: flex;
     flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
 }
 .box {
-    width: 50%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-.box > div {
-    padding: 10px;
+    /* Positioned relative to that later parts can be made relative */
+    position: relative;
+    width: calc(50vw - 24px);
+    height: calc(50vw - 24px);
+    margin: 8px;
+    padding: 10px 12px;
     border-radius: 8px;
     background-color: #CCC;
     box-sizing: border-box;
 }
 .box h2 {
+    font-size: 16px;
     margin: 0;
     padding: 0 0 14px 0;
 }
 .box .measurement {
-    font-size: 18px;
+    font-size: 10vw;
     font-weight: bold;
 }
 .box .measurement .units {
@@ -50,22 +53,74 @@ html { font-family: "San Francisco", sans-serif; font-size: 14px; }
     font-weight: normal;
 }
 .box .source {
+    position: absolute;
+    bottom: 10px;
     padding: 14px 0 0 0;
     font-size: 12px;
 }
-.box .vital-weight {
+.box.vital-weight {
     background-color: #CAF5E7;
 }
-.box .vital-bp {
+.box.vital-bp {
     background-color: #E3D5BC;
 }
-.box .vital-sleep {
+.box.vital-sleep {
     background-color: #C1BBF9;
 }
-.box .mood {
+.box.mood {
     background-color: #C2DDF2;
 }
         </style>
+<script type="application/javascript">
+class Box {
+    constructor(json) {
+        this.title = json['title'];
+        this.measurement = json['measurement'];
+        this.units = json['units'];
+        this.delta = json['delta'];
+        this.source = json['source'];
+        this.style = json['style'];
+    }
+    buildBox(container) {
+        container.append(this.box = document.createElement('div'));
+        this.box.className = 'box ' + (this.style ? this.style : '');
+        if (this.title) {
+            this.titleDiv = this._appendField(this.title, null, 'h2');
+        }
+        if (this.measurement) {
+            this.measurementDiv = this._appendField(this.measurement, 'measurement');
+            if (this.units) {
+                this.unitsSpan = document.createElement('units');
+                this.unitsSpan.className = "units";
+                this.unitsSpan.append(this.units);
+                this.measurementDiv.append(this.unitsSpan);
+            }
+        }
+        if (this.delta) {
+            this.deltaDiv = this._appendField(this.delta, 'delta');
+        }
+        if (this.source) {
+            this.sourceDiv = this._appendField(this.source, 'source');
+        }
+    }
+    _appendField(contents, type, element) {
+        let n = document.createElement(element ? element : "div");
+        if (type)
+            n.className = type;
+        n.append(contents);
+        this.box.append(n);
+        return n;
+    }
+}
+
+function receiveBoxes(json) {
+    let boxContainer = document.getElementById('health-boxes');
+    for (let boxDefinition of json) {
+        let box = new Box(boxDefinition);
+        box.buildBox(boxContainer);
+    }
+}
+</script>
     </head>
     <body>
         <section class="careplan">
@@ -77,38 +132,7 @@ html { font-family: "San Francisco", sans-serif; font-size: 14px; }
         </section>
         <section>
             <h1>Health</h1>
-            <div class="boxes">
-                <div class="box">
-                    <div class="vital vital-weight">
-                        <h2>Weight</h2>
-                        <div class="measurement">146.5<span class="units">lbs</span></div>
-                        <div class="delta">-2</div>
-                        <div class="source">Withings Scale</div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="vital vital-bp">
-                        <h2>Blood Pressure</h2>
-                        <div class="measurement">108/89<span class="units">mmHg</span></div>
-                        <div class="source">Mass General Hospital</div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="vital vital-sleep">
-                        <h2>Sleep</h2>
-                        <div class="measurement">6.42<span class="units">hours</span></div>
-                        <div class="delta">+0.22</div>
-                        <div class="source">iPhone</div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="mood">
-                        <h2>Mood</h2>
-                        <div class="measurement">:(</div>
-                        <div class="source">Measure my Mood</div>
-                    </div>
-                </div>
-            </div>
+            <div id="health-boxes" class="boxes"></div>
         </section>
     </body>
 </html>

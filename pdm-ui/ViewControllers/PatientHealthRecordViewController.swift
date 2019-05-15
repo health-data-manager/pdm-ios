@@ -9,9 +9,9 @@
 import UIKit
 import WebKit
 
-class PatientHealthRecordViewController: UIViewController {
-
+class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate {
     @IBOutlet weak var webView: WKWebView!
+    var patientViewNavigation: WKNavigation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,26 @@ class PatientHealthRecordViewController: UIViewController {
             webView.loadHTMLString("<html><body>Could not load patient view</body></html>", baseURL: nil)
             return
         }
-        webView.loadFileURL(patientURL, allowingReadAccessTo: patientURL)
+        webView.navigationDelegate = self
+        patientViewNavigation = webView.loadFileURL(patientURL, allowingReadAccessTo: patientURL)
+    }
+
+    func displayPatientData() {
+        let boxes = [ [ "title": "Weight", "measurement": "146.5", "units": "lbs", "delta": "-2", "source": "Withings Scale", "style": "vital vital-weight" ],
+                      [ "title": "Blood Pressure", "measurement": "108/89", "units": "mmHg", "source": "Mass General Hospital", "style": "vital vital-bp" ],
+                      [ "title": "Sleep", "measurement": "6.42", "units": "hours", "source": "iPhone", "style": "vital vital-sleep" ],
+                      [ "title": "Mood", "measurement": ":(", "source": "Measure my Mood", "style": "mood" ]
+        ]
+        do {
+            let json = try JSONSerialization.data(withJSONObject: boxes, options: [])
+            guard let jsonString = String(data: json, encoding: .utf8) else {
+                // TODO: Show an error somewhere? This shouldn't be possible
+                return
+            }
+            webView.evaluateJavaScript("receiveBoxes(\(jsonString))")
+        } catch {
+            // TODO: Log this error somewhere
+        }
     }
 
     /*
@@ -34,4 +53,13 @@ class PatientHealthRecordViewController: UIViewController {
     }
     */
 
+    // MARK: - WK Navigation Delegate
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("Navigation completed")
+        if navigation == patientViewNavigation {
+            // No longer need the navigation
+            patientViewNavigation = nil
+            displayPatientData()
+        }
+    }
 }
