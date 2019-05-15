@@ -42,8 +42,8 @@ class CreateAccountViewController: UIViewController {
             self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
         }
         updateCreateAccountButtonState()
+        updatePasswordStatus()
     }
-    
 
     /*
     // MARK: - Navigation
@@ -84,23 +84,7 @@ class CreateAccountViewController: UIViewController {
         updateCreateAccountButtonState()
         if let sendingField = sender as? UITextField {
             if sendingField == passwordField || sendingField == passwordConfirmationField {
-                if passwordField.isEmpty {
-                    passwordStatusLabel.text = "Password not filled in yet"
-                    passwordStatusLabel.textColor = UIColor.black
-                } else {
-                    if let password = passwordField.text, let passwordConfirmation = passwordConfirmationField.text {
-                        if password == passwordConfirmation {
-                            passwordStatusLabel.text = "\u{2714}\u{FE0E} Passwords match"
-                            passwordStatusLabel.textColor = UIColor.green
-                        } else {
-                            passwordStatusLabel.text = "Passwords do not match"
-                            passwordStatusLabel.textColor = UIColor.red
-                        }
-                    } else {
-                        passwordStatusLabel.text = "Password could not be read"
-                        passwordStatusLabel.textColor = UIColor.red
-                    }
-                }
+                updatePasswordStatus()
             }
         }
     }
@@ -111,6 +95,29 @@ class CreateAccountViewController: UIViewController {
 
     func updateCreateAccountButtonState() {
         createAccountButton.isEnabled = !(firstNameField.isEmpty || lastNameField.isEmpty || emailField.isEmpty || passwordField.isEmpty || passwordConfirmationField.isEmpty)
+    }
+
+    func updatePasswordStatus() {
+        if passwordField.isEmpty {
+            passwordStatusLabel.text = "Password not filled in yet"
+            passwordStatusLabel.textColor = UIColor.black
+        } else {
+            if let password = passwordField.text, let passwordConfirmation = passwordConfirmationField.text {
+                if password.count < 6 {
+                    passwordStatusLabel.text = "Password is too short"
+                    passwordStatusLabel.textColor = UIColor.red
+                } else if password == passwordConfirmation {
+                    passwordStatusLabel.text = "\u{2714}\u{FE0E} Passwords match"
+                    passwordStatusLabel.textColor = UIColor.green
+                } else {
+                    passwordStatusLabel.text = "Passwords do not match"
+                    passwordStatusLabel.textColor = UIColor.red
+                }
+            } else {
+                passwordStatusLabel.text = "Password could not be read"
+                passwordStatusLabel.textColor = UIColor.red
+            }
+        }
     }
 
     // Submit the current fields to create an account (if possible).
