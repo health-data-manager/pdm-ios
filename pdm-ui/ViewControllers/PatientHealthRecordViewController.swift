@@ -7,16 +7,21 @@
 //
 
 import UIKit
+import WebKit
 
 class PatientHealthRecordViewController: UIViewController {
 
-    @IBOutlet weak var healthRecordText: UITextView!
+    @IBOutlet weak var webView: WKWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let pdm = patientDataManager {
-            healthRecordText.text = pdm.serverRecords
+        // For prototyping purposes, it makes more sense to implement this as HTML
+        // Eventually as much as possible should be done via native controls, but for rapid prototyping, do as HTML
+        guard let patientURL = Bundle.main.url(forResource: "patient", withExtension: "html") else {
+            webView.loadHTMLString("<html><body>Could not load patient view</body></html>", baseURL: nil)
+            return
         }
+        webView.loadFileURL(patientURL, allowingReadAccessTo: patientURL)
     }
 
     /*

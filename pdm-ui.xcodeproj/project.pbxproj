@@ -29,6 +29,8 @@
 		2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F5226908BD009FF808 /* PDMCheckbox.swift */; };
 		2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5A87BA2244C06000E225D5 /* MessageBundle.swift */; };
 		2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E5A87BC2245188B00E225D5 /* Settings.plist */; };
+		2E8468B7228BCF8400C8ECB6 /* patient.html in Resources */ = {isa = PBXBuildFile; fileRef = 2E8468B6228BCF8400C8ECB6 /* patient.html */; };
+		2E8468B9228BCF9E00C8ECB6 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8468B8228BCF9E00C8ECB6 /* WebKit.framework */; };
 		2EA93702226E406400513F9D /* HttpExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA93701226E406400513F9D /* HttpExtensions.swift */; };
 		2EA93704226F60E100513F9D /* HttpExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA93703226F60E100513F9D /* HttpExtensionsTests.swift */; };
 		2EA937062277580700513F9D /* PDMUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA937052277580700513F9D /* PDMUser.swift */; };
@@ -90,6 +92,8 @@
 		2E5088F5226908BD009FF808 /* PDMCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMCheckbox.swift; sourceTree = "<group>"; };
 		2E5A87BA2244C06000E225D5 /* MessageBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBundle.swift; sourceTree = "<group>"; };
 		2E5A87BC2245188B00E225D5 /* Settings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		2E8468B6228BCF8400C8ECB6 /* patient.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = patient.html; sourceTree = "<group>"; };
+		2E8468B8228BCF9E00C8ECB6 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2EA93701226E406400513F9D /* HttpExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpExtensions.swift; sourceTree = "<group>"; };
 		2EA93703226F60E100513F9D /* HttpExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpExtensionsTests.swift; sourceTree = "<group>"; };
 		2EA937052277580700513F9D /* PDMUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMUser.swift; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E8468B9228BCF9E00C8ECB6 /* WebKit.framework in Frameworks */,
 				2E2342CB2242931600045E3A /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +181,7 @@
 				2E23429F224291C500045E3A /* Assets.xcassets */,
 				2E2342A1224291C500045E3A /* LaunchScreen.storyboard */,
 				2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */,
+				2E8468B5228BCF3D00C8ECB6 /* Patient View */,
 				2E17CFFE227B6C9000AF2FBC /* ViewControllers */,
 				2EA937122279481F00513F9D /* UI */,
 				2E2342A4224291C500045E3A /* Info.plist */,
@@ -210,6 +216,7 @@
 		2E2342C92242931600045E3A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2E8468B8228BCF9E00C8ECB6 /* WebKit.framework */,
 				2E2342CA2242931600045E3A /* HealthKit.framework */,
 			);
 			name = Frameworks;
@@ -227,6 +234,14 @@
 				2EA937052277580700513F9D /* PDMUser.swift */,
 			);
 			path = Backend;
+			sourceTree = "<group>";
+		};
+		2E8468B5228BCF3D00C8ECB6 /* Patient View */ = {
+			isa = PBXGroup;
+			children = (
+				2E8468B6228BCF8400C8ECB6 /* patient.html */,
+			);
+			path = "Patient View";
 			sourceTree = "<group>";
 		};
 		2EA937122279481F00513F9D /* UI */ = {
@@ -356,6 +371,7 @@
 				2E2342A3224291C500045E3A /* LaunchScreen.storyboard in Resources */,
 				2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */,
 				2E2342A0224291C500045E3A /* Assets.xcassets in Resources */,
+				2E8468B7228BCF8400C8ECB6 /* patient.html in Resources */,
 				2E23429B224291C300045E3A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
