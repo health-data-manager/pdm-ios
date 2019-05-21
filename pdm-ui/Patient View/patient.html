@@ -7,18 +7,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style type="text/css">
 html { font-family: "San Francisco", sans-serif; font-size: 14px; }
-.careplan .body {
+section.careplan div.careplan {
     background-color: #FDDDD6;
     padding: 8px;
     border-radius: 8px;
 }
-.careplan .body h2 {
+.careplan h2 {
     margin: 0;
     padding: 0;
     font-size: 16px;
     font-weight: bold;
 }
-.careplan .body p {
+.careplan p {
     margin: 0 0 14px 0;
     padding: 0;
 }
@@ -48,47 +48,76 @@ html { font-family: "San Francisco", sans-serif; font-size: 14px; }
     font-size: 10vw;
     font-weight: bold;
 }
-.box .measurement .units {
-    font-size: 14px;
+.box .measurement.small {
+    font-size: 5vw;
+}
+.box .measurement .units, .box .delta {
+    font-size: 5vw;
     font-weight: normal;
+}
+.box .measurement.small .units {
+    font-size: 3vw;
 }
 .box .source {
     position: absolute;
     bottom: 10px;
     padding: 14px 0 0 0;
-    font-size: 12px;
+    font-size: 3vw;
+}
+.box.appointment {
+    background-color: #F0E1C5;
 }
 .box.disease {
     background-color: #CAF6E7;
 }
-.box.vital {
-    background-color: #C5E0F4;
-}
-.box.vital-sleep {
-    background-color: #C1BBF9;
+.box.health-receipt {
+    background-color: #C6EBB4;
 }
 .box.mood {
     background-color: #C2DDF2;
 }
+.box.vital {
+    background-color: #C5E0F4;
+}
         </style>
 <script type="application/javascript">
 class Box {
+    constructor(json) { }
+    build(container) { }
+    _appendField(contents, type, element) {
+        let n = document.createElement(element ? element : "div");
+        if (type)
+            n.className = type;
+        n.append(contents);
+        this.box.append(n);
+        return n;
+    }
+}
+class HealthBox extends Box {
     constructor(json) {
+        super(json);
         this.title = json['title'];
         this.measurement = json['measurement'];
         this.units = json['units'];
         this.delta = json['delta'];
         this.source = json['source'];
         this.style = json['style'];
+        this.link = json['link'];
     }
-    buildBox(container) {
+    build(container) {
         container.append(this.box = document.createElement('div'));
-        this.box.className = 'box ' + (this.style ? this.style : '');
+        this.box.className = 'box';
+        if (this.style) {
+            this.box.classList.add(this.style);
+        }
         if (this.title) {
             this.titleDiv = this._appendField(this.title, null, 'h2');
         }
         if (this.measurement) {
             this.measurementDiv = this._appendField(this.measurement, 'measurement');
+            if (this.measurement.length > 15) {
+                this.measurementDiv.classList.add('small');
+            }
             if (this.units) {
                 this.unitsSpan = document.createElement('units');
                 this.unitsSpan.className = "units";
@@ -102,34 +131,73 @@ class Box {
         if (this.source) {
             this.sourceDiv = this._appendField(this.source, 'source');
         }
-    }
-    _appendField(contents, type, element) {
-        let n = document.createElement(element ? element : "div");
-        if (type)
-            n.className = type;
-        n.append(contents);
-        this.box.append(n);
-        return n;
+        if (this.link) {
+            this.box.onclick = event => {
+                location = this.link;
+            }
+        }
     }
 }
 
-function receiveBoxes(json) {
-    let boxContainer = document.getElementById('health-boxes');
-    for (let boxDefinition of json) {
-        let box = new Box(boxDefinition);
-        box.buildBox(boxContainer);
+class CarePlan extends Box {
+    constructor(json) {
+        super(json);
+        this.title = json['title'];
+        this.header = json['header'];
+        this.body = json['body'];
+        this.link = json['link'];
     }
+    build(container) {
+        container.append(this.box = document.createElement('div'));
+        this.box.className = 'careplan';
+        if (this.header) {
+            this.headerDiv = this._appendField(this.header, null, 'h2');
+        }
+        if (this.body) {
+            this.bodyDiv = this._appendField(this.body, 'body');
+        }
+        if (this.link) {
+            this.box.onclick = event => {
+                location = this.link;
+            }
+        }
+    }
+}
+
+function setup(json) {
+    if ('boxes' in json) {
+        setHealthBoxes(json['boxes'])
+    }
+    if ('careplan' in json) {
+        setCarePlan(json['careplan'])
+    }
+}
+
+/**
+ * Sets the boxes, clearing out any that already exist.
+ */
+function setHealthBoxes(json) {
+    let boxContainer = document.getElementById('health-boxes');
+    boxContainer.innerHTML = "";
+    for (let boxDefinition of json) {
+        let box = new HealthBox(boxDefinition);
+        box.build(boxContainer);
+    }
+}
+
+function setCarePlan(careplan) {
+    let container = document.getElementById('careplan');
+    container.innerHTML = "";
+    careplan = new CarePlan(careplan);
+    let title = document.createElement('h1');
+    title.append(careplan.title ? careplan.title : "Care Plan");
+    container.append(title);
+    careplan.build(container);
 }
 </script>
     </head>
     <body>
-        <section class="careplan">
-            <h1>Care Plan</h1>
-            <div class="body">
-                <h2>Go for a 15 minutes jog or bike ride</h2>
-                <p>Regular exercise decreases your risk of developing certain diseases, including type 2 diabetes or high blood pressure.</p>
-            </div>
-        </section>
+        <section id="careplan" class="careplan"></section>
         <section>
             <h1>Health</h1>
             <div id="health-boxes" class="boxes"></div>

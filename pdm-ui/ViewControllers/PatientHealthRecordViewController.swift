@@ -9,16 +9,17 @@
 import UIKit
 import WebKit
 
-class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate {
+class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     /// Boxes that only exist for demo purposes. THIS WILL BE REMOVED WHEN ALL DATA COMES FROM THE PDM
-    static var demoBoxes = [ [ "title": "Weight", "measurement": "146.5", "units": "lbs", "delta": "-2", "source": "Withings Scale", "style": "vital vital-weight" ],
-                             [ "title": "Blood Pressure", "measurement": "108/89", "units": "mmHg", "source": "Mass General Hospital", "style": "vital vital-bp" ],
-                             [ "title": "Sleep", "measurement": "6.42", "units": "hours", "source": "iPhone", "style": "vital vital-sleep" ],
+    static var demoBoxes = [ [ "title": "Weight", "measurement": "146.5", "units": "lbs", "delta": "-2", "source": "Withings Scale", "style": "vital" ],
+                             [ "title": "Blood Pressure", "measurement": "108/89", "units": "mmHg", "source": "Mass General Hospital", "style": "vital" ],
+                             [ "title": "Sleep", "measurement": "6.42", "units": "hours", "source": "iPhone", "style": "vital" ],
                              [ "title": "Mood", "measurement": ":(", "source": "Measure my Mood", "style": "mood" ]
     ]
 
     @IBOutlet weak var webView: WKWebView!
     var patientViewNavigation: WKNavigation?
+    var patientURL: URL?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +29,18 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate 
             webView.loadHTMLString("<html><body>Could not load patient view</body></html>", baseURL: nil)
             return
         }
+        self.patientURL = patientURL
         webView.navigationDelegate = self
+        webView.uiDelegate = self
         patientViewNavigation = webView.loadFileURL(patientURL, allowingReadAccessTo: patientURL)
     }
 
     func displayPatientData() {
         var boxes = [[String: String]]()
+        var careplan = [
+            "header": "Go for a 15 minute jog or bike ride",
+            "body": "Regular exercise decreases your risk of developing certain diseases, including type 2 diabetes or high blood pressure."
+        ]
         // See if we can find a cancer resource
         if let pdm = patientDataManager {
             if let records = pdm.serverRecords {
@@ -44,22 +51,50 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate 
                         ]
                     ]
                 ])
-                print("Found resources: \(cancerResources)")
                 // For now, just use the first one
                 if let cancerResource = cancerResources.first, let cancerType = cancerResource.getString(forField: "code.text") {
-                    boxes.append([ "title": "Cancer", "measurement": cancerType, "style": "disease" ])
+                    var box = [ "title": "Cancer", "measurement": cancerType, "style": "disease" ]
+                    if let cancerStageCoding = cancerResource.getValue(forField: "stage.summary.coding") as? [Any],
+                        let cancerStageElement = cancerStageCoding.first,
+                        let cancerStageCodingObj = cancerStageElement as? [String: Any],
+                        let cancerStage = cancerStageCodingObj["display"] as? String {
+                            box["title"] = cancerStage
+                    }
+                    boxes.append(box)
+                    // Change careplan to a cancer careplan
+                    careplan["title"] = "Colon Cancer Care Plan"
+                    careplan["header"] = "Prepare for treatment discussion"
+                    careplan["body"] = "Here are some examples of the types of questions you may want to ask Dr. Rusk99 on 21.May, 10AM."
+                    careplan["link"] = "pdm://careplan/colonCancer"
+                    // Add some more static boxes
+                    boxes.append([
+                        "title": "Next Appointment with Dr. Rusk99",
+                        "measurement": "21.May",
+                        "delta": "10:00AM",
+                        "style": "appointment"
+                    ])
+                    boxes.append([
+                        "title": "Health Receipt from Dr. Rusk99",
+                        "measurement": "Routine Visit",
+                        "link": "pdm://health-receipt/1",
+                        "style": "health-receipt"
+                    ])
                 }
             }
         }
         // Add in demo boxes as necessary
         boxes.append(contentsOf: PatientHealthRecordViewController.demoBoxes[0...(3-boxes.count)])
         do {
-            let json = try JSONSerialization.data(withJSONObject: boxes, options: [])
+            let json = try JSONSerialization.data(withJSONObject: [ "careplan": careplan, "boxes": boxes ], options: [])
             guard let jsonString = String(data: json, encoding: .utf8) else {
                 // TODO: Show an error somewhere? This shouldn't be possible
                 return
             }
-            webView.evaluateJavaScript("receiveBoxes(\(jsonString))")
+            webView.evaluateJavaScript("setup(\(jsonString))") { result, error in
+                if let error = error {
+                    print("Error while setting up patient view: \(error)")
+                }
+            }
         } catch {
             // TODO: Log this error somewhere
         }
@@ -75,13 +110,77 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate 
     }
     */
 
+    func openInternalURL(_ url: URL) {
+        // Ignore the scheme for this
+        // Host is the type for now
+        if let type = url.host {
+            if type == "careplan" {
+                performSegue(withIdentifier: "CarePlan", sender: self)
+            } else if type == "health-receipt" {
+                performSegue(withIdentifier: "HealthReceipt", sender: self)
+            }
+        }
+    }
+
     // MARK: - WK Navigation Delegate
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("Navigation completed")
         if navigation == patientViewNavigation {
             // No longer need the navigation
             patientViewNavigation = nil
             displayPatientData()
         }
+    }
+
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.request.url == patientURL {
+            // Always allow navigations to ourself
+            decisionHandler(.allow)
+            return
+        }
+        if let requestURL = navigationAction.request.url, let scheme = requestURL.scheme, scheme.caseInsensitiveCompare("pdm") == .orderedSame {
+            openInternalURL(requestURL)
+            decisionHandler(.cancel)
+            return
+        }
+        switch navigationAction.navigationType {
+        case .linkActivated:
+            // If the link is to an HTTP/HTTPS link, forward to Safari
+            if let url = navigationAction.request.url, let scheme = url.scheme {
+                if scheme.caseInsensitiveCompare("http") == .orderedSame || scheme.caseInsensitiveCompare("https") == .orderedSame {
+                    UIApplication.shared.open(url)
+                }
+            }
+            // In any case, cancel this
+            decisionHandler(.cancel)
+        case .formSubmitted, .formResubmitted:
+            // For now, disallow in these scenarios
+            decisionHandler(.cancel)
+        case .backForward, .reload, .other:
+            decisionHandler(.allow)
+        @unknown default:
+            decisionHandler(.cancel)
+        }
+    }
+
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        let okAction = UIAlertAction(title: "OK", style: .default) { alert in
+            completionHandler()
+        }
+        let alert = UIAlertController(title: "JavaScript Alert", message: message, preferredStyle: .alert)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        let okAction = UIAlertAction(title: "OK", style: .default) { alert in
+            completionHandler(true)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { alert in
+            completionHandler(false)
+        }
+        let alert = UIAlertController(title: "JavaScript Alert", message: message, preferredStyle: .alert)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
     }
 }

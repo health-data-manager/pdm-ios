@@ -21,12 +21,18 @@ class FHIRResource {
         return query.count == 1 && query["resourceType"] as? String == resourceType
     }
 
-    func getString(forField field: String) -> String? {
+    /// Handles getting a value for resourceType. Otherwise returns nil.
+    func getValue(forField field: String) -> Any? {
         if field == "resourceType" {
             return resourceType
         } else {
             return nil
         }
+    }
+
+    /// Gets a string based on a field name.
+    func getString(forField field: String) -> String? {
+        return getValue(forField: field) as? String
     }
 
     static func create(fromJSON json: Any) -> FHIRResource? {
@@ -94,7 +100,7 @@ func matchArrays(document: [Any], query: [Any]) -> Bool {
     return true
 }
 
-func getValue(forField field: String, inDict dict: [String: Any]) -> Any? {
+func lookupValue(forField field: String, inDict dict: [String: Any]) -> Any? {
     if let dotIdx = field.firstIndex(of: ".") {
         // In this case, we will be recursing.
         let localField = String(field[..<dotIdx])
@@ -102,7 +108,7 @@ func getValue(forField field: String, inDict dict: [String: Any]) -> Any? {
         // If there's a remaining value, it MUST be a dict
         guard let remaining = value as? [String: Any] else { return nil }
         let remainingField = String(field[field.index(after: dotIdx)...])
-        return getValue(forField: remainingField, inDict: remaining)
+        return lookupValue(forField: remainingField, inDict: remaining)
     } else {
         // Otherwise return whatever we got
         return dict[field]
@@ -126,8 +132,8 @@ class GenericFHIRResource: FHIRResource {
         return matchDicts(document: resource, query: query)
     }
 
-    override func getString(forField field: String) -> String? {
-        return getValue(forField: field, inDict: resource) as? String
+    override func getValue(forField field: String) -> Any? {
+        return lookupValue(forField: field, inDict: resource)
     }
 }
 

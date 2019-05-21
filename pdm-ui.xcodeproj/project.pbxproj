@@ -20,8 +20,6 @@
 		2E2342B9224291C500045E3A /* pdm_uiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342B8224291C500045E3A /* pdm_uiUITests.swift */; };
 		2E2342C7224292DC00045E3A /* PatientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342C6224292DC00045E3A /* PatientDataManager.swift */; };
 		2E2342CB2242931600045E3A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2342CA2242931600045E3A /* HealthKit.framework */; };
-		2E2342CD2242935700045E3A /* HealthRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */; };
-		2E2342CF2242936600045E3A /* HealthRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342CE2242936600045E3A /* HealthRecordViewController.swift */; };
 		2E2342D12242937700045E3A /* InitializePDMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342D02242937700045E3A /* InitializePDMViewController.swift */; };
 		2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC5226783B600A9A7D6 /* PDMTheme.swift */; };
 		2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC6226783B600A9A7D6 /* PDMButton.swift */; };
@@ -41,6 +39,7 @@
 		2EA9370E2278914000513F9D /* PDMHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA9370D2278914000513F9D /* PDMHealthKit.swift */; };
 		2EA937102278AC6700513F9D /* PatientDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */; };
 		2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF772C229321CC00170091 /* PDMProvider.swift */; };
+		2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF7730229496CB00170091 /* PDMTimeLine.swift */; };
 		2ED98950227B6F320034B4B6 /* PatientHealthRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */; };
 		2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98951227CAC8D0034B4B6 /* RESTClient.swift */; };
 		2ED98954227CEAF70034B4B6 /* PDMProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */; };
@@ -85,8 +84,6 @@
 		2E2342C6224292DC00045E3A /* PatientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDataManager.swift; sourceTree = "<group>"; };
 		2E2342C82242931600045E3A /* pdm-ui.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pdm-ui.entitlements"; sourceTree = "<group>"; };
 		2E2342CA2242931600045E3A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
-		2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordTableViewController.swift; sourceTree = "<group>"; };
-		2E2342CE2242936600045E3A /* HealthRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRecordViewController.swift; sourceTree = "<group>"; };
 		2E2342D02242937700045E3A /* InitializePDMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializePDMViewController.swift; sourceTree = "<group>"; };
 		2E395EC5226783B600A9A7D6 /* PDMTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMTheme.swift; sourceTree = "<group>"; };
 		2E395EC6226783B600A9A7D6 /* PDMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMButton.swift; sourceTree = "<group>"; };
@@ -106,6 +103,7 @@
 		2EA9370D2278914000513F9D /* PDMHealthKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMHealthKit.swift; sourceTree = "<group>"; };
 		2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientDataManagerTests.swift; path = "pdm-uiTests/PatientDataManagerTests.swift"; sourceTree = SOURCE_ROOT; };
 		2EBF772C229321CC00170091 /* PDMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProvider.swift; sourceTree = "<group>"; };
+		2EBF7730229496CB00170091 /* PDMTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMTimeLine.swift; sourceTree = "<group>"; };
 		2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthRecordViewController.swift; sourceTree = "<group>"; };
 		2ED98951227CAC8D0034B4B6 /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
 		2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProfileTests.swift; sourceTree = "<group>"; };
@@ -143,8 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				2E17CFFA2279529C00AF2FBC /* AccountInfoViewController.swift */,
-				2E2342CC2242935700045E3A /* HealthRecordTableViewController.swift */,
-				2E2342CE2242936600045E3A /* HealthRecordViewController.swift */,
 				2E17CFFF227B6DE900AF2FBC /* HomeViewController.swift */,
 				2E2342D02242937700045E3A /* InitializePDMViewController.swift */,
 				2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */,
@@ -254,6 +250,7 @@
 				2E395EC6226783B600A9A7D6 /* PDMButton.swift */,
 				2E5088F5226908BD009FF808 /* PDMCheckbox.swift */,
 				2E395EC5226783B600A9A7D6 /* PDMTheme.swift */,
+				2EBF7730229496CB00170091 /* PDMTimeLine.swift */,
 				2EA9370B2277949000513F9D /* PDMViewController.swift */,
 				2EA9370922778BA700513F9D /* TextFieldExtensions.swift */,
 			);
@@ -413,7 +410,6 @@
 			files = (
 				2EA937082277775C00513F9D /* CreateAccountViewController.swift in Sources */,
 				2E17CFFD227A207A00AF2FBC /* PDMProfile.swift in Sources */,
-				2E2342CF2242936600045E3A /* HealthRecordViewController.swift in Sources */,
 				2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */,
 				2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */,
 				2E17D000227B6DE900AF2FBC /* HomeViewController.swift in Sources */,
@@ -430,11 +426,11 @@
 				2E234298224291C300045E3A /* LoginViewController.swift in Sources */,
 				2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */,
 				2EA9370E2278914000513F9D /* PDMHealthKit.swift in Sources */,
+				2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */,
 				2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */,
 				2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */,
 				2EA9370A22778BA700513F9D /* TextFieldExtensions.swift in Sources */,
 				2E17CFFB2279529C00AF2FBC /* AccountInfoViewController.swift in Sources */,
-				2E2342CD2242935700045E3A /* HealthRecordTableViewController.swift in Sources */,
 				2E234296224291C300045E3A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
