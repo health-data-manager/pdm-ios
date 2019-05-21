@@ -101,8 +101,9 @@ class InitializePDMViewController: UIViewController {
         pdm.fhirClientLogin() { error in
             DispatchQueue.main.async {
                 if let error = error {
-                    self.handleError(error, title: "Could not log in to PDM")
-                    return
+                    // This means we couldn't log in as a FHIR client. This should be handled in some fashion but for now, skip ahead
+                    print("Could not log in as a FHIR client: \(error)")
+                    self.loadHealthRecords()
                 } else {
                     self.sendHealthKitRecords()
                 }

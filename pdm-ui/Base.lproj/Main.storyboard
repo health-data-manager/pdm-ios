@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,19 +20,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient Data Manager" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDd-X6-beO">
-                                <rect key="frame" x="49" y="373" width="277" height="36"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="37" y="357" width="301" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <color key="textColor" name="SelectedNav"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect your health data for sharing with anyone you want." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chf-KJ-HHe">
-                                <rect key="frame" x="32" y="457" width="311" height="41"/>
+                                <rect key="frame" x="32" y="441" width="311" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-Pp-QvB" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                <rect key="frame" x="8" y="629" width="359" height="30"/>
+                                <rect key="frame" x="8" y="621" width="359" height="38"/>
                                 <state key="normal" title="Sign In"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="pdmButtonActive" value="NO"/>
@@ -41,20 +42,20 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An open source project by MITRE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZx-sf-pUU">
-                                <rect key="frame" x="60" y="530" width="255" height="21"/>
+                                <rect key="frame" x="60" y="514" width="255" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtT-uw-y5F" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                <rect key="frame" x="8" y="583" width="359" height="30"/>
+                                <rect key="frame" x="8" y="567" width="359" height="38"/>
                                 <state key="normal" title="Create Account"/>
                                 <connections>
                                     <segue destination="ZdN-2E-koJ" kind="show" id="W7N-IY-EK3"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="LandingBackground"/>
                         <constraints>
                             <constraint firstItem="sDd-X6-beO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pFw-oJ-JDK" secondAttribute="top" id="08c-kp-rN5"/>
                             <constraint firstItem="mtT-uw-y5F" firstAttribute="top" secondItem="eZx-sf-pUU" secondAttribute="bottom" constant="32" id="4nG-HQ-hxt"/>
@@ -737,6 +738,12 @@
         <image name="HealthTabIcon" width="25" height="25"/>
         <image name="SharingTabIcon" width="23" height="23"/>
         <image name="SourcesTabIcon" width="23" height="23"/>
+        <namedColor name="LandingBackground">
+            <color red="0.51372549019607838" green="0.85490196078431369" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SelectedNav">
+            <color red="0.25882352941176473" green="0.5490196078431373" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XFW-u4-nzc"/>

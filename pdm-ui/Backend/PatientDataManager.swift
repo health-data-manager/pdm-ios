@@ -92,8 +92,8 @@ class PatientDataManager {
      */
     var activeProfile: PDMProfile?
 
-    /// For now, this is the server records as a pretty-printed JSON string. In the future this will be properly pasred.
-    var serverRecords: String?
+    /// A bundle of loaded records from the server. This will probably be changed at some future point.
+    var serverRecords: FHIRBundle?
 
     // Generated URLs.
 
@@ -174,7 +174,7 @@ class PatientDataManager {
                 completionHandler(error)
                 return
             }
-            guard let tokenType = json["token_type"] as? String, tokenType == "bearer", let accessToken = json["access_token"] as? String else {
+            guard let tokenType = json["token_type"] as? String, tokenType.caseInsensitiveCompare("bearer") == .orderedSame, let accessToken = json["access_token"] as? String else {
                 completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
                 return
             }
@@ -194,8 +194,21 @@ class PatientDataManager {
         completionHandler(nil)
     }
 
-    func createNewUserAccount(firstName: String, lastName: String, email: String, password: String, passwordConfirmation: String?, completionHandler: @escaping (PDMUser?, Error?) -> Void) {
-        userClient.postJSONExpectingObject([
+    /**
+     Invoke the create new user account endpoint on the backend.
+     - Parameters:
+         - firstName: the user's first name
+         - lastName: the user's last name
+         - email: the user's email address
+         - password: the (unencrypted) password
+         - passwordConfirmation: a second copy of the password, for verifying it's entered correctly (if left nil, `password` is sent for this)
+         - completionHandler: a callback to receive information on the success of the call
+         - user: the created user, if the account was successfully created
+         - error: the error that prevented the account from being created
+     - Returns: a task indicating progress if the request was sent (or nil if an error prevented it from being sent, the details of which will be sent to the callback)
+     */
+    @discardableResult func createNewUserAccount(firstName: String, lastName: String, email: String, password: String, passwordConfirmation: String?, completionHandler: @escaping (_ user: PDMUser?, _ error: Error?) -> Void) -> URLSessionTask? {
+        return userClient.postJSONExpectingObject([
             "user": [
                 "email": email,
                 "first_name": firstName,
@@ -204,7 +217,6 @@ class PatientDataManager {
                 "password_confirmation": passwordConfirmation ?? password
             ]
         ], to: usersURL) { json, response, error in
-            print("Received account create response")
             guard let json = json, let response = response else {
                 completionHandler(nil, error ?? PatientDataManagerError.couldNotUnderstandResponse)
                 return
@@ -249,7 +261,8 @@ class PatientDataManager {
             do {
                 let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
                 guard let jsonResponseDictionary = jsonResponse as? [String: Any],
-                    jsonResponseDictionary["token_type"] as? String == "bearer" else {
+                    let tokenType = jsonResponseDictionary["token_type"] as? String,
+                    tokenType.caseInsensitiveCompare("Bearer") == .orderedSame else {
                         completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
                         return
                 }
@@ -380,8 +393,13 @@ class PatientDataManager {
 
     /**
      Load health records from the patient data manager.
+     - Parameters:
+         - completionCallback: the completion handler invoked when the operation completes
+         - bundle: the resulting FHIR bundle if the load was successful
+         - error: an error object describing why the load failed
+     - Returns: a URLSessionTask describing the load progress
      */
-    @discardableResult func loadHealthRecords(completionCallback: @escaping ([String: Any]?, Error?) -> Void) -> URLSessionDataTask? {
+    @discardableResult func loadHealthRecords(completionCallback: @escaping (_ bundle: FHIRBundle?, _ error: Error?) -> Void) -> URLSessionTask? {
         guard userClient.hasBearerToken else {
             completionCallback(nil, PatientDataManagerError.notLoggedIn)
             return nil
@@ -398,18 +416,48 @@ class PatientDataManager {
                     completionCallback(nil, PatientDataManagerError.noResultFromServer)
                     return
                 }
-                do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: json, options: [.prettyPrinted,.sortedKeys])
-                    self.serverRecords = String(data: jsonData, encoding: .utf8)
-                } catch {
-                    self.serverRecords = nil
+                guard let bundle = FHIRBundle(fromJSON: json) else {
+                    print("Could not parse FHIR bundle")
+                    completionCallback(nil, PatientDataManagerError.couldNotUnderstandResponse)
+                    return
                 }
-                completionCallback(json, nil)
+                self.serverRecords = bundle
+                completionCallback(bundle, nil)
             }
         }
     }
 
-    // Attempts to decode a JSON object that describes form errors
+    /**
+     Load providers from the patient data manager.
+     - Parameters:
+         - completionCallback: the completion handler invoked when the operation completes
+         - providers: the resulting list of providers, or `nil` if there was an error
+         - error: an error object describing why the load failed if it failed
+     - Returns: a URLSessionTask describing the load progress
+     */
+    @discardableResult func loadProviders(completionCallback: @escaping (_ providers: [PDMProvider]?, _ error: Error?) -> Void) -> URLSessionTask? {
+        guard userClient.hasBearerToken else {
+            completionCallback(nil, PatientDataManagerError.notLoggedIn)
+            return nil
+        }
+        return userClient.getJSON(from: rootURL.appendingPathComponent("providers")) { data, response, error in
+            if let error = error {
+                completionCallback(nil, error)
+                return
+            }
+            guard let json = data else {
+                completionCallback(nil, PatientDataManagerError.noResultFromServer)
+                return
+            }
+            guard let jsonArray = json as? [Any], let providers = PDMProvider.providers(fromJSON: jsonArray) else {
+                completionCallback(nil, PatientDataManagerError.couldNotUnderstandResponse)
+                return
+            }
+            completionCallback(providers, nil)
+        }
+    }
+
+    /// Attempts to decode a JSON object that describes form errors
     static func decodeErrors(json: [String: Any]) -> [String: [String]]? {
         guard let errors = json["errors"],
             let errorDict = errors as? [String: Any] else {
@@ -425,50 +473,4 @@ class PatientDataManager {
         }
         return result
     }
-
-/*
-    // Internal function for handling a response. Note that this is called by the various utilities that send requests. The completionHandler will ALWAYS be called by this method and cannot be left out.
-    internal func handleHTTPURLResponse(data: Data?, response: URLResponse?, error: Error?, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        if let error = error {
-            completionHandler(nil, nil, error)
-            return
-        }
-        guard let httpResponse = response as? HTTPURLResponse else {
-            completionHandler(nil, nil, PatientDataManagerError.internalError)
-            return
-        }
-        // Handle various "standard errors"
-        switch httpResponse.statusCode {
-        case (100..<300):
-            completionHandler(data, httpResponse, nil)
-        case (300..<400):
-            // This is a redirect of some form
-            completionHandler(data, httpResponse, PatientDataManagerError.unhandledRedirect(httpResponse.statusCode))
-        case 401:
-            completionHandler(data, httpResponse, PatientDataManagerError.unauthorized)
-        case 403:
-            completionHandler(data, httpResponse, PatientDataManagerError.forbidden)
-        case 404:
-            completionHandler(data, httpResponse, PatientDataManagerError.missing)
-        case 422:
-            guard let unwrappedData = data, let mimeType = httpResponse.mimeType, MIMEType.isJSON(mimeType) else {
-                // Not a 422 we can decode, return as a regular error
-                completionHandler(data, httpResponse, PatientDataManagerError.serverReturnedError(httpResponse.statusCode))
-                return
-            }
-            do {
-                if let errors = try PatientDataManager.decodeErrors(unwrappedData) {
-                    completionHandler(data, httpResponse, PatientDataManagerError.formInvalid(errors))
-                    return
-                }
-            } catch {
-                // Otherwise handle as normal
-                completionHandler(data, httpResponse, PatientDataManagerError.serverReturnedError(httpResponse.statusCode))
-            }
-        default:
-            // Anything else, just return as-is
-            completionHandler(data, httpResponse, PatientDataManagerError.serverReturnedError(httpResponse.statusCode))
-        }
-    }
-    */
 }

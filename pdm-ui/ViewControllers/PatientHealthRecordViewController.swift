@@ -10,6 +10,13 @@ import UIKit
 import WebKit
 
 class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate {
+    /// Boxes that only exist for demo purposes. THIS WILL BE REMOVED WHEN ALL DATA COMES FROM THE PDM
+    static var demoBoxes = [ [ "title": "Weight", "measurement": "146.5", "units": "lbs", "delta": "-2", "source": "Withings Scale", "style": "vital vital-weight" ],
+                             [ "title": "Blood Pressure", "measurement": "108/89", "units": "mmHg", "source": "Mass General Hospital", "style": "vital vital-bp" ],
+                             [ "title": "Sleep", "measurement": "6.42", "units": "hours", "source": "iPhone", "style": "vital vital-sleep" ],
+                             [ "title": "Mood", "measurement": ":(", "source": "Measure my Mood", "style": "mood" ]
+    ]
+
     @IBOutlet weak var webView: WKWebView!
     var patientViewNavigation: WKNavigation?
 
@@ -26,11 +33,26 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate 
     }
 
     func displayPatientData() {
-        let boxes = [ [ "title": "Weight", "measurement": "146.5", "units": "lbs", "delta": "-2", "source": "Withings Scale", "style": "vital vital-weight" ],
-                      [ "title": "Blood Pressure", "measurement": "108/89", "units": "mmHg", "source": "Mass General Hospital", "style": "vital vital-bp" ],
-                      [ "title": "Sleep", "measurement": "6.42", "units": "hours", "source": "iPhone", "style": "vital vital-sleep" ],
-                      [ "title": "Mood", "measurement": ":(", "source": "Measure my Mood", "style": "mood" ]
-        ]
+        var boxes = [[String: String]]()
+        // See if we can find a cancer resource
+        if let pdm = patientDataManager {
+            if let records = pdm.serverRecords {
+                let cancerResources = records.search([
+                    "meta": [
+                        "profile": [
+                            "http://hl7.org/fhir/us/shr/StructureDefinition/onco-core-PrimaryCancerCondition"
+                        ]
+                    ]
+                ])
+                print("Found resources: \(cancerResources)")
+                // For now, just use the first one
+                if let cancerResource = cancerResources.first, let cancerType = cancerResource.getString(forField: "code.text") {
+                    boxes.append([ "title": "Cancer", "measurement": cancerType, "style": "disease" ])
+                }
+            }
+        }
+        // Add in demo boxes as necessary
+        boxes.append(contentsOf: PatientHealthRecordViewController.demoBoxes[0...(3-boxes.count)])
         do {
             let json = try JSONSerialization.data(withJSONObject: boxes, options: [])
             guard let jsonString = String(data: json, encoding: .utf8) else {
