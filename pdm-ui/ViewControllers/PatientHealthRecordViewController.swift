@@ -74,7 +74,7 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate,
                         "style": "appointment"
                     ])
                     boxes.append([
-                        "title": "Health Receipt from Dr. Rusk99",
+                        "title": "Patient Data Receipt from Dr. Rusk99",
                         "measurement": "Routine Visit",
                         "link": "pdm://health-receipt/1",
                         "style": "health-receipt"
