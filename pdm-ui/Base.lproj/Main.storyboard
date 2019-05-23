@@ -75,6 +75,9 @@
                         <viewLayoutGuide key="safeArea" id="pFw-oJ-JDK"/>
                     </view>
                     <navigationItem key="navigationItem" id="XS2-dI-QH6"/>
+                    <connections>
+                        <segue destination="3dG-5s-UAs" kind="show" identifier="LoggedIn" id="lhz-BI-xji"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddN-hW-ZkY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -89,7 +92,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-9Y-rYY">
-                                <rect key="frame" x="16" y="148" width="343" height="179"/>
+                                <rect key="frame" x="16" y="148" width="343" height="171"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okf-Ss-tCp">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -128,7 +131,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9N-hh-f85" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="141" width="343" height="38"/>
+                                        <rect key="frame" x="0.0" y="141" width="343" height="30"/>
                                         <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
                                         <state key="normal" title="Sign In"/>
                                         <connections>
@@ -181,7 +184,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TL-5A-ouP" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                <rect key="frame" x="16" y="282" width="343" height="30"/>
+                                <rect key="frame" x="16" y="282" width="343" height="38"/>
                                 <state key="normal" title="Retry"/>
                                 <connections>
                                     <action selector="retry:" destination="3dG-5s-UAs" eventType="primaryActionTriggered" id="Wbm-t2-e8r"/>
@@ -262,7 +265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4p4-lD-bdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-743" y="1567"/>
+            <point key="canvasLocation" x="257" y="1513"/>
         </scene>
         <!--Sources-->
         <scene sceneID="cX3-lS-xaO">
@@ -272,7 +275,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hyo-t2-NNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1616" y="1213"/>
+            <point key="canvasLocation" x="-696" y="1227"/>
         </scene>
         <!--HealthRecord-->
         <scene sceneID="isA-x2-VIh">
@@ -282,7 +285,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3iv-6d-AuD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1310" y="1211"/>
+            <point key="canvasLocation" x="-391" y="1225"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="K2z-PB-OWu">
@@ -301,7 +304,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZmI-Sn-0dM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1453" y="729"/>
+            <point key="canvasLocation" x="-391" y="753"/>
         </scene>
         <!--Login Navigation-->
         <scene sceneID="VJf-ZJ-Ipn">
@@ -491,6 +494,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XFW-u4-nzc"/>
+        <segue reference="lhz-BI-xji"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -34,6 +34,9 @@ enum PatientDataManagerError: Error, LocalizedError {
     /// A request was made that requires HealthKit but HealthKit is not available on this device
     case healthKitNotAvailable
 
+    /// The configuration of the PDM is invalid
+    case invalidConfiguration
+
     public var errorDescription: String? {
         switch self {
         case .internalError:
@@ -52,6 +55,8 @@ enum PatientDataManagerError: Error, LocalizedError {
             return NSLocalizedString("No object was returned by the server.", comment: "No result from server")
         case .healthKitNotAvailable:
             return NSLocalizedString("HealthKit is not available on this device.", comment: "HealthKit not available")
+        case .invalidConfiguration:
+            return NSLocalizedString("The internal configuration of the application is invalid.", comment: "Invalid configuration")
         }
     }
 }
@@ -82,6 +87,9 @@ class PatientDataManager {
 
     /// Client for FHIR requests (sending records to the PDM)
     let fhirClient = RESTClient()
+
+    /// Whether or not auto login has been enabled within the client configuration. Defaults to false.
+    var autoLogin = false
 
     /// The current user information. This does not appear to be exposed via the PDM backend REST API so this should probably not be relied on.
     var user: PDMUser?
@@ -119,12 +127,13 @@ class PatientDataManager {
          - rootURL: the root URL of the PDM server
          - clientId: the client ID to use for this client
          - clientSecret: the secret token to use
+         - ignoreHealthKit: if set to true, HealthKit support will be disabled even if it exists on the current device
      */
-    init(rootURL: URL, clientId: String, clientSecret: String) {
+    init(rootURL: URL, clientId: String, clientSecret: String, ignoreHealthKit: Bool=false) {
         self.rootURL = rootURL
         self.clientId = clientId
         self.clientSecret = clientSecret
-        self.healthKit = PDMHealthKit()
+        self.healthKit = ignoreHealthKit ? nil : PDMHealthKit()
     }
 
     /**
@@ -139,7 +148,12 @@ class PatientDataManager {
             let clientSecret = config["ClientSecret"] as? String else {
                 return nil
         }
-        self.init(rootURL: rootURL, clientId: clientId, clientSecret: clientSecret)
+        let ignoreHealthKit = (config["DisableHealthKit"] as? Bool) ?? false
+        if ignoreHealthKit {
+            print("Ignoring HealthKit (based on client settings)")
+        }
+        self.init(rootURL: rootURL, clientId: clientId, clientSecret: clientSecret, ignoreHealthKit: ignoreHealthKit)
+        self.autoLogin = (config["AutoLogin"] as? Bool) ?? false
     }
 
     /**
@@ -151,9 +165,9 @@ class PatientDataManager {
          - completionHandler: a closure to invoke when the request has completed
          - error: the error if an error occurred preventing the user from logging in, otherwise `nil` to indicate success
      */
-    func signInAsUser(email: String, password: String, completionHandler: @escaping (_ error: Error?) -> Void) {
+    @discardableResult func signInAsUser(email: String, password: String, completionHandler: @escaping (_ error: Error?) -> Void) -> URLSessionTask? {
         // This uses the same token login the client login would use
-        userClient.postJSONExpectingObject([ "email": email, "password": password, "grant_type": "password" ], to: oauthTokenURL) { json, response, error in
+        return userClient.postJSONExpectingObject([ "email": email, "password": password, "grant_type": "password" ], to: oauthTokenURL) { json, response, error in
             guard let response = response else {
                 completionHandler(error)
                 return

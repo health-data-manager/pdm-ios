@@ -8,5 +8,9 @@
 	<string>CLIENT ID HERE</string>
 	<key>ClientSecret</key>
 	<string>CLIENT SECRET HERE</string>
+	<key>AutoLogin</key>
+	<false/>
+	<key>DisableHealthKit</key>
+	<false/>
 </dict>
 </plist>

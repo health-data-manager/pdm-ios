@@ -78,6 +78,18 @@ class LoginViewController: UIViewController {
     }
 
     func loginCompleted() {
+        // TODO: Make persisting credentials optional based on user settings
+        if let pdm = patientDataManager {
+            if pdm.autoLogin,
+                let email = emailTextField.text,
+                let password = passwordTextField.text {
+                    do {
+                        try pdm.storeCredentialsInKeychain(PDMCredentials(username: email, password: password))
+                    } catch {
+                        print("Could not persist user credentials to keychain")
+                    }
+            }
+        }
         performSegue(withIdentifier: "Login", sender: self)
     }
 }

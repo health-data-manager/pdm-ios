@@ -40,6 +40,7 @@
 		2EA937102278AC6700513F9D /* PatientDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */; };
 		2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF772C229321CC00170091 /* PDMProvider.swift */; };
 		2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF7730229496CB00170091 /* PDMTimeLine.swift */; };
+		2ED1969E2295DCCA001821A8 /* PatientDataManagerKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1969D2295DCCA001821A8 /* PatientDataManagerKeychain.swift */; };
 		2ED196A32296EF14001821A8 /* Sources.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED196A12296EF14001821A8 /* Sources.storyboard */; };
 		2ED196A62296F06A001821A8 /* HealthRecord.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED196A42296F06A001821A8 /* HealthRecord.storyboard */; };
 		2ED98950227B6F320034B4B6 /* PatientHealthRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */; };
@@ -106,6 +107,7 @@
 		2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientDataManagerTests.swift; path = "pdm-uiTests/PatientDataManagerTests.swift"; sourceTree = SOURCE_ROOT; };
 		2EBF772C229321CC00170091 /* PDMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProvider.swift; sourceTree = "<group>"; };
 		2EBF7730229496CB00170091 /* PDMTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMTimeLine.swift; sourceTree = "<group>"; };
+		2ED1969D2295DCCA001821A8 /* PatientDataManagerKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDataManagerKeychain.swift; sourceTree = "<group>"; };
 		2ED196A22296EF14001821A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Sources.storyboard; sourceTree = "<group>"; };
 		2ED196A52296F06A001821A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HealthRecord.storyboard; sourceTree = "<group>"; };
 		2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthRecordViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			children = (
 				2EBF772B229321B400170091 /* Models */,
 				2E2342C6224292DC00045E3A /* PatientDataManager.swift */,
+				2ED1969D2295DCCA001821A8 /* PatientDataManagerKeychain.swift */,
 				2EA9370D2278914000513F9D /* PDMHealthKit.swift */,
 				2EA93701226E406400513F9D /* HTTPExtensions.swift */,
 				2ED98951227CAC8D0034B4B6 /* RESTClient.swift */,
@@ -433,6 +436,7 @@
 				2E2342C7224292DC00045E3A /* PatientDataManager.swift in Sources */,
 				2E234298224291C300045E3A /* LoginViewController.swift in Sources */,
 				2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */,
+				2ED1969E2295DCCA001821A8 /* PatientDataManagerKeychain.swift in Sources */,
 				2EA9370E2278914000513F9D /* PDMHealthKit.swift in Sources */,
 				2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */,
 				2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */,
