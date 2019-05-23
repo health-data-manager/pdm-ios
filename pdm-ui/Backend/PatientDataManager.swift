@@ -115,9 +115,11 @@ class PatientDataManager {
         return rootURL.appendingPathComponent("users")
     }
 
+    lazy var apiURL = rootURL.appendingPathComponent("api/v1")
+
     /// The URL for retrieving profiles
     var profilesURL: URL {
-        return rootURL.appendingPathComponent("api/v1/profiles")
+        return apiURL.appendingPathComponent("profiles")
     }
 
     /**
@@ -454,7 +456,7 @@ class PatientDataManager {
             completionCallback(nil, PatientDataManagerError.notLoggedIn)
             return nil
         }
-        return userClient.getJSON(from: rootURL.appendingPathComponent("providers")) { data, response, error in
+        return userClient.getJSON(from: apiURL.appendingPathComponent("providers")) { data, response, error in
             if let error = error {
                 completionCallback(nil, error)
                 return
