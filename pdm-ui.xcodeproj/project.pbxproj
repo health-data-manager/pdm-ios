@@ -40,6 +40,8 @@
 		2EA937102278AC6700513F9D /* PatientDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */; };
 		2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF772C229321CC00170091 /* PDMProvider.swift */; };
 		2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF7730229496CB00170091 /* PDMTimeLine.swift */; };
+		2ED196A32296EF14001821A8 /* Sources.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED196A12296EF14001821A8 /* Sources.storyboard */; };
+		2ED196A62296F06A001821A8 /* HealthRecord.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED196A42296F06A001821A8 /* HealthRecord.storyboard */; };
 		2ED98950227B6F320034B4B6 /* PatientHealthRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */; };
 		2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98951227CAC8D0034B4B6 /* RESTClient.swift */; };
 		2ED98954227CEAF70034B4B6 /* PDMProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */; };
@@ -104,6 +106,8 @@
 		2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientDataManagerTests.swift; path = "pdm-uiTests/PatientDataManagerTests.swift"; sourceTree = SOURCE_ROOT; };
 		2EBF772C229321CC00170091 /* PDMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProvider.swift; sourceTree = "<group>"; };
 		2EBF7730229496CB00170091 /* PDMTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMTimeLine.swift; sourceTree = "<group>"; };
+		2ED196A22296EF14001821A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Sources.storyboard; sourceTree = "<group>"; };
+		2ED196A52296F06A001821A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HealthRecord.storyboard; sourceTree = "<group>"; };
 		2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthRecordViewController.swift; sourceTree = "<group>"; };
 		2ED98951227CAC8D0034B4B6 /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
 		2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProfileTests.swift; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 				2EA937072277775C00513F9D /* CreateAccountViewController.swift */,
 				2E234297224291C300045E3A /* LoginViewController.swift */,
 				2E234299224291C300045E3A /* Main.storyboard */,
+				2ED196A42296F06A001821A8 /* HealthRecord.storyboard */,
+				2ED196A12296EF14001821A8 /* Sources.storyboard */,
 				2E23429F224291C500045E3A /* Assets.xcassets */,
 				2E2342A1224291C500045E3A /* LaunchScreen.storyboard */,
 				2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */,
@@ -379,11 +385,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED196A62296F06A001821A8 /* HealthRecord.storyboard in Resources */,
 				2E2342A3224291C500045E3A /* LaunchScreen.storyboard in Resources */,
 				2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */,
 				2E2342A0224291C500045E3A /* Assets.xcassets in Resources */,
 				2E8468B7228BCF8400C8ECB6 /* patient.html in Resources */,
 				2E23429B224291C300045E3A /* Main.storyboard in Resources */,
+				2ED196A32296EF14001821A8 /* Sources.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +493,22 @@
 				2E2342A2224291C500045E3A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2ED196A12296EF14001821A8 /* Sources.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2ED196A22296EF14001821A8 /* Base */,
+			);
+			name = Sources.storyboard;
+			sourceTree = "<group>";
+		};
+		2ED196A42296F06A001821A8 /* HealthRecord.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2ED196A52296F06A001821A8 /* Base */,
+			);
+			name = HealthRecord.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

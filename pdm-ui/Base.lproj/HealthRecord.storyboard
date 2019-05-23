@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WCG-q5-BTa">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Health Record-->
+        <scene sceneID="6lU-Ay-GVO">
+            <objects>
+                <navigationController title="Health Record" automaticallyAdjustsScrollViewInsets="NO" id="WCG-q5-BTa" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Health" image="HealthTabIcon" id="108-kO-AQE"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h33-NU-0Ll">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Yun-3G-EoY" kind="relationship" relationship="rootViewController" id="BgQ-tW-qT4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wpe-Pf-EQx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-636" y="727.28635682158927"/>
+        </scene>
+        <!--Patient Health Record View Controller-->
+        <scene sceneID="EYt-6Z-FCs">
+            <objects>
+                <viewController id="Yun-3G-EoY" customClass="PatientHealthRecordViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YZv-C8-mvw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ip0-9h-MjK">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RHe-rP-Si8" firstAttribute="bottom" secondItem="Ip0-9h-MjK" secondAttribute="bottom" id="IDo-Dj-N67"/>
+                            <constraint firstItem="Ip0-9h-MjK" firstAttribute="top" secondItem="RHe-rP-Si8" secondAttribute="top" id="M9g-mO-Sje"/>
+                            <constraint firstItem="Ip0-9h-MjK" firstAttribute="leading" secondItem="RHe-rP-Si8" secondAttribute="leading" id="YrG-p2-w1m"/>
+                            <constraint firstItem="RHe-rP-Si8" firstAttribute="trailing" secondItem="Ip0-9h-MjK" secondAttribute="trailing" id="gQF-H3-tqv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RHe-rP-Si8"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uec-KX-KNS"/>
+                    <connections>
+                        <outlet property="webView" destination="Ip0-9h-MjK" id="wfp-qU-Kgs"/>
+                        <segue destination="bt8-Cf-ROn" kind="show" identifier="CarePlan" id="Tic-sg-SBI"/>
+                        <segue destination="o9w-xC-8Kv" kind="show" identifier="HealthReceipt" id="6Q4-Yq-Grn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cQV-mH-oti" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="303.19999999999999" y="727.28635682158927"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zRV-HU-3yu">
+            <objects>
+                <viewController id="bt8-Cf-ROn" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="akE-mY-RSg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="10" placeholderIntrinsicHeight="458" translatesAutoresizingMaskIntoConstraints="NO" id="hGT-GP-uY3" customClass="PDMTimeLine" customModule="pdm_ui" customModuleProvider="target">
+                                <rect key="frame" x="16" y="168" width="10" height="678"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Colon Cancer Care Plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbW-0L-pzT">
+                                <rect key="frame" x="16" y="104" width="306" height="36"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lzd-3y-7EK">
+                                <rect key="frame" x="42" y="156" width="356" height="690"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">This Week
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.55000000000000004" green="0.55000000000000004" blue="0.75" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Prepare for treatment discussion">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".AppleSystemUIFontEmphasized"/>
+                                            <font key="NSOriginalFont" size="14" name=".AppleSystemUIFontEmphasized"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+You may want to ask your doctor these questions before treatment begins.
+
+What are my treatment choices? Which do you suggest for me? Will I have more than one kind of treatment?
+
+What are the expected benefits of each kind of treatment?
+
+What are the risks and possible side effects of each treatment? How can the side effects be managed?
+
+What can I do to prepare for treatment?
+
+How will treatment affect my normal activities? Am I likely to have urinary problems? What about bowel problems, such as diarrhea or rectal bleeding? Will treatment affect my sex life?
+
+What will treatment cost? Is this treatment plan covered by my insurance plan?</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rbW-0L-pzT" firstAttribute="leading" secondItem="zOY-dC-CdS" secondAttribute="leading" constant="16" id="2Jx-fy-76n"/>
+                            <constraint firstItem="Lzd-3y-7EK" firstAttribute="leading" secondItem="hGT-GP-uY3" secondAttribute="trailing" constant="16" id="5xX-Ym-PmL"/>
+                            <constraint firstItem="zOY-dC-CdS" firstAttribute="trailing" secondItem="Lzd-3y-7EK" secondAttribute="trailing" constant="16" id="9TK-L1-Qd1"/>
+                            <constraint firstItem="hGT-GP-uY3" firstAttribute="top" secondItem="rbW-0L-pzT" secondAttribute="bottom" constant="28" id="DnN-UN-1u0"/>
+                            <constraint firstItem="zOY-dC-CdS" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rbW-0L-pzT" secondAttribute="trailing" constant="16" id="NWY-Ks-3Y3"/>
+                            <constraint firstItem="zOY-dC-CdS" firstAttribute="bottom" secondItem="hGT-GP-uY3" secondAttribute="bottom" constant="16" id="QVH-WA-nug"/>
+                            <constraint firstItem="rbW-0L-pzT" firstAttribute="top" secondItem="zOY-dC-CdS" secondAttribute="top" constant="16" id="XEH-Zx-Hq6"/>
+                            <constraint firstItem="hGT-GP-uY3" firstAttribute="leading" secondItem="zOY-dC-CdS" secondAttribute="leading" constant="16" id="f0g-KV-GCa"/>
+                            <constraint firstItem="zOY-dC-CdS" firstAttribute="bottom" secondItem="Lzd-3y-7EK" secondAttribute="bottom" constant="16" id="fgK-ra-jyU"/>
+                            <constraint firstItem="Lzd-3y-7EK" firstAttribute="top" secondItem="rbW-0L-pzT" secondAttribute="bottom" constant="16" id="jEe-Ub-pst"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zOY-dC-CdS"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M6v-Dm-BWB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1229.5999999999999" y="727.28635682158927"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4Tq-X5-JUL">
+            <objects>
+                <viewController id="o9w-xC-8Kv" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ghG-M2-UQ4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVo-MF-m5F">
+                                <rect key="frame" x="16" y="104" width="382" height="84"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="On ">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="4.Apr.2019">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name=".AppleSystemUIFontEmphasized"/>
+                                            <font key="NSOriginalFont" size="17" name=".AppleSystemUIFontEmphasized"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> you had a
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Routine Visit">
+                                        <attributes>
+                                            <font key="NSFont" size="36" name=".AppleSystemUIFontEmphasized"/>
+                                            <font key="NSOriginalFont" size="36" name=".AppleSystemUIFontEmphasized"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+with </string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Dr. Rusk99">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name=".AppleSystemUIFontEmphasized"/>
+                                            <font key="NSOriginalFont" size="17" name=".AppleSystemUIFontEmphasized"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" at ">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Mass Hospital22">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name=".AppleSystemUIFontEmphasized"/>
+                                            <font key="NSOriginalFont" size="17" name=".AppleSystemUIFontEmphasized"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=".">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="UVo-MF-m5F" secondAttribute="trailing" constant="16" id="MBU-pl-Z6D"/>
+                            <constraint firstItem="UVo-MF-m5F" firstAttribute="top" secondItem="psx-93-gq1" secondAttribute="top" constant="16" id="ooV-2a-Yyh"/>
+                            <constraint firstItem="UVo-MF-m5F" firstAttribute="leading" secondItem="psx-93-gq1" secondAttribute="leading" constant="16" id="xrj-UW-Cqx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="psx-93-gq1"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ARO-pO-kZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1230" y="1431"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="HealthTabIcon" width="25" height="25"/>
+    </resources>
+</document>
