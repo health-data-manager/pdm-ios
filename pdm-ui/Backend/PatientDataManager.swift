@@ -66,6 +66,75 @@ extension Notification.Name {
     static let healthRecordsChanged = Notification.Name("pdmHealthRecordsChanged")
 }
 
+/// Supported record types.
+enum PDMRecordType: CaseIterable {
+    case allergy
+    case appointment
+    case careplan
+    case condition
+    case disease
+    case healthReceipt
+    case immunization
+    case lab
+    case medication
+    case procedure
+    case vital
+
+    var name: String {
+        switch self {
+        case .allergy:
+            return "Allergy"
+        case .appointment:
+            return "Appointment"
+        case .careplan:
+            return "CarePlan"
+        case .condition:
+            return "Condition"
+        case .disease:
+            return "Disease"
+        case .healthReceipt:
+            return "HealthReceipt"
+        case .immunization:
+            return "Immunization"
+        case .lab:
+            return "Lab"
+        case .medication:
+            return "Medication"
+        case .procedure:
+            return "Procedure"
+        case .vital:
+            return "Vital"
+        }
+    }
+
+    var cssName: String {
+        switch self {
+        case .allergy:
+            return "allergy"
+        case .appointment:
+            return "appointment"
+        case .careplan:
+            return "care-plan"
+        case .condition:
+            return "condition"
+        case .disease:
+            return "disease"
+        case .healthReceipt:
+            return "health-receipt"
+        case .immunization:
+            return "immunization"
+        case .lab:
+            return "lab"
+        case .medication:
+            return "medication"
+        case .procedure:
+            return "procedure"
+        case .vital:
+            return "vital"
+        }
+    }
+}
+
 /**
  The PatientDataManager object. This is intended to be a singleton that represents the connection to the PatientDataManager web server. Conceptually multiple instances could exist that provide connections to different PDMs.
  */

@@ -80,21 +80,6 @@ section.careplan div.careplan {
     padding: 14px 0 0 0;
     font-size: 3vw;
 }
-.health-tile.appointment {
-    background-color: #F0E1C5;
-}
-.health-tile.disease {
-    background-color: #CAF6E7;
-}
-.health-tile.health-receipt {
-    background-color: #C6EBB4;
-}
-.health-tile.mood {
-    background-color: #C2DDF2;
-}
-.health-tile.vital {
-    background-color: #C5E0F4;
-}
         </style>
 <script type="application/javascript">
 class Box {
@@ -182,10 +167,13 @@ class CarePlan extends Box {
 
 function setup(json) {
     if ('boxes' in json) {
-        setHealthBoxes(json['boxes'])
+        setHealthBoxes(json['boxes']);
     }
     if ('careplan' in json) {
-        setCarePlan(json['careplan'])
+        setCarePlan(json['careplan']);
+    }
+    if ('colors' in json) {
+        setupColors(json['colors']);
     }
 }
 
@@ -209,6 +197,18 @@ function setCarePlan(careplan) {
     title.append(careplan.title ? careplan.title : "Care Plan");
     container.append(title);
     careplan.build(container);
+}
+
+function setupColors(colors) {
+    // Grabs out the colors, setting up styles for them.
+    var css = "";
+    for (let type in colors) {
+        css += `.health-tile.${type} { background-color: ${colors[type]}; }\n`;
+    }
+    let style = document.createElement('style');
+    style.setAttribute('type', 'text/css');
+    style.append(css);
+    document.head.append(style);
 }
 </script>
     </head>

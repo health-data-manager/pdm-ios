@@ -11,10 +11,10 @@ import WebKit
 
 class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     /// Boxes that only exist for demo purposes. THIS WILL BE REMOVED WHEN ALL DATA COMES FROM THE PDM
-    static var demoBoxes = [ [ "title": "Weight", "measurement": "146.5", "units": "lbs", "delta": "-2", "source": "Withings Scale", "style": "vital" ],
-                             [ "title": "Blood Pressure", "measurement": "108/89", "units": "mmHg", "source": "Mass General Hospital", "style": "vital" ],
-                             [ "title": "Sleep", "measurement": "6.42", "units": "hours", "source": "iPhone", "style": "vital" ],
-                             [ "title": "Mood", "measurement": ":(", "source": "Measure my Mood", "style": "mood" ]
+    static var demoBoxes = [ [ "title": "Condition", "measurement": "Sinusitis", "style": "condition" ],
+                             [ "title": "Cholesterol HDL", "measurement": "53.5", "units": "mg/dL", "style": "lab" ],
+                             [ "title": "Triglycerides", "measurement": "86", "units": "mg/dL", "style": "lab" ],
+                             [ "title": "BMI-body mass index", "measurement": "26", "units": "kg/m\u{B2}", "style": "vital" ]
     ]
 
     @IBOutlet weak var webView: WKWebView!
@@ -85,7 +85,7 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate,
         // Add in demo boxes as necessary
         boxes.append(contentsOf: PatientHealthRecordViewController.demoBoxes[0...(3-boxes.count)])
         do {
-            let json = try JSONSerialization.data(withJSONObject: [ "careplan": careplan, "boxes": boxes ], options: [])
+            let json = try JSONSerialization.data(withJSONObject: [ "careplan": careplan, "boxes": boxes, "colors": generateColorJSON() ], options: [])
             guard let jsonString = String(data: json, encoding: .utf8) else {
                 // TODO: Show an error somewhere? This shouldn't be possible
                 return
@@ -98,6 +98,16 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate,
         } catch {
             // TODO: Log this error somewhere
         }
+    }
+
+    func generateColorJSON() -> [String: Any] {
+        var result = [String: Any]()
+        for type in PDMRecordType.allCases {
+            if let color = UIColor(named: type.name) {
+                result[type.cssName] = color.cssColor
+            }
+        }
+        return result
     }
 
     /*
