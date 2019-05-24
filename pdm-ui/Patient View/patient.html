@@ -6,29 +6,50 @@
         <title>Patient View</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style type="text/css">
-html { font-family: "San Francisco", sans-serif; font-size: 14px; }
+html {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 16px;
+}
+h1 {
+    font-size: 24px;
+}
+h1, h2 {
+    font-weight: 550;
+}
 section.careplan div.careplan {
     background-color: #FDDDD6;
+    font-size: 16px;
     padding: 8px;
     border-radius: 8px;
 }
+.careplan h1 {
+    margin: 0 0 4px 0;
+}
 .careplan h2 {
-    margin: 0;
-    padding: 0;
+    margin: -2px 0 0 0;
     font-size: 16px;
-    font-weight: bold;
+    padding: 0;
 }
 .careplan p {
     margin: 0 0 14px 0;
     padding: 0;
 }
-.boxes {
+.health-tiles h1 {
+    margin: 24px 0 0 0;
+}
+.health-tile-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0;
+    margin: 0 -8px;
     padding: 0;
 }
-.box {
+.health-tile {
     /* Positioned relative to that later parts can be made relative */
     position: relative;
     width: calc(50vw - 24px);
@@ -39,45 +60,30 @@ section.careplan div.careplan {
     background-color: #CCC;
     box-sizing: border-box;
 }
-.box h2 {
-    font-size: 16px;
+.health-tile h2 {
+    font-size: 13px;
     margin: 0;
     padding: 0 0 14px 0;
 }
-.box .measurement {
-    font-size: 10vw;
-    font-weight: bold;
+.health-tile .measurement {
+    font-size: 24px;
+    font-weight: 550;
 }
-.box .measurement.small {
-    font-size: 5vw;
+.health-tile .measurement.small {
+    font-size: 16px;
 }
-.box .measurement .units, .box .delta {
-    font-size: 5vw;
+.health-tile .measurement .units, .health-tile .delta {
+    font-size: 16px;
     font-weight: normal;
 }
-.box .measurement.small .units {
-    font-size: 3vw;
+.health-tile .measurement.small .units {
+    font-size: 14px;
 }
-.box .source {
+.health-tile .source {
     position: absolute;
     bottom: 10px;
     padding: 14px 0 0 0;
     font-size: 3vw;
-}
-.box.appointment {
-    background-color: #F0E1C5;
-}
-.box.disease {
-    background-color: #CAF6E7;
-}
-.box.health-receipt {
-    background-color: #C6EBB4;
-}
-.box.mood {
-    background-color: #C2DDF2;
-}
-.box.vital {
-    background-color: #C5E0F4;
 }
         </style>
 <script type="application/javascript">
@@ -93,7 +99,7 @@ class Box {
         return n;
     }
 }
-class HealthBox extends Box {
+class HealthTile extends Box {
     constructor(json) {
         super(json);
         this.title = json['title'];
@@ -106,7 +112,7 @@ class HealthBox extends Box {
     }
     build(container) {
         container.append(this.box = document.createElement('div'));
-        this.box.className = 'box';
+        this.box.className = 'health-tile';
         if (this.style) {
             this.box.classList.add(this.style);
         }
@@ -115,7 +121,7 @@ class HealthBox extends Box {
         }
         if (this.measurement) {
             this.measurementDiv = this._appendField(this.measurement, 'measurement');
-            if (this.measurement.length > 15) {
+            if (this.measurement.length > 32) {
                 this.measurementDiv.classList.add('small');
             }
             if (this.units) {
@@ -166,10 +172,13 @@ class CarePlan extends Box {
 
 function setup(json) {
     if ('boxes' in json) {
-        setHealthBoxes(json['boxes'])
+        setHealthBoxes(json['boxes']);
     }
     if ('careplan' in json) {
-        setCarePlan(json['careplan'])
+        setCarePlan(json['careplan']);
+    }
+    if ('colors' in json) {
+        setupColors(json['colors']);
     }
 }
 
@@ -177,10 +186,10 @@ function setup(json) {
  * Sets the boxes, clearing out any that already exist.
  */
 function setHealthBoxes(json) {
-    let boxContainer = document.getElementById('health-boxes');
+    let boxContainer = document.getElementById('health-tile-container');
     boxContainer.innerHTML = "";
     for (let boxDefinition of json) {
-        let box = new HealthBox(boxDefinition);
+        let box = new HealthTile(boxDefinition);
         box.build(boxContainer);
     }
 }
@@ -194,13 +203,25 @@ function setCarePlan(careplan) {
     container.append(title);
     careplan.build(container);
 }
+
+function setupColors(colors) {
+    // Grabs out the colors, setting up styles for them.
+    var css = "";
+    for (let type in colors) {
+        css += `.health-tile.${type} { background-color: ${colors[type]}; }\n`;
+    }
+    let style = document.createElement('style');
+    style.setAttribute('type', 'text/css');
+    style.append(css);
+    document.head.append(style);
+}
 </script>
     </head>
     <body>
         <section id="careplan" class="careplan"></section>
-        <section>
+        <section id="health-tiles" class="health-tiles">
             <h1>Health</h1>
-            <div id="health-boxes" class="boxes"></div>
+            <div id="health-tile-container" class="health-tile-container"></div>
         </section>
     </body>
 </html>
