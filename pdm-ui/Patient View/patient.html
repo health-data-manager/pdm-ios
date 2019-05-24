@@ -16,6 +16,12 @@ body {
     margin: 0;
     padding: 16px;
 }
+h1 {
+    font-size: 24px;
+}
+h1, h2 {
+    font-weight: 550;
+}
 section.careplan div.careplan {
     background-color: #FDDDD6;
     font-size: 16px;
@@ -29,7 +35,6 @@ section.careplan div.careplan {
     margin: -2px 0 0 0;
     font-size: 16px;
     padding: 0;
-    font-weight: bold;
 }
 .careplan p {
     margin: 0 0 14px 0;
@@ -56,23 +61,23 @@ section.careplan div.careplan {
     box-sizing: border-box;
 }
 .health-tile h2 {
-    font-size: 16px;
+    font-size: 13px;
     margin: 0;
     padding: 0 0 14px 0;
 }
 .health-tile .measurement {
-    font-size: 10vw;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 550;
 }
 .health-tile .measurement.small {
-    font-size: 5vw;
+    font-size: 16px;
 }
 .health-tile .measurement .units, .health-tile .delta {
-    font-size: 5vw;
+    font-size: 16px;
     font-weight: normal;
 }
 .health-tile .measurement.small .units {
-    font-size: 3vw;
+    font-size: 14px;
 }
 .health-tile .source {
     position: absolute;
@@ -116,7 +121,7 @@ class HealthTile extends Box {
         }
         if (this.measurement) {
             this.measurementDiv = this._appendField(this.measurement, 'measurement');
-            if (this.measurement.length > 15) {
+            if (this.measurement.length > 32) {
                 this.measurementDiv.classList.add('small');
             }
             if (this.units) {
