@@ -151,9 +151,12 @@ class RESTClient {
     @discardableResult func get(from url: URL, withQueryItems queryItems: [URLQueryItem]?=nil, completionHandler: @escaping (_ data: Data?, _ response: HTTPURLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask? {
         var finalURL = url
         if let queryItems = queryItems {
-            var components = URLComponents()
+            guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+                completionHandler(nil, nil, RESTError.couldNotEncodeRequest(nil))
+                return nil
+            }
             components.queryItems = queryItems
-            guard let generatedURL = components.url(relativeTo: url) else {
+            guard let generatedURL = components.url else {
                 completionHandler(nil, nil, RESTError.couldNotEncodeRequest(nil))
                 return nil
             }

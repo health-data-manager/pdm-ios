@@ -2,7 +2,6 @@
 //  AddSourceViewController.swift
 //  pdm-ui
 //
-//  Created by Potter, Dan on 5/23/19.
 //  Copyright © 2019 MITRE. All rights reserved.
 //
 
@@ -12,7 +11,7 @@ import UIKit
 class AddSourceViewController: UIViewController {
     var provider: PDMProvider?
     @IBOutlet weak var providerImageView: UIImageView!
-    @IBOutlet weak var providerDescriptionLabel: UILabel!
+    @IBOutlet weak var connectProviderButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,21 +28,32 @@ class AddSourceViewController: UIViewController {
             } else {
                 providerImageView.isHidden = true
             }
-            providerDescriptionLabel.text = provider.description.isEmpty ? provider.name : provider.description
+            // Create an NSAttributedString to hold the text describing the provider
+            let size: CGFloat = 17.0
+            let providerDescription = NSMutableAttributedString(string: provider.name, attributes: [.font: UIFont.boldSystemFont(ofSize: size)])
+            if !provider.description.isEmpty {
+                providerDescription.append(NSAttributedString(string: "\n\(provider.description)", attributes: [.font: UIFont.systemFont(ofSize: size)]))
+            }
+            connectProviderButton.setAttributedTitle(providerDescription, for: .normal)
         } else {
-            providerDescriptionLabel.text = "Error: no provider defined"
+            connectProviderButton.setTitle("Error: no provider defined", for: .normal)
         }
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "Connect" {
+            guard let oauthViewController = segue.destination as? AddSourceOAuthViewController else {
+                // Maybe should be a fatal error?
+                return
+            }
+            oauthViewController.provider = provider
+        }
     }
-    */
 
 }

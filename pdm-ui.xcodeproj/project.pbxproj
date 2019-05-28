@@ -24,12 +24,15 @@
 		2E26F8D4229708DE00BB1F60 /* AddSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E26F8D3229708DE00BB1F60 /* AddSourceViewController.swift */; };
 		2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC5226783B600A9A7D6 /* PDMTheme.swift */; };
 		2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC6226783B600A9A7D6 /* PDMButton.swift */; };
+		2E3C334722988F960013A712 /* AddSourceOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C334622988F960013A712 /* AddSourceOAuthViewController.swift */; };
+		2E3C3349229892DD0013A712 /* PDMMiniBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */; };
 		2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */; };
 		2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F5226908BD009FF808 /* PDMCheckbox.swift */; };
 		2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5A87BA2244C06000E225D5 /* MessageBundle.swift */; };
 		2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E5A87BC2245188B00E225D5 /* Settings.plist */; };
 		2E777DF12296FE760005250C /* ConnectedSourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E777DF02296FE760005250C /* ConnectedSourcesTableViewController.swift */; };
 		2E777DF32296FEEB0005250C /* AddSourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E777DF22296FEEB0005250C /* AddSourceTableViewController.swift */; };
+		2E7FADFA229DA3D600A766C6 /* TableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FADF9229DA3D600A766C6 /* TableViewExtensions.swift */; };
 		2E8468B7228BCF8400C8ECB6 /* patient.html in Resources */ = {isa = PBXBuildFile; fileRef = 2E8468B6228BCF8400C8ECB6 /* patient.html */; };
 		2E8468B9228BCF9E00C8ECB6 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8468B8228BCF9E00C8ECB6 /* WebKit.framework */; };
 		2E8468BB228DB04000C8ECB6 /* FHIRBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8468BA228DB04000C8ECB6 /* FHIRBundle.swift */; };
@@ -94,12 +97,15 @@
 		2E26F8D3229708DE00BB1F60 /* AddSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceViewController.swift; sourceTree = "<group>"; };
 		2E395EC5226783B600A9A7D6 /* PDMTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMTheme.swift; sourceTree = "<group>"; };
 		2E395EC6226783B600A9A7D6 /* PDMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMButton.swift; sourceTree = "<group>"; };
+		2E3C334622988F960013A712 /* AddSourceOAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceOAuthViewController.swift; sourceTree = "<group>"; };
+		2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMMiniBrowserViewController.swift; sourceTree = "<group>"; };
 		2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		2E5088F5226908BD009FF808 /* PDMCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMCheckbox.swift; sourceTree = "<group>"; };
 		2E5A87BA2244C06000E225D5 /* MessageBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBundle.swift; sourceTree = "<group>"; };
 		2E5A87BC2245188B00E225D5 /* Settings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		2E777DF02296FE760005250C /* ConnectedSourcesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedSourcesTableViewController.swift; sourceTree = "<group>"; };
 		2E777DF22296FEEB0005250C /* AddSourceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceTableViewController.swift; sourceTree = "<group>"; };
+		2E7FADF9229DA3D600A766C6 /* TableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtensions.swift; sourceTree = "<group>"; };
 		2E8468B6228BCF8400C8ECB6 /* patient.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = patient.html; sourceTree = "<group>"; };
 		2E8468B8228BCF9E00C8ECB6 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2E8468BA228DB04000C8ECB6 /* FHIRBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FHIRBundle.swift; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 				2E777DF02296FE760005250C /* ConnectedSourcesTableViewController.swift */,
 				2E777DF22296FEEB0005250C /* AddSourceTableViewController.swift */,
 				2E26F8D3229708DE00BB1F60 /* AddSourceViewController.swift */,
+				2E3C334622988F960013A712 /* AddSourceOAuthViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -270,6 +277,8 @@
 				2E395EC5226783B600A9A7D6 /* PDMTheme.swift */,
 				2EBF7730229496CB00170091 /* PDMTimeLine.swift */,
 				2EA9370B2277949000513F9D /* PDMViewController.swift */,
+				2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */,
+				2E7FADF9229DA3D600A766C6 /* TableViewExtensions.swift */,
 				2EA9370922778BA700513F9D /* TextFieldExtensions.swift */,
 			);
 			path = UI;
@@ -428,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E7FADFA229DA3D600A766C6 /* TableViewExtensions.swift in Sources */,
 				2EA937082277775C00513F9D /* CreateAccountViewController.swift in Sources */,
 				2E17CFFD227A207A00AF2FBC /* PDMProfile.swift in Sources */,
 				2E777DF12296FE760005250C /* ConnectedSourcesTableViewController.swift in Sources */,
@@ -436,6 +446,7 @@
 				2E17D000227B6DE900AF2FBC /* HomeViewController.swift in Sources */,
 				2EA93702226E406400513F9D /* HTTPExtensions.swift in Sources */,
 				2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */,
+				2E3C3349229892DD0013A712 /* PDMMiniBrowserViewController.swift in Sources */,
 				2E2342D12242937700045E3A /* InitializePDMViewController.swift in Sources */,
 				2E26F8D4229708DE00BB1F60 /* AddSourceViewController.swift in Sources */,
 				2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */,
@@ -453,6 +464,7 @@
 				2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */,
 				2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */,
 				2EA9370A22778BA700513F9D /* TextFieldExtensions.swift in Sources */,
+				2E3C334722988F960013A712 /* AddSourceOAuthViewController.swift in Sources */,
 				2E777DF32296FEEB0005250C /* AddSourceTableViewController.swift in Sources */,
 				2E17CFFB2279529C00AF2FBC /* AccountInfoViewController.swift in Sources */,
 				2E234296224291C300045E3A /* AppDelegate.swift in Sources */,

@@ -2,7 +2,6 @@
 //  AddSourceTableViewController.swift
 //  pdm-ui
 //
-//  Created by Potter, Dan on 5/23/19.
 //  Copyright © 2019 MITRE. All rights reserved.
 //
 
@@ -29,34 +28,18 @@ class AddSourceTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if availableProviders == nil {
-            loadProviders()
-        }
-    }
-
     // MARK: - Provider loading
 
-    /// Loads providers. If called when providers where already loaded, this reloads the providers.
-    func loadProviders() {
-        if let pdm = patientDataManager {
-            print("Loading providers...")
-            pdm.loadProviders() { providers, error in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.presentErrorAlert(error, title: "Error loading providers")
-                    } else {
-                        self.availableProviders = providers
-                    }
-                }
-            }
-        }
-    }
-
     private func updateTableView(from: [PDMProvider]?, to: [PDMProvider]?) {
+        // Conceptually it may be possible to update the providers before the table exists?
+        guard tableView != nil else {
+            print("Not updating table view (is nil)")
+            return
+        }
+        print("Updating table view")
         tableView.beginUpdates()
         if let from = from {
+            print("Removing \(from.count) rows")
             // For now, just tell it we're removing everything. In the future we should calculate inserts and deletes.
             var rows = [IndexPath]()
             for index in 0..<from.count {
@@ -64,7 +47,11 @@ class AddSourceTableViewController: UITableViewController {
             }
             tableView.deleteRows(at: rows, with: .automatic)
         }
+        if from?.isEmpty ?? true && !(to?.isEmpty ?? true) {
+            tableView.insertSections(IndexSet(arrayLiteral: 0), with: .automatic)
+        }
         if let to = to {
+            print("Adding \(to.count) rows")
             var rows = [IndexPath]()
             for index in 0..<to.count {
                 rows.append(IndexPath(row: index, section: 0))
@@ -77,7 +64,13 @@ class AddSourceTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if availableProviders?.isEmpty ?? true {
+            tableView.setEmptyMessage("No providers are available to connect at this time")
+            return 0
+        } else {
+            tableView.clearEmptyMessage()
+            return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -152,5 +145,10 @@ class AddSourceTableViewController: UITableViewController {
             }
             addSourceViewController.provider = availableProviders?[selectedIndex.row]
         }
+    }
+
+    // MARK: - Actions
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true)
     }
 }
