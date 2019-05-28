@@ -2,7 +2,6 @@
 //  AccountInfoViewController.swift
 //  pdm-ui
 //
-//  Created by Potter, Dan on 5/1/19.
 //  Copyright © 2019 MITRE. All rights reserved.
 //
 
@@ -27,4 +26,23 @@ class AccountInfoViewController: UIViewController {
     }
     */
 
+    @IBAction func logOutAction(_ sender: UIButton) {
+        guard let pdm = patientDataManager else {
+            // Should raise an error?
+            return
+        }
+        // Ensure autologin is disabled or this will get interesting
+        pdm.autoLogin = false
+        pdm.signOut() { error in
+            if let error = error {
+                self.presentErrorAlert(error, title: "Error Logging Out")
+            } else {
+                DispatchQueue.main.async {
+                    // And kill EVERYTHING - this completely resets the root controller, blanking out everything
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    UIApplication.shared.keyWindow?.rootViewController = mainStoryboard.instantiateInitialViewController()
+                }
+            }
+        }
+    }
 }

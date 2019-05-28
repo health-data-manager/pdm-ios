@@ -273,7 +273,9 @@ class PatientDataManager {
     func signOut(completionHandler: @escaping (Error?) -> Void) {
         user = nil
         userClient.bearerToken = nil
-        // For now, just instantly "complete"
+        activeProfile = nil
+        serverRecords = nil
+        // For now, just instantly "complete" - in the future this should try and expire the session on the server, too
         completionHandler(nil)
     }
 
