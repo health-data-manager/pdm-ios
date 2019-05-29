@@ -89,3 +89,55 @@ class PDMProvider {
         }
     }
 }
+
+/// A link between a profile and a provider. These are mostly intended to be "short-lived."
+struct PDMProviderProfileLink {
+    var id: Int64
+    var profileId: Int64
+    var providerId: Int64
+    var lastSync: Date?
+
+    init(id: Int64, profileId: Int64, providerId: Int64, lastSync: Date?=nil) {
+        self.id = id
+        self.profileId = profileId
+        self.providerId = providerId
+        self.lastSync = lastSync
+    }
+
+    init(id: Int64, profileId: Int64, providerId: Int64, lastSyncISOString: String?) {
+        let date: Date?
+        if let lastSyncISOString = lastSyncISOString {
+            let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.formatOptions.insert(.withFractionalSeconds)
+            date = dateFormatter.date(from: lastSyncISOString)
+        } else {
+            date = nil
+        }
+        self.init(id: id, profileId: profileId, providerId: providerId, lastSync: date)
+    }
+
+    /// Potentially initializes this object with a JSON object. Returns `nil` if the object cannot be created because the JSON object is missing required fields or the fields are of the wrong type.
+    init?(withJSON json: [String: Any]) {
+        guard let id = json["id"] as? NSNumber,
+            let profileId = json["profile_id"] as? NSNumber,
+            let providerId = json["provider_id"] as? NSNumber else {
+                return nil
+        }
+        self.init(id: id.int64Value, profileId: profileId.int64Value, providerId: providerId.int64Value, lastSyncISOString: json["last_sync"] as? String)
+    }
+
+    static func list(fromJSON json: [Any]) -> [PDMProviderProfileLink]? {
+        // Return an empty list if there were none
+        if json.count == 0 {
+            return []
+        }
+        var result = [PDMProviderProfileLink]()
+        for element in json {
+            if let obj = element as? [String: Any], let link = PDMProviderProfileLink(withJSON: obj) {
+                result.append(link)
+            }
+        }
+        // Return nil if nothing could be parsed - assume that means a bad argument
+        return result.isEmpty ? nil : result
+    }
+}

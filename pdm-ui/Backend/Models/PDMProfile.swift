@@ -7,15 +7,19 @@
 
 import Foundation
 
-/**
- A profile within the PDM.
- */
+/// A profile within the PDM.
 class PDMProfile {
+    /// The profile's ID
     let profileId: Int64
+    /// The user ID associated with the profile
     let userId: Int64
+    /// A patient identifier (as appearing in FHIR records)
     let patientId: UUID
+    /// The patient's full name
     var name: String
+    /// The patient's first name
     var firstName: String?
+    /// The patient's last name
     var lastName: String?
     var gender: String?
     var dateOfBirth: Date?
@@ -32,14 +36,13 @@ class PDMProfile {
     /// Updated at timestamp
     var updatedAt: Date?
 
-    /**
-     Initializes with just the required parameters
-
-     - Parameters:
-        - userId: the user ID
-        - patientId: the patient ID
-        - name: the patient's name
-     */
+    /// Initializes with just the required parameters
+    ///
+    /// - Parameters:
+    ///   - profileId: the profile ID
+    ///   - userId: the user ID
+    ///   - patientId: the patient ID
+    ///   - name: the patient's name
     init(id profileId: Int64, userId: Int64, patientId: UUID, name: String) {
         self.profileId = profileId
         self.userId = userId
@@ -47,11 +50,9 @@ class PDMProfile {
         self.name = name
     }
 
-    /**
-     Initializes using a JSON document.
-
-     - Parameter json: a JSON object (as parsed by JSONSerialization)
-     */
+    /// Initializes using a JSON document.
+    ///
+    /// - Parameter json: a JSON object (as parsed by JSONSerialization)
     init?(withJSON json: [String: Any]) {
         guard let profileId = json["id"] as? NSNumber, let userId = json["user_id"] as? NSNumber else {
             return nil
@@ -89,12 +90,10 @@ class PDMProfile {
         }
     }
 
-    /**
-     Parse a list of profiles from a given JSON array (as returned from JSONSerialization.jsonObject).
-
-     - Parameter json: the JSON to use
-     - Returns: the list of loaded profiles or `nil` if no profile loaded successfully (as this likely indicates some underlying error like a list of some other set of JSON objects being passed in). Note that an empty list is possible if given an empty list.
-     */
+    /// Parse a list of profiles from a given JSON array (as returned from JSONSerialization.jsonObject).
+    ///
+    /// - Parameter json: the JSON to use
+    /// - Returns: the list of loaded profiles or `nil` if no profile loaded successfully (as this likely indicates some underlying error like a list of some other set of JSON objects being passed in). Note that an empty list is possible if given an empty list, as an empty list is a valid list of profiles.
     static func profilesFromJSON(json: [Any]) -> [PDMProfile]? {
         if json.isEmpty {
             return []
@@ -108,13 +107,5 @@ class PDMProfile {
             }
         }
         return result.isEmpty ? nil : result
-    }
-
-    static func profilesFromJSON(data: Data) throws -> [PDMProfile]? {
-        let json = try JSONSerialization.jsonObject(with: data, options: [])
-        guard let jsonArray = json as? [Any] else {
-            return nil
-        }
-        return profilesFromJSON(json: jsonArray)
     }
 }

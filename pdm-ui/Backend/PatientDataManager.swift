@@ -7,6 +7,7 @@
 
 import Foundation
 import HealthKit
+import os.log
 
 /// Various errors that can occur within the Patient Data Manager.
 enum PatientDataManagerError: Error, LocalizedError {
@@ -184,9 +185,11 @@ class PatientDataManager {
         return rootURL.appendingPathComponent("users")
     }
 
+    lazy var apiURL = rootURL.appendingPathComponent("api/v1")
+
     /// The URL for retrieving profiles
     var profilesURL: URL {
-        return rootURL.appendingPathComponent("api/v1/profiles")
+        return apiURL.appendingPathComponent("profiles")
     }
 
     /**
@@ -513,19 +516,19 @@ class PatientDataManager {
     }
 
     /**
-     Load providers from the patient data manager.
+     Load all providers from the patient data manager.
      - Parameters:
          - completionCallback: the completion handler invoked when the operation completes
          - providers: the resulting list of providers, or `nil` if there was an error
          - error: an error object describing why the load failed if it failed
      - Returns: a URLSessionTask describing the load progress
      */
-    @discardableResult func loadProviders(completionCallback: @escaping (_ providers: [PDMProvider]?, _ error: Error?) -> Void) -> URLSessionTask? {
+    @discardableResult func loadAllProviders(completionCallback: @escaping (_ providers: [PDMProvider]?, _ error: Error?) -> Void) -> URLSessionTask? {
         guard userClient.hasBearerToken else {
             completionCallback(nil, PatientDataManagerError.notLoggedIn)
             return nil
         }
-        return userClient.getJSON(from: rootURL.appendingPathComponent("providers")) { data, response, error in
+        return userClient.getJSON(from: apiURL.appendingPathComponent("providers")) { data, response, error in
             if let error = error {
                 completionCallback(nil, error)
                 return
@@ -539,6 +542,76 @@ class PatientDataManager {
                 return
             }
             completionCallback(providers, nil)
+        }
+    }
+
+    /**
+     Load providers that have already been connected to a given profile from the patient data manager.
+     - Parameters:
+         - completionCallback: the completion handler invoked when the operation completes
+         - providerLinks: the resulting list of provider links, or `nil` if there was an error
+         - error: an error object describing why the load failed if it failed
+     - Returns: a URLSessionTask describing the load progress
+     */
+    @discardableResult func loadProvidersConnectedTo(_ profile: PDMProfile, completionCallback: @escaping (_ providerLinks: [PDMProviderProfileLink]?, _ error: Error?) -> Void) -> URLSessionTask? {
+        guard userClient.hasBearerToken else {
+            completionCallback(nil, PatientDataManagerError.notLoggedIn)
+            return nil
+        }
+        return userClient.getJSON(from: apiURL.appendingPathComponent("profiles/\(profile.profileId)/providers")) { data, response, error in
+            if let error = error {
+                completionCallback(nil, error)
+                return
+            }
+            guard let json = data else {
+                completionCallback(nil, PatientDataManagerError.noResultFromServer)
+                return
+            }
+            guard let jsonArray = json as? [Any], let providerLinks = PDMProviderProfileLink.list(fromJSON: jsonArray) else {
+                completionCallback(nil, PatientDataManagerError.couldNotUnderstandResponse)
+                return
+            }
+            completionCallback(providerLinks, nil)
+        }
+    }
+
+    @discardableResult func linkToProvider(_ provider: PDMProvider, redirectURI: String, completionHandler: @escaping (_ oauthURL: URL?, _ error: Error?) -> Void) -> URLSessionTask? {
+        guard let profile = activeProfile else {
+            completionHandler(nil, PatientDataManagerError.noActiveProfile)
+            return nil
+        }
+        // Just need the API root
+        return userClient.postJSONExpectingObject([
+            "provider_id": provider.id,
+            "redirect_uri": redirectURI
+        ], to: apiURL.appendingPathComponent("profiles/\(profile.profileId)/providers")) { data, response, error in
+            if let error = error {
+                completionHandler(nil, error)
+                return
+            }
+            guard let data = data, let redirectString = data["redirect_uri"] as? String, let redirectURI = URL(string: redirectString) else {
+                completionHandler(nil, PatientDataManagerError.couldNotUnderstandResponse)
+                return
+            }
+            completionHandler(redirectURI, nil)
+        }
+    }
+
+    @discardableResult func linkToProviderOauthCallback(_ provider: PDMProvider, code: String, redirectURI: String, completionHandler: @escaping (_ error: Error?) -> Void) -> URLSessionTask? {
+        guard let profile = activeProfile else {
+            completionHandler(PatientDataManagerError.noActiveProfile)
+            return nil
+        }
+        return userClient.getJSONObject(from: rootURL.appendingPathComponent("oauth/callback"), withQueryItems: [
+            URLQueryItem(name: "state", value: "\(provider.id):\(profile.profileId)"),
+            URLQueryItem(name: "code", value: code),
+            URLQueryItem(name: "redirect_uri", value: redirectURI)
+        ]) { data, response, error in
+            if let error = error {
+                completionHandler(error)
+                return
+            }
+            completionHandler(nil)
         }
     }
 
