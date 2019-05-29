@@ -76,15 +76,20 @@ class AddSourceOAuthViewController: PDMMiniBrowserViewController, WKNavigationDe
         guard let pdm = patientDataManager, let provider = provider else {
             return
         }
-        present(createLoadingAlert("Linking to profile..."), animated: true)
+        let group = DispatchGroup()
+        group.enter()
+        present(createLoadingAlert("Linking to profile..."), animated: true) {
+            group.leave()
+        }
         pdm.linkToProviderOauthCallback(provider, code: oauthCode, redirectURI: "https://\(AddSourceOAuthViewController.redirectHost)/") { error in
-            DispatchQueue.main.async {
+            // Make sure we do this after the animation has finished
+            group.notify(queue: DispatchQueue.main) {
                 if let error = error {
                     self.dismiss(animated: false) {
                         self.presentErrorAlert(error, title: "Could not link provider")
                     }
                 } else {
-                    // Unwind wwwwaaaaayyyy back
+                    // Dismiss the loading overlay and then dismiss the navigation controller - this resets back to the sources view
                     self.dismiss(animated: true) {
                         self.navigationController?.dismiss(animated: true)
                     }

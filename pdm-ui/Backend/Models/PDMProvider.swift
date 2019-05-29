@@ -148,6 +148,10 @@ class PDMProviderList {
     private var providers = [PDMProvider]()
     private var providersById = [Int64: PDMProvider]()
 
+    var isEmpty: Bool {
+        return providers.isEmpty
+    }
+
     /// Creates an empty provider list
     init() {
         // Does nothing
@@ -206,5 +210,10 @@ class PDMProviderList {
             }
         }
         return result
+    }
+
+    func removeAll() {
+        providers.removeAll()
+        providersById.removeAll()
     }
 }

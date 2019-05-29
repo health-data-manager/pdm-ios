@@ -9,12 +9,17 @@ import UIKit
 
 /// Displays the sources connected to by a given user.
 class ConnectedSourcesTableViewController: UITableViewController {
+    @IBOutlet weak var addSourceButton: UIBarButtonItem!
+
     /// Data source for the table
-    var connectedProviders = [PDMProvider]()
-    var providerLinks = [PDMProviderProfileLink]()
-    var availableProviders = PDMProviderList()
+    private var connectedProviders = [PDMProvider]()
+    private var providerLinks = [PDMProviderProfileLink]()
+    /// The new provider links that should be used to populate both providerLinks and connectedProviders once loading has completed.
+    private var newProviderLinks: [PDMProviderProfileLink]?
+    private var availableProviders = PDMProviderList()
     // Various bits of state that need to exist while loading
     private var didLoadProviders = false
+    private var shouldReloadLinkedProviders = false
     private var providerLoadErrors: [Error]?
     private var providerGroup = DispatchGroup()
 
@@ -26,6 +31,9 @@ class ConnectedSourcesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+
+        // The add source button should always start disabled
+        addSourceButton.isEnabled = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -33,9 +41,40 @@ class ConnectedSourcesTableViewController: UITableViewController {
         loadConnectedProviders()
     }
 
+    /// Reloads the connected providers, assuming the providers have been loaded. If the providers have not been loaded yet, this does nothing. (Note that means there's a somewhat obscure edge condition where connected providers have been loaded but the complete provider list hasn't. Calling this during that time period will not cause the connected providers to be reloaded.)
+    func reloadConnectedProviders() {
+        guard let pdm = patientDataManager, let profile = pdm.activeProfile else { return }
+        addSourceButton.isEnabled = false
+        pdm.loadProvidersConnectedTo(profile) { providerLinks, error in
+            if let error = error {
+                self.presentErrorAlert(error, title: "Error loading connected sources")
+            } else if let providerLinks = providerLinks {
+                DispatchQueue.main.async {
+                    self.newProviderLinks = providerLinks
+                    self.updateLinkedProviders()
+                }
+            }
+        }
+    }
+
+    /// Forces everything to be reloaded. This will completely empty out the existing data and reload from scratch.
+    func reloadProviders() {
+        didLoadProviders = false
+        connectedProviders.removeAll()
+        providerLinks.removeAll()
+        availableProviders.removeAll()
+        tableView.reloadData()
+    }
+
+    /// Load connected providers. This should only be called from the main thread: it makes UI changes and that also makes it simpler to implement.
     private func loadConnectedProviders() {
-        // Only load once
+        // Only load everything once
         if didLoadProviders {
+            if shouldReloadLinkedProviders {
+                // In this case, we just reload the links and then repopulate the list
+                reloadConnectedProviders()
+                shouldReloadLinkedProviders = false
+            }
             return
         }
         guard let pdm = patientDataManager, let profile = pdm.activeProfile else { return }
@@ -44,13 +83,15 @@ class ConnectedSourcesTableViewController: UITableViewController {
         // and repopulating the data
         didLoadProviders = true
         tableView.setEmptyMessage("Loading...")
+        // Disable the add source button during loading
+        addSourceButton.isEnabled = false
         // So we actually need to load two things: the complete list of providers and the list of links
         providerGroup.enter()
         pdm.loadProvidersConnectedTo(profile) { providerLinks, error in
             if let error = error {
                 self.handleLoadError(error)
             } else if let providerLinks = providerLinks {
-                self.providerLinks.append(contentsOf: providerLinks)
+                self.newProviderLinks = providerLinks
             }
             self.providerGroup.leave()
         }
@@ -86,6 +127,7 @@ class ConnectedSourcesTableViewController: UITableViewController {
                 } else {
                     self.tableView.clearEmptyMessage()
                 }
+                self.addSourceButton.isEnabled = !self.availableProviders.isEmpty
             }
         }
     }
@@ -99,6 +141,22 @@ class ConnectedSourcesTableViewController: UITableViewController {
                 self.providerLoadErrors!.append(error)
             }
         }
+    }
+
+    /// Internal function to update a list of linked providers entirely.
+    private func updateLinkedProviders() {
+        guard let newProviderLinks = newProviderLinks else {
+            // If there are no new provider links, do nothing: this is NOT the same case as "empty"
+            return
+        }
+        var newConnectedProviders = availableProviders.getProvidersWithin(newProviderLinks)
+        newConnectedProviders.sort(by: {a, b in
+            return a.name.localizedCompare(b.name) == .orderedAscending
+        })
+        // TODO (maybe): Figure out what the edits are. But for now:
+        connectedProviders = newConnectedProviders
+        tableView.reloadData()
+        addSourceButton.isEnabled = true
     }
 
     private func appendConnectedProviders(_ providers: [PDMProvider]) {
@@ -195,7 +253,9 @@ class ConnectedSourcesTableViewController: UITableViewController {
         if segue.identifier == "AddSource" {
             if let navigationController = segue.destination as? UINavigationController {
                 if let addSourceViewController = navigationController.visibleViewController as? AddSourceTableViewController {
-                addSourceViewController.availableProviders = availableProviders.getProvidersWithout(providerLinks)
+                    addSourceViewController.availableProviders = availableProviders.getProvidersWithout(providerLinks)
+                    // Also indicate we should reload linked providers after this view is reshown
+                    shouldReloadLinkedProviders = true
                 } else {
                     fatalError("Unable to get add source view controller")
                 }
@@ -205,8 +265,5 @@ class ConnectedSourcesTableViewController: UITableViewController {
         } else {
             print("Unknown segue to \(segue.identifier ?? "nil")")
         }
-    }
-
-    func unwindFromAddSource(_ segue: UIStoryboardSegue) {
     }
 }
