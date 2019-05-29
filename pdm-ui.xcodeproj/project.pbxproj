@@ -33,6 +33,8 @@
 		2E777DF12296FE760005250C /* ConnectedSourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E777DF02296FE760005250C /* ConnectedSourcesTableViewController.swift */; };
 		2E777DF32296FEEB0005250C /* AddSourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E777DF22296FEEB0005250C /* AddSourceTableViewController.swift */; };
 		2E7FADFA229DA3D600A766C6 /* TableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FADF9229DA3D600A766C6 /* TableViewExtensions.swift */; };
+		2E7FADFC229EF13000A766C6 /* PDMProviderCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FADFB229EF13000A766C6 /* PDMProviderCollection.swift */; };
+		2E7FADFE229EFF6000A766C6 /* PDMProfileSourceDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FADFD229EFF6000A766C6 /* PDMProfileSourceDataController.swift */; };
 		2E8468B7228BCF8400C8ECB6 /* patient.html in Resources */ = {isa = PBXBuildFile; fileRef = 2E8468B6228BCF8400C8ECB6 /* patient.html */; };
 		2E8468B9228BCF9E00C8ECB6 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8468B8228BCF9E00C8ECB6 /* WebKit.framework */; };
 		2E8468BB228DB04000C8ECB6 /* FHIRBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8468BA228DB04000C8ECB6 /* FHIRBundle.swift */; };
@@ -106,6 +108,8 @@
 		2E777DF02296FE760005250C /* ConnectedSourcesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedSourcesTableViewController.swift; sourceTree = "<group>"; };
 		2E777DF22296FEEB0005250C /* AddSourceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceTableViewController.swift; sourceTree = "<group>"; };
 		2E7FADF9229DA3D600A766C6 /* TableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtensions.swift; sourceTree = "<group>"; };
+		2E7FADFB229EF13000A766C6 /* PDMProviderCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProviderCollection.swift; sourceTree = "<group>"; };
+		2E7FADFD229EFF6000A766C6 /* PDMProfileSourceDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProfileSourceDataController.swift; sourceTree = "<group>"; };
 		2E8468B6228BCF8400C8ECB6 /* patient.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = patient.html; sourceTree = "<group>"; };
 		2E8468B8228BCF9E00C8ECB6 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2E8468BA228DB04000C8ECB6 /* FHIRBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FHIRBundle.swift; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 				2E17CFFC227A207A00AF2FBC /* PDMProfile.swift */,
 				2EA937052277580700513F9D /* PDMUser.swift */,
 				2EBF772C229321CC00170091 /* PDMProvider.swift */,
+				2E7FADFB229EF13000A766C6 /* PDMProviderCollection.swift */,
+				2E7FADFD229EFF6000A766C6 /* PDMProfileSourceDataController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -454,6 +460,7 @@
 				2EA937062277580700513F9D /* PDMUser.swift in Sources */,
 				2ED98950227B6F320034B4B6 /* PatientHealthRecordViewController.swift in Sources */,
 				2E23429E224291C300045E3A /* pdm_ui.xcdatamodeld in Sources */,
+				2E7FADFE229EFF6000A766C6 /* PDMProfileSourceDataController.swift in Sources */,
 				2E8468BB228DB04000C8ECB6 /* FHIRBundle.swift in Sources */,
 				2E2342C7224292DC00045E3A /* PatientDataManager.swift in Sources */,
 				2E234298224291C300045E3A /* LoginViewController.swift in Sources */,
@@ -461,6 +468,7 @@
 				2ED1969E2295DCCA001821A8 /* PatientDataManagerKeychain.swift in Sources */,
 				2EA9370E2278914000513F9D /* PDMHealthKit.swift in Sources */,
 				2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */,
+				2E7FADFC229EF13000A766C6 /* PDMProviderCollection.swift in Sources */,
 				2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */,
 				2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */,
 				2EA9370A22778BA700513F9D /* TextFieldExtensions.swift in Sources */,
