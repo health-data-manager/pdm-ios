@@ -81,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uf2-OV-QWM">
-                                <rect key="frame" x="180" y="832" width="55" height="30"/>
+                                <rect key="frame" x="179.5" y="832" width="55" height="30"/>
                                 <state key="normal" title="Log Out"/>
                                 <connections>
                                     <action selector="logOutAction:" destination="s9h-MH-5UP" eventType="primaryActionTriggered" id="5zO-Ai-RX1"/>
@@ -96,12 +96,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Uf2-OV-QWM" firstAttribute="leading" secondItem="XgK-LC-Gx7" secondAttribute="leading" constant="180" id="46F-bJ-ZxF"/>
                             <constraint firstItem="DVJ-x4-OhZ" firstAttribute="top" secondItem="XgK-LC-Gx7" secondAttribute="top" constant="20" id="8Kn-rh-eU7"/>
                             <constraint firstItem="XgK-LC-Gx7" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DVJ-x4-OhZ" secondAttribute="trailing" constant="20" id="C6G-8G-cY5"/>
                             <constraint firstItem="Uf2-OV-QWM" firstAttribute="bottom" secondItem="XgK-LC-Gx7" secondAttribute="bottom" id="MGY-fb-EUP"/>
                             <constraint firstItem="DVJ-x4-OhZ" firstAttribute="leading" secondItem="XgK-LC-Gx7" secondAttribute="leading" constant="20" id="ZcM-Lk-ASw"/>
-                            <constraint firstItem="XgK-LC-Gx7" firstAttribute="trailing" secondItem="Uf2-OV-QWM" secondAttribute="trailing" constant="179" id="iPv-8e-wAe"/>
+                            <constraint firstItem="Uf2-OV-QWM" firstAttribute="centerX" secondItem="Odw-8R-vBX" secondAttribute="centerX" id="irK-Yw-WtS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XgK-LC-Gx7"/>
                     </view>
