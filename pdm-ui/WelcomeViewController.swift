@@ -19,6 +19,7 @@ class WelcomeViewController: UIViewController {
     // MARK: - Navigation
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let navigationController = navigationController {
             navigationController.setNavigationBarHidden(true, animated: animated)
         }
