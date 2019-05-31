@@ -26,6 +26,9 @@
 		2E3C3349229892DD0013A712 /* PDMMiniBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */; };
 		2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */; };
 		2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F5226908BD009FF808 /* PDMCheckbox.swift */; };
+		2E53B95422A176E800202ACD /* PatientHealthRecordDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53B95322A176E800202ACD /* PatientHealthRecordDataController.swift */; };
+		2E53B95622A178B700202ACD /* PatientHealthTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53B95522A178B700202ACD /* PatientHealthTile.swift */; };
+		2E53B95822A17D6E00202ACD /* CarePlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53B95722A17D6E00202ACD /* CarePlan.swift */; };
 		2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5A87BA2244C06000E225D5 /* MessageBundle.swift */; };
 		2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E5A87BC2245188B00E225D5 /* Settings.plist */; };
 		2E6DC42F22A04D6C000D8DE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DC42722A04D6C000D8DE4 /* Main.storyboard */; };
@@ -101,6 +104,9 @@
 		2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMMiniBrowserViewController.swift; sourceTree = "<group>"; };
 		2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		2E5088F5226908BD009FF808 /* PDMCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMCheckbox.swift; sourceTree = "<group>"; };
+		2E53B95322A176E800202ACD /* PatientHealthRecordDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthRecordDataController.swift; sourceTree = "<group>"; };
+		2E53B95522A178B700202ACD /* PatientHealthTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthTile.swift; sourceTree = "<group>"; };
+		2E53B95722A17D6E00202ACD /* CarePlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarePlan.swift; sourceTree = "<group>"; };
 		2E5A87BA2244C06000E225D5 /* MessageBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBundle.swift; sourceTree = "<group>"; };
 		2E5A87BC2245188B00E225D5 /* Settings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		2E6DC42822A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -277,6 +283,9 @@
 			isa = PBXGroup;
 			children = (
 				2E8468B6228BCF8400C8ECB6 /* patient.html */,
+				2E53B95322A176E800202ACD /* PatientHealthRecordDataController.swift */,
+				2E53B95722A17D6E00202ACD /* CarePlan.swift */,
+				2E53B95522A178B700202ACD /* PatientHealthTile.swift */,
 			);
 			path = "Patient View";
 			sourceTree = "<group>";
@@ -477,10 +486,13 @@
 				2EA9370E2278914000513F9D /* PDMHealthKit.swift in Sources */,
 				2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */,
 				2E7FADFC229EF13000A766C6 /* PDMProviderCollection.swift in Sources */,
+				2E53B95622A178B700202ACD /* PatientHealthTile.swift in Sources */,
+				2E53B95822A17D6E00202ACD /* CarePlan.swift in Sources */,
 				2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */,
 				2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */,
 				2EA9370A22778BA700513F9D /* TextFieldExtensions.swift in Sources */,
 				2E3C334722988F960013A712 /* AddSourceOAuthViewController.swift in Sources */,
+				2E53B95422A176E800202ACD /* PatientHealthRecordDataController.swift in Sources */,
 				2E777DF32296FEEB0005250C /* AddSourceTableViewController.swift in Sources */,
 				2E17CFFB2279529C00AF2FBC /* AccountInfoViewController.swift in Sources */,
 				2E234296224291C300045E3A /* AppDelegate.swift in Sources */,

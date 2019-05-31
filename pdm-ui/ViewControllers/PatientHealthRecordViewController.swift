@@ -10,16 +10,10 @@ import UIKit
 import WebKit
 
 class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
-    /// Boxes that only exist for demo purposes. THIS WILL BE REMOVED WHEN ALL DATA COMES FROM THE PDM
-    static var demoBoxes = [ [ "title": "Condition", "measurement": "Sinusitis", "style": "condition" ],
-                             [ "title": "Cholesterol HDL", "measurement": "53.5", "units": "mg/dL", "style": "lab" ],
-                             [ "title": "Triglycerides", "measurement": "86", "units": "mg/dL", "style": "lab" ],
-                             [ "title": "BMI-body mass index", "measurement": "26", "units": "kg/m\u{B2}", "style": "vital" ]
-    ]
-
     @IBOutlet weak var webView: WKWebView!
     var patientViewNavigation: WKNavigation?
     var patientURL: URL?
+    let recordDataController = PatientHealthRecordDataController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,56 +30,15 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate,
     }
 
     func displayPatientData() {
-        var boxes = [[String: String]]()
-        var careplan = [
-            "header": "Go for a 15 minute jog or bike ride",
-            "body": "Regular exercise decreases your risk of developing certain diseases, including type 2 diabetes or high blood pressure."
-        ]
-        // See if we can find a cancer resource
-        if let pdm = patientDataManager {
-            if let records = pdm.serverRecords {
-                let cancerResources = records.search([
-                    "meta": [
-                        "profile": [
-                            "http://hl7.org/fhir/us/shr/StructureDefinition/onco-core-PrimaryCancerCondition"
-                        ]
-                    ]
-                ])
-                // For now, just use the first one
-                if let cancerResource = cancerResources.first, let cancerType = cancerResource.getString(forField: "code.text") {
-                    var box = [ "title": "Cancer", "measurement": cancerType, "style": "disease" ]
-                    if let cancerStageCoding = cancerResource.getValue(forField: "stage.summary.coding") as? [Any],
-                        let cancerStageElement = cancerStageCoding.first,
-                        let cancerStageCodingObj = cancerStageElement as? [String: Any],
-                        let cancerStage = cancerStageCodingObj["display"] as? String {
-                            box["title"] = cancerStage
-                    }
-                    boxes.append(box)
-                    // Change careplan to a cancer careplan
-                    careplan["title"] = "Colon Cancer Care Plan"
-                    careplan["header"] = "Prepare for treatment discussion"
-                    careplan["body"] = "Here are some examples of the types of questions you may want to ask Dr. Rusk99 on 21.May, 10AM."
-                    careplan["link"] = "pdm://careplan/colonCancer"
-                    // Add some more static boxes
-                    boxes.append([
-                        "title": "Next Appointment with Dr. Rusk99",
-                        "measurement": "21.May",
-                        "delta": "10:00AM",
-                        "style": "appointment"
-                    ])
-                    boxes.append([
-                        "title": "Patient Data Receipt from Dr. Rusk99",
-                        "measurement": "Routine Visit",
-                        "link": "pdm://health-receipt/1",
-                        "style": "health-receipt"
-                    ])
-                }
-            }
+        guard let pdm = patientDataManager, let records = pdm.serverRecords else {
+            // There's nothing to show
+            return
         }
-        // Add in demo boxes as necessary
-        boxes.append(contentsOf: PatientHealthRecordViewController.demoBoxes[0...(3-boxes.count)])
+        let tiles = recordDataController.calculatePatientData(fromRecords: records)
+        let careplan = recordDataController.calculateCarePlan(fromRecords: records)
+        let tilesJSON = tiles.map({ tile in return tile.jsonValue() })
         do {
-            let json = try JSONSerialization.data(withJSONObject: [ "careplan": careplan, "boxes": boxes, "colors": generateColorJSON() ], options: [])
+            let json = try JSONSerialization.data(withJSONObject: [ "careplan": careplan.jsonValue(), "tiles": tilesJSON, "colors": generateColorJSON() ], options: [])
             guard let jsonString = String(data: json, encoding: .utf8) else {
                 // TODO: Show an error somewhere? This shouldn't be possible
                 return
