@@ -136,9 +136,7 @@ enum PDMRecordType: CaseIterable {
     }
 }
 
-/**
- The PatientDataManager object. This is intended to be a singleton that represents the connection to the PatientDataManager web server. Conceptually multiple instances could exist that provide connections to different PDMs.
- */
+/// The PatientDataManager object. This is intended to be a singleton that represents the connection to the PatientDataManager web server. Conceptually multiple instances could exist that provide connections to different PDMs.
 class PatientDataManager {
     /// The root server URL, configured when the PDM object is created
     let rootURL: URL
@@ -270,9 +268,9 @@ class PatientDataManager {
         }
     }
 
-    /**
-     Signs out. This "always" succeeds in that the user information and user bearer token are cleared, but it can fail if the server can't be told to terminate the session.
-     */
+    /// Signs out. This "always" succeeds in that the user information and user bearer token are cleared, but it can fail if the server can't be told to terminate the session.
+    ///
+    /// - Parameter completionHandler: handler invoked when the logout completes
     func signOut(completionHandler: @escaping (Error?) -> Void) {
         user = nil
         userClient.bearerToken = nil
@@ -282,19 +280,18 @@ class PatientDataManager {
         completionHandler(nil)
     }
 
-    /**
-     Invoke the create new user account endpoint on the backend.
-     - Parameters:
-         - firstName: the user's first name
-         - lastName: the user's last name
-         - email: the user's email address
-         - password: the (unencrypted) password
-         - passwordConfirmation: a second copy of the password, for verifying it's entered correctly (if left nil, `password` is sent for this)
-         - completionHandler: a callback to receive information on the success of the call
-         - user: the created user, if the account was successfully created
-         - error: the error that prevented the account from being created
-     - Returns: a task indicating progress if the request was sent (or nil if an error prevented it from being sent, the details of which will be sent to the callback)
-     */
+    /// Invoke the create new user account endpoint on the backend.
+    ///
+    /// - Parameters:
+    ///   - firstName: the user's first name
+    ///   - lastName: the user's last name
+    ///   - email: the user's email address
+    ///   - password: the (unencrypted) password
+    ///   - passwordConfirmation: a second copy of the password, for verifying it's entered correctly (if left nil, `password` is sent for this)
+    ///   - completionHandler: a callback to receive information on the success of the call
+    ///   - user: the created user, if the account was successfully created
+    ///   - error: the error that prevented the account from being created
+    /// - Returns: a task indicating progress if the request was sent (or nil if an error prevented it from being sent, the details of which will be sent to the callback)
     @discardableResult func createNewUserAccount(firstName: String, lastName: String, email: String, password: String, passwordConfirmation: String?, completionHandler: @escaping (_ user: PDMUser?, _ error: Error?) -> Void) -> URLSessionTask? {
         return userClient.postJSONExpectingObject([
             "user": [

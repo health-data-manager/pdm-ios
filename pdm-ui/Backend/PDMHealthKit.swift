@@ -12,9 +12,8 @@ enum PDMHealthKitError: Error {
     case multipleQueryErrors([Error])
 }
 
-// Provides a connection to HealthKit via the PDM.
-// Note that HealthKit may not be available on all devices.
-// It is noteably not available on the iPad.
+/// Provides a connection to HealthKit via the PDM.
+/// Note that HealthKit may not be available on all devices. It is noteably not available on the iPad.
 class PDMHealthKit {
     // It's probably possible to create this list via reflection but conceptually we should limit it to documents we can handle anyway
     static let supportedTypes = [
@@ -27,13 +26,15 @@ class PDMHealthKit {
         HKClinicalTypeIdentifier.vitalSignRecord
     ]
 
+    /// The health store being used by the app
     let healthStore: HKHealthStore
+    /// The available clinical record types
     let availableTypes: Set<HKClinicalType>
 
-    // The query dispatch queue. Note that it is intentionally serial: it is mostly used for adding data to collections.
+    /// The query dispatch queue. Note that it is intentionally serial: it is mostly used for adding data to collections.
     private let queryDispatchQueue = DispatchQueue(label: "org.mitre.PDM.queryQueue", attributes: [])
 
-    // Possibly creates the health kit connection. This depends on health data being available through HealthKit.
+    /// Possibly creates the health kit connection. This depends on health data being available through HealthKit.
     init?() {
         guard HKHealthStore.isHealthDataAvailable() else {
             // If this device does not support health data, this will never work
@@ -59,13 +60,23 @@ class PDMHealthKit {
         self.availableTypes = availableTypes
     }
 
-    // Sends a request to HealthKit for the various supported record types.
-    func requestHealthRecordAccess(completion: @escaping (Bool, Error?) -> Void) {
+    /// Sends a request to HealthKit for the various supported record types. This may pop up a HealthKit UI requesting the user allow access.
+    ///
+    /// - Parameters:
+    ///   - completion: a completion handler invoked when the request completes
+    ///   - success: `true` if the request was successful, `false` otherwise
+    ///   - error: non-`nil` if an error prevented the request
+    func requestHealthRecordAccess(completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         healthStore.requestAuthorization(toShare: nil, read: availableTypes, completion: completion)
     }
 
-    // Request all available health records
-    func queryAllHealthRecords(completionCallback: @escaping ([HKClinicalRecord]?, Error?) -> Void) {
+    /// Request all available health records on the device.
+    ///
+    /// - Parameters:
+    ///   - completionCallback: a callback invoked when the records are available
+    ///   - records: the records loaded or `nil` if loading failed
+    ///   - error: non-`nil` if an error prevented record loading
+    func queryAllHealthRecords(completionCallback: @escaping (_ records: [HKClinicalRecord]?, _ error: Error?) -> Void) {
         // Because we have to run multiple queries, we need a dispatch group to known when they're all done
         let group = DispatchGroup()
         // The records we want to return
