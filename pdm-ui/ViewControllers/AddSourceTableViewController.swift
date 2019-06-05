@@ -9,14 +9,7 @@ import UIKit
 
 /// View for adding a new source.
 class AddSourceTableViewController: UITableViewController {
-    var availableProviders: [PDMProvider]? {
-        didSet {
-            let newValue = availableProviders
-            DispatchQueue.main.async {
-                self.updateTableView(from: oldValue, to: newValue)
-            }
-        }
-    }
+    var availableProviders: [PDMProvider]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,39 +19,6 @@ class AddSourceTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
-    // MARK: - Provider loading
-
-    private func updateTableView(from: [PDMProvider]?, to: [PDMProvider]?) {
-        // Conceptually it may be possible to update the providers before the table exists?
-        guard tableView != nil else {
-            print("Not updating table view (is nil)")
-            return
-        }
-        print("Updating table view")
-        tableView.beginUpdates()
-        if let from = from {
-            print("Removing \(from.count) rows")
-            // For now, just tell it we're removing everything. In the future we should calculate inserts and deletes.
-            var rows = [IndexPath]()
-            for index in 0..<from.count {
-                rows.append(IndexPath(row: index, section: 0))
-            }
-            tableView.deleteRows(at: rows, with: .automatic)
-        }
-        if from?.isEmpty ?? true && !(to?.isEmpty ?? true) {
-            tableView.insertSections(IndexSet(arrayLiteral: 0), with: .automatic)
-        }
-        if let to = to {
-            print("Adding \(to.count) rows")
-            var rows = [IndexPath]()
-            for index in 0..<to.count {
-                rows.append(IndexPath(row: index, section: 0))
-            }
-            tableView.insertRows(at: rows, with: .fade)
-        }
-        tableView.endUpdates()
     }
 
     // MARK: - Table view data source

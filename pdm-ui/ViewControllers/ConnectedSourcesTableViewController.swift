@@ -54,27 +54,6 @@ class ConnectedSourcesTableViewController: UITableViewController, PDMProfileSour
         }
     }
 
-    private func appendConnectedProviders(_ providers: [PDMProvider]) {
-        // If nothing is being added, don't do anything
-        if providers.isEmpty {
-            return
-        }
-        let startIndex = connectedProviders.count
-        connectedProviders.append(contentsOf: providers)
-        let lastIndex = connectedProviders.count
-        var changedRows = [IndexPath]()
-        for index in (startIndex..<lastIndex) {
-            changedRows.append(IndexPath(row: index, section: 0))
-        }
-        tableView.beginUpdates()
-        if startIndex == 0 {
-            // also inserting a complete section
-            tableView.insertSections(IndexSet(arrayLiteral: 0), with: .automatic)
-        }
-        tableView.insertRows(at: changedRows, with: .automatic)
-        tableView.endUpdates()
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
