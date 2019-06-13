@@ -53,6 +53,8 @@
 		2EA937102278AC6700513F9D /* PatientDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */; };
 		2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF772C229321CC00170091 /* PDMProvider.swift */; };
 		2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF7730229496CB00170091 /* PDMTimeLine.swift */; };
+		2EC27F2922B1423500E0DFD2 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC27F2722B1423500E0DFD2 /* Account.storyboard */; };
+		2EC27F2B22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC27F2A22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift */; };
 		2ED1969E2295DCCA001821A8 /* PatientDataManagerKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1969D2295DCCA001821A8 /* PatientDataManagerKeychain.swift */; };
 		2ED98950227B6F320034B4B6 /* PatientHealthRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */; };
 		2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98951227CAC8D0034B4B6 /* RESTClient.swift */; };
@@ -131,6 +133,8 @@
 		2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientDataManagerTests.swift; path = "pdm-uiTests/PatientDataManagerTests.swift"; sourceTree = SOURCE_ROOT; };
 		2EBF772C229321CC00170091 /* PDMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProvider.swift; sourceTree = "<group>"; };
 		2EBF7730229496CB00170091 /* PDMTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMTimeLine.swift; sourceTree = "<group>"; };
+		2EC27F2822B1423500E0DFD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/Account.storyboard"; sourceTree = SOURCE_ROOT; };
+		2EC27F2A22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMenuInfoTableViewController.swift; sourceTree = "<group>"; };
 		2ED1969D2295DCCA001821A8 /* PatientDataManagerKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDataManagerKeychain.swift; sourceTree = "<group>"; };
 		2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthRecordViewController.swift; sourceTree = "<group>"; };
 		2ED98951227CAC8D0034B4B6 /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 				2EA937072277775C00513F9D /* CreateAccountViewController.swift */,
 				2E234297224291C300045E3A /* LoginViewController.swift */,
 				2E17CFFA2279529C00AF2FBC /* AccountInfoViewController.swift */,
+				2EC27F2A22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift */,
 				2E17CFFF227B6DE900AF2FBC /* HomeViewController.swift */,
 				2E2342D02242937700045E3A /* InitializePDMViewController.swift */,
 				2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */,
@@ -275,6 +280,7 @@
 				2E6DC42B22A04D6C000D8DE4 /* LaunchScreen.storyboard */,
 				2E6DC42722A04D6C000D8DE4 /* Main.storyboard */,
 				2E6DC42D22A04D6C000D8DE4 /* Sources.storyboard */,
+				2EC27F2722B1423500E0DFD2 /* Account.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -435,6 +441,7 @@
 				2E8468B7228BCF8400C8ECB6 /* patient.html in Resources */,
 				2E6DC43122A04D6C000D8DE4 /* LaunchScreen.storyboard in Resources */,
 				2E6DC43022A04D6C000D8DE4 /* HealthRecord.storyboard in Resources */,
+				2EC27F2922B1423500E0DFD2 /* Account.storyboard in Resources */,
 				2E6DC42F22A04D6C000D8DE4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,6 +499,7 @@
 				2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */,
 				2EA9370A22778BA700513F9D /* TextFieldExtensions.swift in Sources */,
 				2E3C334722988F960013A712 /* AddSourceOAuthViewController.swift in Sources */,
+				2EC27F2B22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift in Sources */,
 				2E53B95422A176E800202ACD /* PatientHealthRecordDataController.swift in Sources */,
 				2E777DF32296FEEB0005250C /* AddSourceTableViewController.swift in Sources */,
 				2E17CFFB2279529C00AF2FBC /* AccountInfoViewController.swift in Sources */,
@@ -565,6 +573,14 @@
 				2E6DC42E22A04D6C000D8DE4 /* Base */,
 			);
 			name = Sources.storyboard;
+			sourceTree = "<group>";
+		};
+		2EC27F2722B1423500E0DFD2 /* Account.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EC27F2822B1423500E0DFD2 /* Base */,
+			);
+			name = Account.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

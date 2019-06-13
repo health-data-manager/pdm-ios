@@ -8,13 +8,27 @@
 import UIKit
 
 class AccountInfoViewController: UIViewController {
+    @IBOutlet weak var patientAccountImageView: UIImageView!
+    @IBOutlet weak var patientNameLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let pdm = patientDataManager, let profile = pdm.activeProfile else {
+            // Hrm
+            patientNameLabel.text = "No Active Profile"
+            patientAccountImageView.isHidden = true
+            return
+        }
+        patientNameLabel.text = profile.name
+        // TODO: Load the patient's profile image
+        patientAccountImageView.isHidden = true
+    }
 
     /*
     // MARK: - Navigation
@@ -26,23 +40,6 @@ class AccountInfoViewController: UIViewController {
     }
     */
 
-    @IBAction func logOutAction(_ sender: UIButton) {
-        guard let pdm = patientDataManager else {
-            // Should raise an error?
-            return
-        }
-        // Ensure autologin is disabled or this will get interesting
-        pdm.autoLogin = false
-        pdm.signOut() { error in
-            if let error = error {
-                self.presentErrorAlert(error, title: "Error Logging Out")
-            } else {
-                DispatchQueue.main.async {
-                    // And kill EVERYTHING - this completely resets the root controller, blanking out everything
-                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    UIApplication.shared.keyWindow?.rootViewController = mainStoryboard.instantiateInitialViewController()
-                }
-            }
-        }
+    @IBAction func deleteAccountData(_ sender: Any) {
     }
 }

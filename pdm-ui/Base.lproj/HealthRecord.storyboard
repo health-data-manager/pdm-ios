@@ -55,13 +55,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RHe-rP-Si8"/>
                     </view>
-                    <navigationItem key="navigationItem" id="uec-KX-KNS">
-                        <barButtonItem key="rightBarButtonItem" title="Account" image="AccountIcon" id="TGL-oL-IGr">
-                            <connections>
-                                <segue destination="s9h-MH-5UP" kind="show" id="cHh-6x-kKz"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="uec-KX-KNS"/>
                     <connections>
                         <outlet property="webView" destination="Ip0-9h-MjK" id="wfp-qU-Kgs"/>
                         <segue destination="bt8-Cf-ROn" kind="show" identifier="CarePlan" id="Tic-sg-SBI"/>
@@ -71,43 +65,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQV-mH-oti" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="303.19999999999999" y="727.28635682158927"/>
-        </scene>
-        <!--Account Info View Controller-->
-        <scene sceneID="Yt7-MZ-SdI">
-            <objects>
-                <viewController id="s9h-MH-5UP" customClass="AccountInfoViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Odw-8R-vBX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uf2-OV-QWM">
-                                <rect key="frame" x="179.5" y="832" width="55" height="30"/>
-                                <state key="normal" title="Log Out"/>
-                                <connections>
-                                    <action selector="logOutAction:" destination="s9h-MH-5UP" eventType="primaryActionTriggered" id="5zO-Ai-RX1"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVJ-x4-OhZ">
-                                <rect key="frame" x="20" y="108" width="261" height="36"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="DVJ-x4-OhZ" firstAttribute="top" secondItem="XgK-LC-Gx7" secondAttribute="top" constant="20" id="8Kn-rh-eU7"/>
-                            <constraint firstItem="XgK-LC-Gx7" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DVJ-x4-OhZ" secondAttribute="trailing" constant="20" id="C6G-8G-cY5"/>
-                            <constraint firstItem="Uf2-OV-QWM" firstAttribute="bottom" secondItem="XgK-LC-Gx7" secondAttribute="bottom" id="MGY-fb-EUP"/>
-                            <constraint firstItem="DVJ-x4-OhZ" firstAttribute="leading" secondItem="XgK-LC-Gx7" secondAttribute="leading" constant="20" id="ZcM-Lk-ASw"/>
-                            <constraint firstItem="Uf2-OV-QWM" firstAttribute="centerX" secondItem="Odw-8R-vBX" secondAttribute="centerX" id="irK-Yw-WtS"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="XgK-LC-Gx7"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Jn-rz-QLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="303" y="1542"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="zRV-HU-3yu">
@@ -272,7 +229,6 @@ with </string>
         </scene>
     </scenes>
     <resources>
-        <image name="AccountIcon" width="24" height="24"/>
         <image name="HealthTabIcon" width="25" height="25"/>
     </resources>
 </document>
