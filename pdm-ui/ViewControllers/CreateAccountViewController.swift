@@ -32,7 +32,7 @@ class CreateAccountViewController: UIViewController {
             guard let userInfo = notification.userInfo else { return }
             guard let keyboardInfo = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
             let keyboardSize = keyboardInfo.cgRectValue.size
-            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+            let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
             self.scrollView.contentInset = contentInsets
             self.scrollView.scrollIndicatorInsets = contentInsets
         }
