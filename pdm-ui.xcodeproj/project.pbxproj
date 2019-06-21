@@ -24,6 +24,7 @@
 		2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E395EC6226783B600A9A7D6 /* PDMButton.swift */; };
 		2E3C334722988F960013A712 /* AddSourceOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C334622988F960013A712 /* AddSourceOAuthViewController.swift */; };
 		2E3C3349229892DD0013A712 /* PDMMiniBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */; };
+		2E40233022B7DE4500E525C7 /* PDMBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40232F22B7DE4400E525C7 /* PDMBorderedView.swift */; };
 		2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */; };
 		2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F5226908BD009FF808 /* PDMCheckbox.swift */; };
 		2E53B95422A176E800202ACD /* PatientHealthRecordDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53B95322A176E800202ACD /* PatientHealthRecordDataController.swift */; };
@@ -104,6 +105,7 @@
 		2E395EC6226783B600A9A7D6 /* PDMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMButton.swift; sourceTree = "<group>"; };
 		2E3C334622988F960013A712 /* AddSourceOAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceOAuthViewController.swift; sourceTree = "<group>"; };
 		2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMMiniBrowserViewController.swift; sourceTree = "<group>"; };
+		2E40232F22B7DE4400E525C7 /* PDMBorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMBorderedView.swift; sourceTree = "<group>"; };
 		2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		2E5088F5226908BD009FF808 /* PDMCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMCheckbox.swift; sourceTree = "<group>"; };
 		2E53B95322A176E800202ACD /* PatientHealthRecordDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthRecordDataController.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 			children = (
 				2E395EC6226783B600A9A7D6 /* PDMButton.swift */,
 				2E5088F5226908BD009FF808 /* PDMCheckbox.swift */,
+				2E40232F22B7DE4400E525C7 /* PDMBorderedView.swift */,
 				2E395EC5226783B600A9A7D6 /* PDMTheme.swift */,
 				2EBF7730229496CB00170091 /* PDMTimeLine.swift */,
 				2EA9370B2277949000513F9D /* PDMViewController.swift */,
@@ -476,6 +479,7 @@
 				2E17D000227B6DE900AF2FBC /* HomeViewController.swift in Sources */,
 				2EA93702226E406400513F9D /* HTTPExtensions.swift in Sources */,
 				2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */,
+				2E40233022B7DE4500E525C7 /* PDMBorderedView.swift in Sources */,
 				2E3C3349229892DD0013A712 /* PDMMiniBrowserViewController.swift in Sources */,
 				2E2342D12242937700045E3A /* InitializePDMViewController.swift in Sources */,
 				2E26F8D4229708DE00BB1F60 /* AddSourceViewController.swift in Sources */,

@@ -31,4 +31,6 @@ class PDMTheme {
     static let disabledActiveTintColor = UIColor.black
     static let basicBackgroundColor = UIColor.clear
     static let basicTintColor = UIColor(named: "UnselectedNav") ?? UIColor.gray
+    static let basicBorderColor = UIColor(named: "UnselectedNav") ?? UIColor.gray
+    static let basicBorderedTintColor = UIColor.black
 }
