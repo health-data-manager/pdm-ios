@@ -108,14 +108,18 @@ class PDMHealthKit {
             group.enter()
             healthStore.execute(query)
         }
-        group.notify(queue: DispatchQueue.main) {
-            switch errors.count {
-            case 0:
-                completionCallback(records, nil)
-            case 1:
-                completionCallback(nil, errors[0])
-            default:
-                completionCallback(nil, PDMHealthKitError.multipleQueryErrors(errors))
+        group.notify(queue: self.queryDispatchQueue) {
+            // Once we've been notified, we need to add a message to the end of the query dispatch queue
+            // This ensures everything has been updated
+            self.queryDispatchQueue.async(flags: .barrier) {
+                switch errors.count {
+                case 0:
+                    completionCallback(records, nil)
+                case 1:
+                    completionCallback(nil, errors[0])
+                default:
+                    completionCallback(nil, PDMHealthKitError.multipleQueryErrors(errors))
+                }
             }
         }
     }
