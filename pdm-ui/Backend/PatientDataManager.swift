@@ -141,20 +141,11 @@ class PatientDataManager {
     /// The root server URL, configured when the PDM object is created
     let rootURL: URL
 
-    /// The client ID, configured when the PDM object is created.
-    let clientId: String
-
-    /// The client secret, configured when the PDM object is created.
-    let clientSecret: String
-
     /// Optional HealthKit support. If the current device does not support HealthKit, this will be `nil`.
     let healthKit: PDMHealthKit?
 
     /// Client for user requests
-    let userClient = RESTClient()
-
-    /// Client for FHIR requests (sending records to the PDM)
-    let fhirClient = RESTClient()
+    let restClient = RESTClient()
 
     /// Whether or not auto login has been enabled within the client configuration. Defaults to false.
     var autoLogin = false
@@ -195,14 +186,10 @@ class PatientDataManager {
 
      - Parameters:
          - rootURL: the root URL of the PDM server
-         - clientId: the client ID to use for this client
-         - clientSecret: the secret token to use
          - ignoreHealthKit: if set to true, HealthKit support will be disabled even if it exists on the current device
      */
-    init(rootURL: URL, clientId: String, clientSecret: String, ignoreHealthKit: Bool=false) {
+    init(rootURL: URL, ignoreHealthKit: Bool=false) {
         self.rootURL = rootURL
-        self.clientId = clientId
-        self.clientSecret = clientSecret
         self.healthKit = ignoreHealthKit ? nil : PDMHealthKit()
     }
 
@@ -213,16 +200,14 @@ class PatientDataManager {
      */
     convenience init?(withConfig config: [String: Any]) {
         guard let urlString = config["RootURL"] as? String,
-            let rootURL = URL(string: urlString),
-            let clientId = config["ClientID"] as? String,
-            let clientSecret = config["ClientSecret"] as? String else {
+            let rootURL = URL(string: urlString) else {
                 return nil
         }
         let ignoreHealthKit = (config["DisableHealthKit"] as? Bool) ?? false
         if ignoreHealthKit {
             print("Ignoring HealthKit (based on client settings)")
         }
-        self.init(rootURL: rootURL, clientId: clientId, clientSecret: clientSecret, ignoreHealthKit: ignoreHealthKit)
+        self.init(rootURL: rootURL, ignoreHealthKit: ignoreHealthKit)
         self.autoLogin = (config["AutoLogin"] as? Bool) ?? false
     }
 
@@ -237,7 +222,7 @@ class PatientDataManager {
      */
     @discardableResult func signInAsUser(email: String, password: String, completionHandler: @escaping (_ error: Error?) -> Void) -> URLSessionTask? {
         // This uses the same token login the client login would use
-        return userClient.postJSONExpectingObject([ "email": email, "password": password, "grant_type": "password" ], to: oauthTokenURL) { json, response, error in
+        return restClient.postJSONExpectingObject([ "email": email, "password": password, "grant_type": "password" ], to: oauthTokenURL) { json, response, error in
             guard let response = response else {
                 completionHandler(error)
                 return
@@ -262,7 +247,7 @@ class PatientDataManager {
                 completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
                 return
             }
-            self.userClient.bearerToken = accessToken
+            self.restClient.bearerToken = accessToken
             // Completed successfully
             completionHandler(nil)
         }
@@ -273,7 +258,7 @@ class PatientDataManager {
     /// - Parameter completionHandler: handler invoked when the logout completes
     func signOut(completionHandler: @escaping (Error?) -> Void) {
         user = nil
-        userClient.bearerToken = nil
+        restClient.bearerToken = nil
         activeProfile = nil
         serverRecords = nil
         // For now, just instantly "complete" - in the future this should try and expire the session on the server, too
@@ -293,7 +278,7 @@ class PatientDataManager {
     ///   - error: the error that prevented the account from being created
     /// - Returns: a task indicating progress if the request was sent (or nil if an error prevented it from being sent, the details of which will be sent to the callback)
     @discardableResult func createNewUserAccount(firstName: String, lastName: String, email: String, password: String, passwordConfirmation: String?, completionHandler: @escaping (_ user: PDMUser?, _ error: Error?) -> Void) -> URLSessionTask? {
-        return userClient.postJSONExpectingObject([
+        return restClient.postJSONExpectingObject([
             "user": [
                 "email": email,
                 "first_name": firstName,
@@ -328,44 +313,6 @@ class PatientDataManager {
         }
     }
 
-    // Logs in with the client secret
-    func fhirClientLogin(completionHandler: @escaping (Error?) -> Void) {
-        fhirClient.postForm([
-            URLQueryItem(name: "client_id", value: clientId),
-            URLQueryItem(name: "client_secret", value: clientSecret),
-            URLQueryItem(name: "grant_type", value: "client_credentials")
-        ], to: oauthTokenURL) { data, response, error in
-            if let error = error {
-                completionHandler(error)
-                return
-            }
-            guard let response = response, let mimeType = response.mimeType, MIMEType.isJSON(mimeType), let data = data else {
-                completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
-                return
-            }
-            do {
-                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
-                guard let jsonResponseDictionary = jsonResponse as? [String: Any],
-                    let tokenType = jsonResponseDictionary["token_type"] as? String,
-                    tokenType.caseInsensitiveCompare("Bearer") == .orderedSame else {
-                        completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
-                        return
-                }
-                guard let bearerToken = jsonResponseDictionary["access_token"] as? String else {
-                    self.fhirClient.bearerToken = nil
-                    completionHandler(PatientDataManagerError.couldNotUnderstandResponse)
-                    return
-                }
-                self.fhirClient.bearerToken = bearerToken
-                completionHandler(nil)
-                return
-            } catch {
-                completionHandler(error)
-                return
-            }
-        }
-    }
-
     /*
     /**
      Assuming the user is logged in, this gets the user information for their current account. If the user has already been loaded and reload is false, this immediately completes. Otherwise, it send an HTTP request to get the user information.
@@ -378,7 +325,7 @@ class PatientDataManager {
             completionHandler(user, nil)
             return
         }
-        userClient.getJSONObject(from: editUserURL) { json, response, error in
+        restClient.getJSONObject(from: editUserURL) { json, response, error in
             guard error == nil else {
                 // This indicates some internal error that means there is no response
                 completionHandler(nil, error)
@@ -395,7 +342,7 @@ class PatientDataManager {
  */
 
     func getUserProfiles(completionHandler: @escaping ([PDMProfile]?, Error?) -> Void) {
-        userClient.getJSON(from: profilesURL) { (json, response, error) in
+        restClient.getJSON(from: profilesURL) { (json, response, error) in
             guard error == nil else {
                 // This indicates some internal error that means there is no response
                 completionHandler(nil, error)
@@ -433,7 +380,7 @@ class PatientDataManager {
     }
 
     @discardableResult func uploadHealthRecords(_ records: [HKClinicalRecord], completionCallback: @escaping (Error?) -> Void) -> URLSessionDataTask? {
-        guard fhirClient.hasBearerToken else {
+        guard restClient.hasBearerToken else {
             completionCallback(PatientDataManagerError.notLoggedIn)
             return nil
         }
@@ -447,7 +394,7 @@ class PatientDataManager {
         bundle.addPatientId(String(pID))
         do {
             try bundle.addRecordsAsEntry(records)
-            return fhirClient.post(to: url, withJSON: bundle.createJSON()) { data, response, error in
+            return restClient.post(to: url, withJSON: bundle.createJSON()) { data, response, error in
                 completionCallback(error)
             }
         } catch {
@@ -485,7 +432,7 @@ class PatientDataManager {
      - Returns: a URLSessionTask describing the load progress
      */
     @discardableResult func loadHealthRecords(completionCallback: @escaping (_ bundle: FHIRBundle?, _ error: Error?) -> Void) -> URLSessionTask? {
-        guard userClient.hasBearerToken else {
+        guard restClient.hasBearerToken else {
             completionCallback(nil, PatientDataManagerError.notLoggedIn)
             return nil
         }
@@ -493,7 +440,7 @@ class PatientDataManager {
             completionCallback(nil, PatientDataManagerError.noActiveProfile)
             return nil
         }
-        return userClient.getJSONObject(from: rootURL.appendingPathComponent("api/v1/Patient/\(profile.profileId)/$everything")) { data, response, error in
+        return restClient.getJSONObject(from: rootURL.appendingPathComponent("api/v1/Patient/\(profile.profileId)/$everything")) { data, response, error in
             if let error = error {
                 completionCallback(nil, error)
             } else {
@@ -521,11 +468,11 @@ class PatientDataManager {
      - Returns: a URLSessionTask describing the load progress
      */
     @discardableResult func loadAllProviders(completionCallback: @escaping (_ providers: [PDMProvider]?, _ error: Error?) -> Void) -> URLSessionTask? {
-        guard userClient.hasBearerToken else {
+        guard restClient.hasBearerToken else {
             completionCallback(nil, PatientDataManagerError.notLoggedIn)
             return nil
         }
-        return userClient.getJSON(from: apiURL.appendingPathComponent("providers")) { data, response, error in
+        return restClient.getJSON(from: apiURL.appendingPathComponent("providers")) { data, response, error in
             if let error = error {
                 completionCallback(nil, error)
                 return
@@ -551,11 +498,11 @@ class PatientDataManager {
      - Returns: a URLSessionTask describing the load progress
      */
     @discardableResult func loadProvidersConnectedTo(_ profile: PDMProfile, completionCallback: @escaping (_ providerLinks: [PDMProviderProfileLink]?, _ error: Error?) -> Void) -> URLSessionTask? {
-        guard userClient.hasBearerToken else {
+        guard restClient.hasBearerToken else {
             completionCallback(nil, PatientDataManagerError.notLoggedIn)
             return nil
         }
-        return userClient.getJSON(from: apiURL.appendingPathComponent("profiles/\(profile.profileId)/providers")) { data, response, error in
+        return restClient.getJSON(from: apiURL.appendingPathComponent("profiles/\(profile.profileId)/providers")) { data, response, error in
             if let error = error {
                 completionCallback(nil, error)
                 return
@@ -578,7 +525,7 @@ class PatientDataManager {
             return nil
         }
         // Just need the API root
-        return userClient.postJSONExpectingObject([
+        return restClient.postJSONExpectingObject([
             "provider_id": provider.id,
             "redirect_uri": redirectURI
         ], to: apiURL.appendingPathComponent("profiles/\(profile.profileId)/providers")) { data, response, error in
@@ -599,7 +546,7 @@ class PatientDataManager {
             completionHandler(PatientDataManagerError.noActiveProfile)
             return nil
         }
-        return userClient.getJSONObject(from: rootURL.appendingPathComponent("oauth/callback"), withQueryItems: [
+        return restClient.getJSONObject(from: rootURL.appendingPathComponent("oauth/callback"), withQueryItems: [
             URLQueryItem(name: "state", value: "\(provider.id):\(profile.profileId)"),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "redirect_uri", value: redirectURI)
