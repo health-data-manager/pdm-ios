@@ -4,10 +4,6 @@
 <dict>
 	<key>RootURL</key>
 	<string>http://localhost:3000/</string>
-	<key>ClientID</key>
-	<string>CLIENT ID HERE</string>
-	<key>ClientSecret</key>
-	<string>CLIENT SECRET HERE</string>
 	<key>AutoLogin</key>
 	<false/>
 	<key>DisableHealthKit</key>
