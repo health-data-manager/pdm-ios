@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Patient Data Use Agreement v17</title>
+  <style type="text/css">
+html {
+    font-family: Calibri, sans-serif;
+    font-size: 12pt;
+    line-height: 120%;
+}
+h1 {
+    text-align: center;
+    font-size: 17pt;
+    line-height: 20pt;
+}
+h2 {
+    font-size: 12pt;
+    font-weight: bold;
+}
+.italic { font-style: italic; }
+ol.lettered {
+    list-style: upper-alpha;
+}
+ol.lettered ol.lettered {
+    list-style: lower-alpha;
+}
+ol.lettered li {
+    margin: 14pt 0;
+}
+a.footnote-ref, .footnote-marker {
+    vertical-align: super;
+    font-size: 50%;
+}
+a.footnote-ref:before, .footnote-marker:before {
+    content: "[";
+}
+a.footnote-ref:after, .footnote-marker:after {
+    content: "]";
+}
+footer {
+    margin: 32pt 0 0 12pt;
+    padding: 12pt;
+    border-top: solid 1px #CCC;
+}
+.highlighted {
+    background-color: #EFDF00;
+}
+  </style>
+<script type="application/javascript">
+function highlightSection(section) {
+    // First, de-highlight anything that's been highlighted
+    for (let node of document.querySelectorAll(".highlighted")) {
+        node.classList.remove("highlighted");
+    }
+    if (arguments.length == 0) {
+        // Calling with no arguments is fine, that just dehighlights anything and scrolls to the top
+        window.scrollTo(0, 0)
+    } else {
+        let firstSection = document.getElementById(section);
+        if (firstSection) {
+            firstSection.scrollIntoView();
+        }
+        for (let arg of arguments) {
+            let node = document.getElementById(arg);
+            if (node) {
+                node.classList.add("highlighted");
+            }
+        }
+    }
+}
+</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="title">Patient Data Use Agreement</h1>
+
+<p>PLACEHOLDER</p>
+
+<p>This is a placeholder for the actual PDUA.</p>
+</body>
+</html>

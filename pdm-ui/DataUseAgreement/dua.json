@@ -1,0 +1,10 @@
+{
+    "nextLabel": "Next \u2192",
+    "url": "dua.html",
+    "pages": [
+        {
+            "image": "placeholder.png",
+            "accessibilityLabel": "Placeholder."
+        }
+    ]
+}

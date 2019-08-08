@@ -162,6 +162,8 @@ class PatientDataManager {
     /// A bundle of loaded records from the server. This will probably be changed at some future point.
     var serverRecords: FHIRBundle?
 
+    let formatter: ISO8601DateFormatter
+
     // Generated URLs.
 
     /// The OAuth token URL (relative to the root URL)
@@ -190,6 +192,8 @@ class PatientDataManager {
      */
     init(rootURL: URL, ignoreHealthKit: Bool=false) {
         self.rootURL = rootURL
+        self.formatter = ISO8601DateFormatter()
+        formatter.formatOptions.insert(.withFractionalSeconds)
         self.healthKit = ignoreHealthKit ? nil : PDMHealthKit()
     }
 
@@ -277,14 +281,25 @@ class PatientDataManager {
     ///   - user: the created user, if the account was successfully created
     ///   - error: the error that prevented the account from being created
     /// - Returns: a task indicating progress if the request was sent (or nil if an error prevented it from being sent, the details of which will be sent to the callback)
-    @discardableResult func createNewUserAccount(firstName: String, lastName: String, email: String, password: String, passwordConfirmation: String?, completionHandler: @escaping (_ user: PDMUser?, _ error: Error?) -> Void) -> URLSessionTask? {
+    @discardableResult func createNewUserAccount(legalName: String, email: String, password: String, acceptedDUA: Bool, completionHandler: @escaping (_ user: PDMUser?, _ error: Error?) -> Void) -> URLSessionTask? {
+        let firstName: String, lastName: String
+        if let spaceIndex = legalName.firstIndex(of: " ") {
+            firstName = String(legalName[legalName.startIndex..<spaceIndex])
+            lastName = String(legalName[legalName.index(after: spaceIndex)...])
+        } else {
+            firstName = ""
+            lastName = legalName
+        }
         return restClient.postJSONExpectingObject([
             "user": [
                 "email": email,
                 "first_name": firstName,
                 "last_name": lastName,
                 "password": password,
-                "password_confirmation": passwordConfirmation ?? password
+                "password_confirmation": password,
+                "dua_accepted_at": formatDate(Date(timeIntervalSinceNow: 0)),
+                "dua_agreed_to": acceptedDUA,
+                "dua_legal_name": legalName
             ]
         ], to: usersURL) { json, response, error in
             guard let json = json, let response = response else {
@@ -574,5 +589,13 @@ class PatientDataManager {
             }
         }
         return result
+    }
+
+    func parseDate(_ string: String) -> Date? {
+        return formatter.date(from: string)
+    }
+
+    func formatDate(_ date: Date) -> String {
+        return formatter.string(from: date)
     }
 }

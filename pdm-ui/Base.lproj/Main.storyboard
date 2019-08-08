@@ -20,19 +20,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient Data Manager" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDd-X6-beO">
-                                <rect key="frame" x="37" y="357" width="301" height="36"/>
+                                <rect key="frame" x="37" y="373" width="301" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" name="SelectedNav"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect your health data for sharing with anyone you want." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chf-KJ-HHe">
-                                <rect key="frame" x="32" y="441" width="311" height="41"/>
+                                <rect key="frame" x="32" y="457" width="311" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-Pp-QvB" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                <rect key="frame" x="8" y="621" width="359" height="38"/>
+                                <rect key="frame" x="8" y="629" width="359" height="30"/>
                                 <state key="normal" title="Sign In"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -42,19 +42,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An open source project by MITRE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZx-sf-pUU">
-                                <rect key="frame" x="60" y="514" width="255" height="21"/>
+                                <rect key="frame" x="60" y="530" width="255" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtT-uw-y5F" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                <rect key="frame" x="8" y="567" width="359" height="38"/>
-                                <state key="normal" title="Create Account"/>
+                                <rect key="frame" x="8" y="583" width="359" height="30"/>
+                                <state key="normal" title="Let’s Get Started"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="ZdN-2E-koJ" kind="show" id="W7N-IY-EK3"/>
+                                    <segue destination="02j-iN-gM8" kind="show" identifier="GetStarted" id="ygS-CW-fS9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -79,6 +79,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="XS2-dI-QH6"/>
                     <connections>
+                        <outlet property="getStartedButton" destination="mtT-uw-y5F" id="D1o-pg-dQc"/>
+                        <outlet property="signInButton" destination="LwG-Pp-QvB" id="UAP-ZN-Br6"/>
                         <segue destination="3dG-5s-UAs" kind="show" identifier="LoggedIn" id="lhz-BI-xji"/>
                     </connections>
                 </viewController>
@@ -95,7 +97,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-9Y-rYY">
-                                <rect key="frame" x="16" y="148" width="343" height="179"/>
+                                <rect key="frame" x="16" y="148" width="343" height="171"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okf-Ss-tCp">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -134,7 +136,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9N-hh-f85" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="141" width="343" height="38"/>
+                                        <rect key="frame" x="0.0" y="141" width="343" height="30"/>
                                         <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
                                         <state key="normal" title="Sign In"/>
                                         <userDefinedRuntimeAttributes>
@@ -178,7 +180,7 @@
         <!--InitializePDM View Controller-->
         <scene sceneID="1CS-wp-M2B">
             <objects>
-                <viewController id="3dG-5s-UAs" customClass="InitializePDMViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitializePDM" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3dG-5s-UAs" customClass="InitializePDMViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bG9-bJ-06g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -323,6 +325,14 @@
             </objects>
             <point key="canvasLocation" x="-391" y="753"/>
         </scene>
+        <!--DataUseAgreement-->
+        <scene sceneID="wqd-hn-5Qr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DataUseAgreement" id="02j-iN-gM8" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Aj-Ih-5n2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-509" y="408"/>
+        </scene>
         <!--Login Navigation-->
         <scene sceneID="VJf-ZJ-Ipn">
             <objects>
@@ -341,168 +351,6 @@
             </objects>
             <point key="canvasLocation" x="-793" y="18"/>
         </scene>
-        <!--Create Account View Controller-->
-        <scene sceneID="20w-8a-5Dc">
-            <objects>
-                <viewController id="ZdN-2E-koJ" customClass="CreateAccountViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aVq-gd-Bys">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xek-l9-Qxc">
-                                <rect key="frame" x="0.0" y="128" width="375" height="539"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H7B-ms-tn3">
-                                        <rect key="frame" x="10" y="0.0" width="354" height="417.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izf-cj-xCp">
-                                                <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbo-yy-txM">
-                                                <rect key="frame" x="0.0" y="30.5" width="354" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" label="Email"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="given-name"/>
-                                                <connections>
-                                                    <action selector="editingChanged:" destination="ZdN-2E-koJ" eventType="editingChanged" id="kXO-Zo-h50"/>
-                                                    <action selector="nextButtonTriggered:" destination="ZdN-2E-koJ" eventType="primaryActionTriggered" id="Yat-Bt-KPe"/>
-                                                </connections>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkz-bi-wV3">
-                                                <rect key="frame" x="0.0" y="70.5" width="354" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bdw-1g-BbB">
-                                                <rect key="frame" x="0.0" y="101" width="354" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" label="Email"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="family-name"/>
-                                                <connections>
-                                                    <action selector="editingChanged:" destination="ZdN-2E-koJ" eventType="editingChanged" id="e6Y-hL-aWH"/>
-                                                    <action selector="nextButtonTriggered:" destination="ZdN-2E-koJ" eventType="primaryActionTriggered" id="7Ng-0O-ZWL"/>
-                                                </connections>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPe-5U-MJ7">
-                                                <rect key="frame" x="0.0" y="141" width="354" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fIK-Nr-zeA">
-                                                <rect key="frame" x="0.0" y="171.5" width="354" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" label="Email"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="username"/>
-                                                <connections>
-                                                    <action selector="editingChanged:" destination="ZdN-2E-koJ" eventType="editingChanged" id="Y1y-6A-3ib"/>
-                                                    <action selector="nextButtonTriggered:" destination="ZdN-2E-koJ" eventType="primaryActionTriggered" id="Acl-n9-Ero"/>
-                                                </connections>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N20-WS-H0h">
-                                                <rect key="frame" x="0.0" y="211.5" width="354" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BOe-QD-foS">
-                                                <rect key="frame" x="0.0" y="242" width="354" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" hint="Your PDM account password" label="Password"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES" textContentType="new-password"/>
-                                                <connections>
-                                                    <action selector="editingChanged:" destination="ZdN-2E-koJ" eventType="editingChanged" id="Wuu-Xu-gK3"/>
-                                                    <action selector="nextButtonTriggered:" destination="ZdN-2E-koJ" eventType="primaryActionTriggered" id="AkL-aw-Gkj"/>
-                                                </connections>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBq-Q7-RcK">
-                                                <rect key="frame" x="0.0" y="282" width="354" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KwR-VZ-c9J">
-                                                <rect key="frame" x="0.0" y="312.5" width="354" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" hint="Your PDM account password" label="Password"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="new-password"/>
-                                                <connections>
-                                                    <action selector="editingChanged:" destination="ZdN-2E-koJ" eventType="editingChanged" id="DIu-Ph-f10"/>
-                                                    <action selector="nextButtonTriggered:" destination="ZdN-2E-koJ" eventType="primaryActionTriggered" id="fYL-lU-lQC"/>
-                                                </connections>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T07-eX-wHd">
-                                                <rect key="frame" x="0.0" y="352.5" width="354" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-qU-IHV" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="379.5" width="354" height="38"/>
-                                                <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
-                                                <state key="normal" title="Create Account"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="createAccountTriggered:" destination="ZdN-2E-koJ" eventType="primaryActionTriggered" id="bJC-E1-g2j"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="H7B-ms-tn3" secondAttribute="bottom" id="B0U-EC-v7Y"/>
-                                    <constraint firstItem="H7B-ms-tn3" firstAttribute="width" secondItem="Xek-l9-Qxc" secondAttribute="width" constant="-21" id="V7K-g1-Q1X"/>
-                                    <constraint firstItem="H7B-ms-tn3" firstAttribute="top" secondItem="Xek-l9-Qxc" secondAttribute="top" id="gsg-Ew-3yC"/>
-                                    <constraint firstAttribute="trailing" secondItem="H7B-ms-tn3" secondAttribute="trailing" constant="10" id="pMC-Fi-vFG"/>
-                                    <constraint firstItem="H7B-ms-tn3" firstAttribute="leading" secondItem="Xek-l9-Qxc" secondAttribute="leading" constant="10" id="pfE-lG-vHW"/>
-                                </constraints>
-                            </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mX-yM-C93">
-                                <rect key="frame" x="16" y="80" width="200.5" height="36"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="Cuf-o1-0QJ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6mX-yM-C93" secondAttribute="trailing" constant="16" id="7TF-E6-gfd"/>
-                            <constraint firstItem="6mX-yM-C93" firstAttribute="leading" secondItem="Cuf-o1-0QJ" secondAttribute="leading" constant="16" id="B9B-wh-cfP"/>
-                            <constraint firstItem="6mX-yM-C93" firstAttribute="top" secondItem="Cuf-o1-0QJ" secondAttribute="top" constant="16" id="I07-5W-NM5"/>
-                            <constraint firstItem="Xek-l9-Qxc" firstAttribute="top" secondItem="6mX-yM-C93" secondAttribute="bottom" constant="12" id="NED-cE-jlj"/>
-                            <constraint firstItem="Cuf-o1-0QJ" firstAttribute="bottom" secondItem="Xek-l9-Qxc" secondAttribute="bottom" id="bSj-4U-0DM"/>
-                            <constraint firstAttribute="trailing" secondItem="Xek-l9-Qxc" secondAttribute="trailing" id="jld-60-Eky"/>
-                            <constraint firstItem="Xek-l9-Qxc" firstAttribute="leading" secondItem="aVq-gd-Bys" secondAttribute="leading" id="l06-Jz-iCt"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Cuf-o1-0QJ"/>
-                    </view>
-                    <connections>
-                        <outlet property="createAccountButton" destination="QJ0-qU-IHV" id="nxj-mF-9OK"/>
-                        <outlet property="emailField" destination="fIK-Nr-zeA" id="SmT-QZ-lzb"/>
-                        <outlet property="firstNameField" destination="gbo-yy-txM" id="iff-xV-pQ9"/>
-                        <outlet property="lastNameField" destination="bdw-1g-BbB" id="XOY-dX-Svv"/>
-                        <outlet property="passwordConfirmationField" destination="KwR-VZ-c9J" id="nJA-gA-jkx"/>
-                        <outlet property="passwordField" destination="BOe-QD-foS" id="hRw-of-F48"/>
-                        <outlet property="passwordStatusLabel" destination="T07-eX-wHd" id="piY-V1-Etw"/>
-                        <outlet property="scrollView" destination="Xek-l9-Qxc" id="UNK-TJ-PXU"/>
-                        <segue destination="3dG-5s-UAs" kind="show" identifier="AccountCreated" id="XFW-u4-nzc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rxr-UA-Tvg" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="993" y="-750"/>
-        </scene>
     </scenes>
     <resources>
         <image name="SharingTabIcon" width="23" height="23"/>
@@ -514,6 +362,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XFW-u4-nzc"/>
+        <segue reference="lhz-BI-xji"/>
     </inferredMetricsTieBreakers>
 </document>
