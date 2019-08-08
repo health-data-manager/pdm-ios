@@ -32,6 +32,7 @@
 		2E53B95822A17D6E00202ACD /* CarePlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53B95722A17D6E00202ACD /* CarePlan.swift */; };
 		2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5A87BA2244C06000E225D5 /* MessageBundle.swift */; };
 		2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E5A87BC2245188B00E225D5 /* Settings.plist */; };
+		2E6D837B22FC87FD005152DE /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E6D837A22FC87FD005152DE /* placeholder.png */; };
 		2E6DC42F22A04D6C000D8DE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DC42722A04D6C000D8DE4 /* Main.storyboard */; };
 		2E6DC43022A04D6C000D8DE4 /* HealthRecord.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DC42922A04D6C000D8DE4 /* HealthRecord.storyboard */; };
 		2E6DC43122A04D6C000D8DE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DC42B22A04D6C000D8DE4 /* LaunchScreen.storyboard */; };
@@ -44,6 +45,9 @@
 		2E8468B7228BCF8400C8ECB6 /* patient.html in Resources */ = {isa = PBXBuildFile; fileRef = 2E8468B6228BCF8400C8ECB6 /* patient.html */; };
 		2E8468B9228BCF9E00C8ECB6 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8468B8228BCF9E00C8ECB6 /* WebKit.framework */; };
 		2E8468BB228DB04000C8ECB6 /* FHIRBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8468BA228DB04000C8ECB6 /* FHIRBundle.swift */; };
+		2EA936FE226E3E1500513F9D /* DigitalSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA936FB226E3E1500513F9D /* DigitalSignatureViewController.swift */; };
+		2EA936FF226E3E1500513F9D /* DataUseAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA936FC226E3E1500513F9D /* DataUseAgreementViewController.swift */; };
+		2EA93700226E3E1500513F9D /* ComicPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA936FD226E3E1500513F9D /* ComicPageViewController.swift */; };
 		2EA93702226E406400513F9D /* HTTPExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA93701226E406400513F9D /* HTTPExtensions.swift */; };
 		2EA93704226F60E100513F9D /* HTTPExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA93703226F60E100513F9D /* HTTPExtensionsTests.swift */; };
 		2EA937062277580700513F9D /* PDMUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA937052277580700513F9D /* PDMUser.swift */; };
@@ -52,6 +56,8 @@
 		2EA9370C2277949000513F9D /* PDMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA9370B2277949000513F9D /* PDMViewController.swift */; };
 		2EA9370E2278914000513F9D /* PDMHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA9370D2278914000513F9D /* PDMHealthKit.swift */; };
 		2EA937102278AC6700513F9D /* PatientDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */; };
+		2EAA84452284776700BFCFA7 /* dua.html in Resources */ = {isa = PBXBuildFile; fileRef = 2EAA84442284776700BFCFA7 /* dua.html */; };
+		2EB5331A22B2C90D00D1DFBA /* DataUseAgreement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB5331822B2C90D00D1DFBA /* DataUseAgreement.storyboard */; };
 		2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF772C229321CC00170091 /* PDMProvider.swift */; };
 		2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF7730229496CB00170091 /* PDMTimeLine.swift */; };
 		2EC27F2922B1423500E0DFD2 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC27F2722B1423500E0DFD2 /* Account.storyboard */; };
@@ -61,6 +67,9 @@
 		2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98951227CAC8D0034B4B6 /* RESTClient.swift */; };
 		2ED98954227CEAF70034B4B6 /* PDMProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */; };
 		2ED989562280ACB20034B4B6 /* RESTClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED989552280ACB20034B4B6 /* RESTClientTests.swift */; };
+		2EF6F62922663090009F04DB /* DataUseAgreement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF6F62822663090009F04DB /* DataUseAgreement.swift */; };
+		2EF6F62D22664146009F04DB /* dua.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EF6F62C22664146009F04DB /* dua.json */; };
+		2EF6F6432266839D009F04DB /* LegalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF6F6422266839D009F04DB /* LegalDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +122,7 @@
 		2E53B95722A17D6E00202ACD /* CarePlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarePlan.swift; sourceTree = "<group>"; };
 		2E5A87BA2244C06000E225D5 /* MessageBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBundle.swift; sourceTree = "<group>"; };
 		2E5A87BC2245188B00E225D5 /* Settings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		2E6D837A22FC87FD005152DE /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		2E6DC42822A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		2E6DC42A22A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/HealthRecord.storyboard"; sourceTree = SOURCE_ROOT; };
 		2E6DC42C22A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -125,6 +135,9 @@
 		2E8468B6228BCF8400C8ECB6 /* patient.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = patient.html; sourceTree = "<group>"; };
 		2E8468B8228BCF9E00C8ECB6 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2E8468BA228DB04000C8ECB6 /* FHIRBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FHIRBundle.swift; sourceTree = "<group>"; };
+		2EA936FB226E3E1500513F9D /* DigitalSignatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalSignatureViewController.swift; sourceTree = "<group>"; };
+		2EA936FC226E3E1500513F9D /* DataUseAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUseAgreementViewController.swift; sourceTree = "<group>"; };
+		2EA936FD226E3E1500513F9D /* ComicPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicPageViewController.swift; sourceTree = "<group>"; };
 		2EA93701226E406400513F9D /* HTTPExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPExtensions.swift; sourceTree = "<group>"; };
 		2EA93703226F60E100513F9D /* HTTPExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPExtensionsTests.swift; sourceTree = "<group>"; };
 		2EA937052277580700513F9D /* PDMUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMUser.swift; sourceTree = "<group>"; };
@@ -133,6 +146,8 @@
 		2EA9370B2277949000513F9D /* PDMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMViewController.swift; sourceTree = "<group>"; };
 		2EA9370D2278914000513F9D /* PDMHealthKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMHealthKit.swift; sourceTree = "<group>"; };
 		2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientDataManagerTests.swift; path = "pdm-uiTests/PatientDataManagerTests.swift"; sourceTree = SOURCE_ROOT; };
+		2EAA84442284776700BFCFA7 /* dua.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dua.html; sourceTree = "<group>"; };
+		2EB5331922B2C90D00D1DFBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/DataUseAgreement.storyboard"; sourceTree = SOURCE_ROOT; };
 		2EBF772C229321CC00170091 /* PDMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProvider.swift; sourceTree = "<group>"; };
 		2EBF7730229496CB00170091 /* PDMTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMTimeLine.swift; sourceTree = "<group>"; };
 		2EC27F2822B1423500E0DFD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/Account.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -142,6 +157,9 @@
 		2ED98951227CAC8D0034B4B6 /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
 		2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProfileTests.swift; sourceTree = "<group>"; };
 		2ED989552280ACB20034B4B6 /* RESTClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClientTests.swift; sourceTree = "<group>"; };
+		2EF6F62822663090009F04DB /* DataUseAgreement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUseAgreement.swift; sourceTree = "<group>"; };
+		2EF6F62C22664146009F04DB /* dua.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dua.json; sourceTree = "<group>"; };
+		2EF6F6422266839D009F04DB /* LegalDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				2E395EC92267882500A9A7D6 /* Backend */,
+				2EF6F62122662F16009F04DB /* DataUseAgreement */,
 				2E2342C82242931600045E3A /* pdm-ui.entitlements */,
 				2E234295224291C300045E3A /* AppDelegate.swift */,
 				2E23429F224291C500045E3A /* Assets.xcassets */,
@@ -283,6 +302,7 @@
 				2E6DC42722A04D6C000D8DE4 /* Main.storyboard */,
 				2E6DC42D22A04D6C000D8DE4 /* Sources.storyboard */,
 				2EC27F2722B1423500E0DFD2 /* Account.storyboard */,
+				2EB5331822B2C90D00D1DFBA /* DataUseAgreement.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -324,6 +344,21 @@
 				2E7FADFD229EFF6000A766C6 /* PDMProfileSourceDataController.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2EF6F62122662F16009F04DB /* DataUseAgreement */ = {
+			isa = PBXGroup;
+			children = (
+				2EA936FD226E3E1500513F9D /* ComicPageViewController.swift */,
+				2EA936FC226E3E1500513F9D /* DataUseAgreementViewController.swift */,
+				2EA936FB226E3E1500513F9D /* DigitalSignatureViewController.swift */,
+				2EF6F6422266839D009F04DB /* LegalDetailsViewController.swift */,
+				2EF6F62822663090009F04DB /* DataUseAgreement.swift */,
+				2EAA84442284776700BFCFA7 /* dua.html */,
+				2EF6F62C22664146009F04DB /* dua.json */,
+				2E6D837A22FC87FD005152DE /* placeholder.png */,
+			);
+			path = DataUseAgreement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,13 +474,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */,
+				2E6D837B22FC87FD005152DE /* placeholder.png in Resources */,
 				2E2342A0224291C500045E3A /* Assets.xcassets in Resources */,
 				2E6DC43222A04D6C000D8DE4 /* Sources.storyboard in Resources */,
 				2E8468B7228BCF8400C8ECB6 /* patient.html in Resources */,
 				2E6DC43122A04D6C000D8DE4 /* LaunchScreen.storyboard in Resources */,
 				2E6DC43022A04D6C000D8DE4 /* HealthRecord.storyboard in Resources */,
 				2EC27F2922B1423500E0DFD2 /* Account.storyboard in Resources */,
+				2EB5331A22B2C90D00D1DFBA /* DataUseAgreement.storyboard in Resources */,
 				2E6DC42F22A04D6C000D8DE4 /* Main.storyboard in Resources */,
+				2EAA84452284776700BFCFA7 /* dua.html in Resources */,
+				2EF6F62D22664146009F04DB /* dua.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,8 +512,10 @@
 				2E7FADFA229DA3D600A766C6 /* TableViewExtensions.swift in Sources */,
 				2EA937082277775C00513F9D /* CreateAccountViewController.swift in Sources */,
 				2E17CFFD227A207A00AF2FBC /* PDMProfile.swift in Sources */,
+				2EA936FE226E3E1500513F9D /* DigitalSignatureViewController.swift in Sources */,
 				2E777DF12296FE760005250C /* ConnectedSourcesTableViewController.swift in Sources */,
 				2E395EC8226783B600A9A7D6 /* PDMButton.swift in Sources */,
+				2EA93700226E3E1500513F9D /* ComicPageViewController.swift in Sources */,
 				2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */,
 				2E17D000227B6DE900AF2FBC /* HomeViewController.swift in Sources */,
 				2EA93702226E406400513F9D /* HTTPExtensions.swift in Sources */,
@@ -492,6 +533,8 @@
 				2E8468BB228DB04000C8ECB6 /* FHIRBundle.swift in Sources */,
 				2E2342C7224292DC00045E3A /* PatientDataManager.swift in Sources */,
 				2E234298224291C300045E3A /* LoginViewController.swift in Sources */,
+				2EF6F6432266839D009F04DB /* LegalDetailsViewController.swift in Sources */,
+				2EF6F62922663090009F04DB /* DataUseAgreement.swift in Sources */,
 				2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */,
 				2ED1969E2295DCCA001821A8 /* PatientDataManagerKeychain.swift in Sources */,
 				2EA9370E2278914000513F9D /* PDMHealthKit.swift in Sources */,
@@ -500,6 +543,7 @@
 				2E53B95622A178B700202ACD /* PatientHealthTile.swift in Sources */,
 				2E53B95822A17D6E00202ACD /* CarePlan.swift in Sources */,
 				2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */,
+				2EA936FF226E3E1500513F9D /* DataUseAgreementViewController.swift in Sources */,
 				2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */,
 				2EA9370A22778BA700513F9D /* TextFieldExtensions.swift in Sources */,
 				2E3C334722988F960013A712 /* AddSourceOAuthViewController.swift in Sources */,
@@ -577,6 +621,14 @@
 				2E6DC42E22A04D6C000D8DE4 /* Base */,
 			);
 			name = Sources.storyboard;
+			sourceTree = "<group>";
+		};
+		2EB5331822B2C90D00D1DFBA /* DataUseAgreement.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EB5331922B2C90D00D1DFBA /* Base */,
+			);
+			name = DataUseAgreement.storyboard;
 			sourceTree = "<group>";
 		};
 		2EC27F2722B1423500E0DFD2 /* Account.storyboard */ = {

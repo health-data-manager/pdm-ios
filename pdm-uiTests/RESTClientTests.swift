@@ -28,4 +28,9 @@ class RESTClientTests: XCTestCase {
         XCTAssertNil(client.bearerToken)
     }
 
+    func testAddingJavaScriptEscapes() {
+        XCTAssertEqual("a string".addingJavaScriptEscapes(), "a string")
+        XCTAssertEqual("\"a string\"".addingJavaScriptEscapes(), "\\\"a string\\\"")
+        XCTAssertEqual("\"\'\\\r\n".addingJavaScriptEscapes(), "\\\"\\\'\\\\r\\n")
+    }
 }

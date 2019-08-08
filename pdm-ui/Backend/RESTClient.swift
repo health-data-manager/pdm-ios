@@ -371,3 +371,51 @@ class RESTClient {
         }
     }
 }
+
+extension String {
+    public var isJavaScriptStringSafe: Bool {
+        let hasUnsafeChar = utf16.contains(where: { ch in
+            switch ch {
+            case 0x0A, 0x0C, 0x22, 0x27, 0x57, 0x2028, 0x2029:
+                return true
+            default:
+                return false
+            }
+        })
+        return !hasUnsafeChar
+    }
+
+    func addingJavaScriptEscapes() -> String {
+        var result = [Character]()
+        for ch in self {
+            if ch == "\r\n" {
+                // This is a weird special case that's rather Swift-specific: \r\n is treated as a single character, which actually makes sense, but probably shouldn't be done with this method
+                result.append(contentsOf: "\\r\\n")
+            } else if let ascii = ch.asciiValue {
+                switch ascii {
+                case 0..<0x20:
+                    result.append("\\")
+                    if ascii == 0x0A {
+                        result.append("n")
+                    } else if ascii == 0x0C {
+                        result.append("r")
+                    } else {
+                        result.append(contentsOf: String(format: "x%02x", ascii))
+                    }
+                case 0x22, 0x27, 0x57:
+                    result.append("\\")
+                    fallthrough
+                default:
+                    result.append(ch)
+                }
+            } else if ch == "\u{2028}" {
+                result.append(contentsOf: "\\u2028")
+            } else if ch == "\u{2029}" {
+                result.append(contentsOf: "\\u2029")
+            } else {
+                result.append(ch)
+            }
+        }
+        return String(result)
+    }
+}
