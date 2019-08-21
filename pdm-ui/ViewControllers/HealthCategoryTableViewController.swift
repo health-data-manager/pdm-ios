@@ -35,24 +35,34 @@ class HealthCategoryTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        // Always just 1 section
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        if section != 0 {
+            return 0
+        }
+        return records?.count ?? 0
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BasicItem", for: indexPath)
 
-        // Configure the cell...
+        guard let records = records else {
+            // This is a degenerate case, cells should never be displayed if records is nil
+            return cell
+        }
+
+        guard indexPath.row >= 0, indexPath.row < records.count else {
+            cell.textLabel?.text = "Unknown"
+            return cell
+        }
+
+        cell.textLabel?.text = records[indexPath.row].describe()
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -89,14 +99,19 @@ class HealthCategoryTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "Details" {
+            guard let recordViewController = segue.destination as? HealthRecordViewController,
+                let indexPath = tableView.indexPathForSelectedRow,
+                let records = records,
+                indexPath.row >= 0, indexPath.row < records.count else {
+                return
+            }
+            recordViewController.record = records[indexPath.row]
+        }
     }
-    */
 
 }

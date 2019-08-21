@@ -120,8 +120,20 @@ class PatientHealthRecordDataController {
         }
     }
 
-    func findRecordsForCategory(_ category: PHRCategory, fromRecords records: FHIRBundle) -> [Any] {
+    func findRecordsForCategory(_ category: PHRCategory) -> [FHIRResource] {
+        // If there are no records, then return an empty list
+        guard let records = records else { return [] }
         switch category {
+        case .allergies:
+            return records.search(["resourceType" : "AllergyIntolerance"])
+        case .diseases:
+            return records.search(["resourceType" : "Condition"])
+        case .labsVitals:
+            return records.search(["resourceType" : "Observation"])
+        case .immunizations:
+            return records.search(["resourceType" : "Immunization"])
+        case .medications:
+            return records.search(["resourceType" : "MedicationOrder"])
         default:
             // For any unsupported category, return an empty list
             return []

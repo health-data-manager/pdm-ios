@@ -173,6 +173,9 @@ What will treatment cost? Is this treatment plan covered by my insurance plan?</
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Gui-ti-Tt2" kind="show" identifier="Details" id="owK-Qi-RCu"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -184,6 +187,38 @@ What will treatment cost? Is this treatment plan covered by my insurance plan?</
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QVm-34-fsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-19" y="1515"/>
+        </scene>
+        <!--Health Record View Controller-->
+        <scene sceneID="d9L-g7-dqq">
+            <objects>
+                <viewController id="Gui-ti-Tt2" customClass="HealthRecordViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wxw-Wk-Ir7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No data" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DIE-L6-ihw">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dQ1-Yx-HTA" firstAttribute="trailing" secondItem="DIE-L6-ihw" secondAttribute="trailing" id="5jO-jw-JQU"/>
+                            <constraint firstItem="DIE-L6-ihw" firstAttribute="top" secondItem="dQ1-Yx-HTA" secondAttribute="top" id="6uY-dT-swU"/>
+                            <constraint firstItem="DIE-L6-ihw" firstAttribute="leading" secondItem="dQ1-Yx-HTA" secondAttribute="leading" id="HLr-Dr-OJi"/>
+                            <constraint firstItem="dQ1-Yx-HTA" firstAttribute="bottom" secondItem="DIE-L6-ihw" secondAttribute="bottom" id="qiL-qr-D2T"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dQ1-Yx-HTA"/>
+                    </view>
+                    <connections>
+                        <outlet property="jsonTextView" destination="DIE-L6-ihw" id="F6W-nb-mqw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SRu-4y-bhs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="790" y="1515"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="4Tq-X5-JUL">
@@ -345,10 +380,10 @@ with </string>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="UjF-sB-njT">
-                                <rect key="frame" x="16" y="510.5" width="382" height="38"/>
+                                <rect key="frame" x="16" y="510.5" width="382" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZK8-zA-u3l" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="183" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="183" height="30"/>
                                         <state key="normal" title="Comment"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -356,7 +391,7 @@ with </string>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuP-CC-foX" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                        <rect key="frame" x="199" y="0.0" width="183" height="38"/>
+                                        <rect key="frame" x="199" y="0.0" width="183" height="30"/>
                                         <state key="normal" title="Share"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -366,7 +401,7 @@ with </string>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vg-8a-Z7a" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                <rect key="frame" x="16" y="564.5" width="382" height="38"/>
+                                <rect key="frame" x="16" y="556.5" width="382" height="30"/>
                                 <state key="normal" title="Make Correction"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -381,7 +416,7 @@ with </string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMc-v5-AdU" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                <rect key="frame" x="16" y="618.5" width="382" height="56"/>
+                                <rect key="frame" x="16" y="602.5" width="382" height="48"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="How are you feeling?">
@@ -438,7 +473,7 @@ Complete a 60 second survey to help us improve your care.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ARO-pO-kZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1228.985507246377" y="1430.3571428571429"/>
+            <point key="canvasLocation" x="1568" y="1515"/>
         </scene>
     </scenes>
     <resources>

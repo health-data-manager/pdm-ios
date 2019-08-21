@@ -91,6 +91,11 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate,
                 return
             }
             healthCategoryController.category = category
+            if let category = category {
+                healthCategoryController.records = recordDataController.findRecordsForCategory(category)
+            } else {
+                healthCategoryController.records = nil
+            }
         }
     }
 
