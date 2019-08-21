@@ -61,6 +61,7 @@
                         <outlet property="webView" destination="Ip0-9h-MjK" id="wfp-qU-Kgs"/>
                         <segue destination="bt8-Cf-ROn" kind="show" identifier="CarePlan" id="Tic-sg-SBI"/>
                         <segue destination="o9w-xC-8Kv" kind="show" identifier="HealthReceipt" id="6Q4-Yq-Grn"/>
+                        <segue destination="9DZ-Pt-iL1" kind="show" identifier="Category" id="EAR-pw-f7Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQV-mH-oti" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -146,6 +147,43 @@ What will treatment cost? Is this treatment plan covered by my insurance plan?</
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6v-Dm-BWB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1229.5999999999999" y="727.28635682158927"/>
+        </scene>
+        <!--Category Records-->
+        <scene sceneID="kie-Yr-o3m">
+            <objects>
+                <tableViewController title="Category Records" id="9DZ-Pt-iL1" customClass="HealthCategoryTableViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ovc-qL-cg2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BasicItem" textLabel="6Tf-Gp-LDA" style="IBUITableViewCellStyleDefault" id="EPa-6p-iJW">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EPa-6p-iJW" id="ea5-tC-EAb">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Tf-Gp-LDA">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9DZ-Pt-iL1" id="p0f-tz-GGo"/>
+                            <outlet property="delegate" destination="9DZ-Pt-iL1" id="0E0-uw-LaV"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVm-34-fsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-19" y="1515"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="4Tq-X5-JUL">

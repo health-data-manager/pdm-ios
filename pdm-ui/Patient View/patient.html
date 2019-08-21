@@ -85,6 +85,21 @@ section.careplan div.careplan {
     padding: 14px 0 0 0;
     font-size: 3vw;
 }
+
+#categories ul {
+    display: block;
+    margin: 1px 0 0 0;
+    padding: 0;
+}
+#categories ul li {
+    display: block;
+    margin: -1px 0 0 0;
+    padding: 0.5em 1em;
+    border: solid 1px lightgray;
+    border-style: solid none;
+    font-weight: 600;
+    font-size: 17px;
+}
         </style>
 <script type="application/javascript">
 class Box {
@@ -172,6 +187,11 @@ class CarePlan extends Box {
 }
 
 function setup(json) {
+    // Kill the loading indicator (if any)
+    let loading = document.getElementById('loading');
+    if (loading) {
+        loading.parentNode.removeChild(loading);
+    }
     if ('tiles' in json) {
         setHealthTiles(json['tiles']);
     }
@@ -180,6 +200,9 @@ function setup(json) {
     }
     if ('colors' in json) {
         setupColors(json['colors']);
+    }
+    if ('categories' in json) {
+        setupCategories(json['categories']);
     }
 }
 
@@ -216,13 +239,28 @@ function setupColors(colors) {
     style.append(css);
     document.head.append(style);
 }
+
+function setupCategories(categories) {
+    // Generate the categories
+    let section = document.getElementById('categories');
+    let list = document.createElement('ul');
+    section.append(list);
+    for (let category of categories) {
+        let li = document.createElement('li');
+        li.append(category.name);
+        li.onclick = e => location = category.link;
+        list.append(li);
+    }
+}
 </script>
     </head>
     <body>
+        <section id="loading">Loading...</section>
         <section id="careplan" class="careplan"></section>
         <section id="health-tiles" class="health-tiles">
             <h1>Health</h1>
             <div id="health-tile-container" class="health-tile-container"></div>
         </section>
+        <section id="categories"></section>
     </body>
 </html>
