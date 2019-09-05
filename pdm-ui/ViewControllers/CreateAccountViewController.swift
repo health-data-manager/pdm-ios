@@ -101,7 +101,7 @@ class CreateAccountViewController: UIViewController {
     // Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character
     func passwordComplex(psswrd :String) -> Bool {
         var complex = false
-        let regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}$"
+        let regex = "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}"
         if psswrd.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil {
             complex = true
         }
