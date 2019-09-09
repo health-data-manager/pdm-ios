@@ -25,6 +25,8 @@
 		2E3C334722988F960013A712 /* AddSourceOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C334622988F960013A712 /* AddSourceOAuthViewController.swift */; };
 		2E3C3349229892DD0013A712 /* PDMMiniBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */; };
 		2E40233022B7DE4500E525C7 /* PDMBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40232F22B7DE4400E525C7 /* PDMBorderedView.swift */; };
+		2E4A2AB62326C26F0019C6A8 /* PDMUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4A2AB52326C26F0019C6A8 /* PDMUserTests.swift */; };
+		2E4A2AB82326CC6C0019C6A8 /* CreateAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4A2AB72326CC6C0019C6A8 /* CreateAccountTests.swift */; };
 		2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */; };
 		2E5088F6226908BD009FF808 /* PDMCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F5226908BD009FF808 /* PDMCheckbox.swift */; };
 		2E53B95422A176E800202ACD /* PatientHealthRecordDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53B95322A176E800202ACD /* PatientHealthRecordDataController.swift */; };
@@ -108,6 +110,8 @@
 		2E3C334622988F960013A712 /* AddSourceOAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceOAuthViewController.swift; sourceTree = "<group>"; };
 		2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMMiniBrowserViewController.swift; sourceTree = "<group>"; };
 		2E40232F22B7DE4400E525C7 /* PDMBorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMBorderedView.swift; sourceTree = "<group>"; };
+		2E4A2AB52326C26F0019C6A8 /* PDMUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMUserTests.swift; sourceTree = "<group>"; };
+		2E4A2AB72326CC6C0019C6A8 /* CreateAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTests.swift; sourceTree = "<group>"; };
 		2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		2E5088F5226908BD009FF808 /* PDMCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMCheckbox.swift; sourceTree = "<group>"; };
 		2E53B95322A176E800202ACD /* PatientHealthRecordDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthRecordDataController.swift; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 				2E2342AF224291C500045E3A /* Info.plist */,
 				2EA93703226F60E100513F9D /* HTTPExtensionsTests.swift */,
 				2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */,
+				2E4A2AB52326C26F0019C6A8 /* PDMUserTests.swift */,
 				2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */,
 				2ED989552280ACB20034B4B6 /* RESTClientTests.swift */,
 			);
@@ -252,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				2E2342B8224291C500045E3A /* pdm_uiUITests.swift */,
+				2E4A2AB72326CC6C0019C6A8 /* CreateAccountTests.swift */,
 				2E2342BA224291C500045E3A /* Info.plist */,
 			);
 			path = "pdm-uiUITests";
@@ -527,6 +533,7 @@
 				2ED98954227CEAF70034B4B6 /* PDMProfileTests.swift in Sources */,
 				2EA93704226F60E100513F9D /* HTTPExtensionsTests.swift in Sources */,
 				2ED989562280ACB20034B4B6 /* RESTClientTests.swift in Sources */,
+				2E4A2AB62326C26F0019C6A8 /* PDMUserTests.swift in Sources */,
 				2EA937102278AC6700513F9D /* PatientDataManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E2342B9224291C500045E3A /* pdm_uiUITests.swift in Sources */,
+				2E4A2AB82326CC6C0019C6A8 /* CreateAccountTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

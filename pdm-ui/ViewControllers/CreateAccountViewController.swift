@@ -103,8 +103,8 @@ class CreateAccountViewController: UIViewController {
             passwordStatusLabel.textColor = UIColor.black
         } else {
             if let password = passwordField.text, let passwordConfirmation = passwordConfirmationField.text {
-                if password.count < 6 {
-                    passwordStatusLabel.text = "Password is too short"
+                if !PDMUser.checkComplexityOfPassword(password) {
+                    passwordStatusLabel.text = "Complexity requirement not met"
                     passwordStatusLabel.textColor = UIColor.red
                 } else if password == passwordConfirmation {
                     passwordStatusLabel.text = "\u{2714}\u{FE0E} Passwords match"
@@ -129,6 +129,11 @@ class CreateAccountViewController: UIViewController {
         guard let password = passwordField.text, let passwordConfirmation = passwordConfirmationField.text else {
             // In this case, one of the two is blank, probably
             print("A password was nil")
+            return
+        }
+        // adding complexity guard
+        guard PDMUser.checkComplexityOfPassword(password) else {
+            presentAlert("Password must be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character", title: "Complexity requirement")
             return
         }
         guard password == passwordConfirmation else {
