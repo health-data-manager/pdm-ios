@@ -40,7 +40,7 @@ class PatientDataManagerTests: XCTestCase {
             XCTFail("URL generation failed?")
             return
         }
-        let pdm = PatientDataManager(rootURL: localhost, clientId: "id", clientSecret: "secret")
+        let pdm = PatientDataManager(rootURL: localhost)
         XCTAssertEqual("http://localhost/oauth/token", pdm.oauthTokenURL.absoluteString)
         XCTAssertEqual("http://localhost/users", pdm.usersURL.absoluteString)
         XCTAssertEqual("http://localhost/api/v1/profiles", pdm.profilesURL.absoluteString)
