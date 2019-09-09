@@ -82,31 +82,7 @@ class InitializePDMViewController: UIViewController {
                     return
                 }
                 // Now that we have the profile, we can send whatever we have from HealthKit (assuming HealthKit is available)
-                self.doFhirClientLogin()
-            }
-        }
-    }
-
-    func doFhirClientLogin() {
-        guard let pdm = patientDataManager else {
-            pdmNotAvailable()
-            return
-        }
-        guard pdm.healthKit != nil else {
-            // Skip this step
-            loadHealthRecords()
-            return
-        }
-        showSendingHealthKit("Logging in to PDM...")
-        pdm.fhirClientLogin() { error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    // This means we couldn't log in as a FHIR client. This should be handled in some fashion but for now, skip ahead
-                    print("Could not log in as a FHIR client: \(error)")
-                    self.loadHealthRecords()
-                } else {
-                    self.sendHealthKitRecords()
-                }
+                self.sendHealthKitRecords()
             }
         }
     }

@@ -35,10 +35,48 @@ class FHIRResource {
         return getValue(forField: field) as? String
     }
 
+    /// Convert this element to JSON
+    func asJSON() -> [String: Any] {
+        return [ "resourceType" : resourceType ]
+    }
+
+    /// Attempt to locate a string to describe this resource. The description
+    func describe() -> String {
+        var result: String?
+        if resourceType == "Condition" || resourceType == "Observation" {
+            // Get the title
+            result = codingToString("code")
+        } else if resourceType == "MedicationOrder" {
+            result = codingToString("medicationCodeableConcept")
+        } else if resourceType == "Immunization" {
+            result = codingToString("vaccineCode")
+        } else if resourceType == "AllergyIntolerance" {
+            result = codingToString("substance")
+        }
+        return result ?? resourceType
+    }
+
     static func create(fromJSON json: Any) -> FHIRResource? {
         // For now just always create the generic objects.
         // Eventually this might special-case some types.
         return GenericFHIRResource(fromJSON: json)
+    }
+
+    private func codingToString(_ conceptName: String) -> String? {
+        guard let concept = getValue(forField: conceptName) as? [String: Any] else {
+            // If the concept doesn't exist, we can't use it at all
+            return nil
+        }
+        // Concept may contain a text value we should use
+        if let text = concept["text"] as? String {
+            return text
+        }
+        // Otherwise, try the coding field
+        guard let coding = concept["coding"] as? [Any],
+            let firstCoding = coding.first as? [String: Any] else {
+                return nil
+        }
+        return firstCoding["display"] as? String
     }
 }
 
@@ -134,6 +172,10 @@ class GenericFHIRResource: FHIRResource {
 
     override func getValue(forField field: String) -> Any? {
         return lookupValue(forField: field, inDict: resource)
+    }
+
+    override func asJSON() -> [String: Any] {
+        return resource
     }
 }
 

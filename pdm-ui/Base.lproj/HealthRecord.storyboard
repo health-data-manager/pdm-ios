@@ -61,6 +61,7 @@
                         <outlet property="webView" destination="Ip0-9h-MjK" id="wfp-qU-Kgs"/>
                         <segue destination="bt8-Cf-ROn" kind="show" identifier="CarePlan" id="Tic-sg-SBI"/>
                         <segue destination="o9w-xC-8Kv" kind="show" identifier="HealthReceipt" id="6Q4-Yq-Grn"/>
+                        <segue destination="9DZ-Pt-iL1" kind="show" identifier="Category" id="EAR-pw-f7Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQV-mH-oti" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -146,6 +147,78 @@ What will treatment cost? Is this treatment plan covered by my insurance plan?</
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6v-Dm-BWB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1229.5999999999999" y="727.28635682158927"/>
+        </scene>
+        <!--Category Records-->
+        <scene sceneID="kie-Yr-o3m">
+            <objects>
+                <tableViewController title="Category Records" id="9DZ-Pt-iL1" customClass="HealthCategoryTableViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ovc-qL-cg2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BasicItem" textLabel="6Tf-Gp-LDA" style="IBUITableViewCellStyleDefault" id="EPa-6p-iJW">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EPa-6p-iJW" id="ea5-tC-EAb">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Tf-Gp-LDA">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Gui-ti-Tt2" kind="show" identifier="Details" id="owK-Qi-RCu"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9DZ-Pt-iL1" id="p0f-tz-GGo"/>
+                            <outlet property="delegate" destination="9DZ-Pt-iL1" id="0E0-uw-LaV"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVm-34-fsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-19" y="1515"/>
+        </scene>
+        <!--Health Record View Controller-->
+        <scene sceneID="d9L-g7-dqq">
+            <objects>
+                <viewController id="Gui-ti-Tt2" customClass="HealthRecordViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wxw-Wk-Ir7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No data" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DIE-L6-ihw">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dQ1-Yx-HTA" firstAttribute="trailing" secondItem="DIE-L6-ihw" secondAttribute="trailing" id="5jO-jw-JQU"/>
+                            <constraint firstItem="DIE-L6-ihw" firstAttribute="top" secondItem="dQ1-Yx-HTA" secondAttribute="top" id="6uY-dT-swU"/>
+                            <constraint firstItem="DIE-L6-ihw" firstAttribute="leading" secondItem="dQ1-Yx-HTA" secondAttribute="leading" id="HLr-Dr-OJi"/>
+                            <constraint firstItem="dQ1-Yx-HTA" firstAttribute="bottom" secondItem="DIE-L6-ihw" secondAttribute="bottom" id="qiL-qr-D2T"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dQ1-Yx-HTA"/>
+                    </view>
+                    <connections>
+                        <outlet property="jsonTextView" destination="DIE-L6-ihw" id="F6W-nb-mqw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SRu-4y-bhs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="790" y="1515"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="4Tq-X5-JUL">
@@ -307,10 +380,10 @@ with </string>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="UjF-sB-njT">
-                                <rect key="frame" x="16" y="510.5" width="382" height="38"/>
+                                <rect key="frame" x="16" y="510.5" width="382" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZK8-zA-u3l" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="183" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="183" height="30"/>
                                         <state key="normal" title="Comment"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -318,7 +391,7 @@ with </string>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuP-CC-foX" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                        <rect key="frame" x="199" y="0.0" width="183" height="38"/>
+                                        <rect key="frame" x="199" y="0.0" width="183" height="30"/>
                                         <state key="normal" title="Share"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -328,7 +401,7 @@ with </string>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vg-8a-Z7a" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                <rect key="frame" x="16" y="564.5" width="382" height="38"/>
+                                <rect key="frame" x="16" y="556.5" width="382" height="30"/>
                                 <state key="normal" title="Make Correction"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -343,7 +416,7 @@ with </string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMc-v5-AdU" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
-                                <rect key="frame" x="16" y="618.5" width="382" height="56"/>
+                                <rect key="frame" x="16" y="602.5" width="382" height="48"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="How are you feeling?">
@@ -400,7 +473,7 @@ Complete a 60 second survey to help us improve your care.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ARO-pO-kZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1228.985507246377" y="1430.3571428571429"/>
+            <point key="canvasLocation" x="1568" y="1515"/>
         </scene>
     </scenes>
     <resources>

@@ -14,6 +14,7 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate,
     var patientViewNavigation: WKNavigation?
     var patientURL: URL?
     let recordDataController = PatientHealthRecordDataController()
+    var nextInternalURL: URL?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +35,12 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate,
             // There's nothing to show
             return
         }
-        let tiles = recordDataController.calculatePatientData(fromRecords: records)
-        let careplan = recordDataController.calculateCarePlan(fromRecords: records)
+        recordDataController.records = records
+        let tiles = recordDataController.calculatePatientData()
+        let careplan = recordDataController.calculateCarePlan()
         let tilesJSON = tiles.map({ tile in return tile.jsonValue() })
         do {
-            let json = try JSONSerialization.data(withJSONObject: [ "careplan": careplan.jsonValue(), "tiles": tilesJSON, "colors": generateColorJSON() ], options: [])
+            let json = try JSONSerialization.data(withJSONObject: [ "careplan": careplan.jsonValue(), "tiles": tilesJSON, "colors": generateColorJSON(), "categories": generateCategoryJSON() ], options: [])
             guard let jsonString = String(data: json, encoding: .utf8) else {
                 // TODO: Show an error somewhere? This shouldn't be possible
                 return
@@ -63,17 +65,43 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate,
         return result
     }
 
-    /*
+    func generateCategoryJSON() -> [Any] {
+        var result = [Any]()
+        for category in PHRCategory.allCases {
+            let categoryJSON = [ "id": String(describing: category), "name": category.localizedName, "link": "pdm://category/\(category)" ] as [String: Any]
+            result.append(categoryJSON)
+        }
+        return result
+    }
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        defer {
+            // Always reset this when done
+            nextInternalURL = nil
+        }
+        if segue.identifier == "Category" {
+            // Need to pass some additional information to the controller
+            guard let categoryURL = nextInternalURL else { return }
+            // Parse out the category being used
+            let category = PHRCategory.categoryFromURLPath(categoryURL)
+            guard let healthCategoryController = segue.destination as? HealthCategoryTableViewController else {
+                // Nothing to do in this case but quit
+                return
+            }
+            healthCategoryController.category = category
+            if let category = category {
+                healthCategoryController.records = recordDataController.findRecordsForCategory(category)
+            } else {
+                healthCategoryController.records = nil
+            }
+        }
     }
-    */
 
     func openInternalURL(_ url: URL) {
+        // Store this to ensure segues know what to do
+        nextInternalURL = url
         // Ignore the scheme for this
         // Host is the type for now
         if let type = url.host {
@@ -81,6 +109,8 @@ class PatientHealthRecordViewController: UIViewController, WKNavigationDelegate,
                 performSegue(withIdentifier: "CarePlan", sender: self)
             } else if type == "health-receipt" {
                 performSegue(withIdentifier: "HealthReceipt", sender: self)
+            } else if type == "category" {
+                performSegue(withIdentifier: "Category", sender: self)
             }
         }
     }
