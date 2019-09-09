@@ -20,10 +20,10 @@ class PDMUserTests: XCTestCase {
     }
 
     func testPasswordComplexity() {
-        XCTAssert(PDMUser.checkComplexityOfPassword("p45$w0rD"))
-        XCTAssert(PDMUser.checkComplexityOfPassword("password") == false)
-        XCTAssert(PDMUser.checkComplexityOfPassword("Ab1$") == false)
+        XCTAssertTrue(PDMUser.checkComplexityOfPassword("p45$w0rD"))
+        XCTAssertFalse(PDMUser.checkComplexityOfPassword("password"))
+        XCTAssertFalse(PDMUser.checkComplexityOfPassword("Ab1$"))
         // This is actually a kind of crummy password, but it should pass anyway
-        XCTAssert(PDMUser.checkComplexityOfPassword("!@#abcABC123"))
+        XCTAssertTrue(PDMUser.checkComplexityOfPassword("!@#abcABC123"))
     }
 }
