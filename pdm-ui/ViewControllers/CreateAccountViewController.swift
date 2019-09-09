@@ -97,24 +97,13 @@ class CreateAccountViewController: UIViewController {
         createAccountButton.isEnabled = !(firstNameField.isEmpty || lastNameField.isEmpty || emailField.isEmpty || passwordField.isEmpty || passwordConfirmationField.isEmpty)
     }
 
-    // adding check for password complexity, Regexp extracted from https://stackoverflow.com/questions/19605150/
-    // Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character
-    func passwordComplex(psswrd :String) -> Bool {
-        var complex = false
-        let regex = "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}"
-        if psswrd.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil {
-            complex = true
-        }
-            return complex
-    }
-    
     func updatePasswordStatus() {
         if passwordField.isEmpty {
             passwordStatusLabel.text = "Password not filled in yet"
             passwordStatusLabel.textColor = UIColor.black
         } else {
             if let password = passwordField.text, let passwordConfirmation = passwordConfirmationField.text {
-                if !passwordComplex(psswrd: password) {
+                if !PDMUser.checkComplexityOfPassword(password) {
                     passwordStatusLabel.text = "Complexity requirement not met"
                     passwordStatusLabel.textColor = UIColor.red
                 } else if password == passwordConfirmation {
@@ -143,7 +132,7 @@ class CreateAccountViewController: UIViewController {
             return
         }
         // adding complexity guard
-        guard passwordComplex(psswrd: password) else {
+        guard PDMUser.checkComplexityOfPassword(password) else {
             presentAlert("Password must be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character", title: "Complexity requirement")
             return
         }

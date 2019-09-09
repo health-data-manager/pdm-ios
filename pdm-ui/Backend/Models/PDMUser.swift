@@ -80,4 +80,11 @@ struct PDMUser {
         }
         self.init(fromJSON: jsonDict)
     }
+
+    /// Checks a password to ensure it meets complexity requirements.
+    /// Password should be 8-70 characters and include at least one of the following character classes: uppercase, lowercase, digit and "special" characters
+    /// The regexp is taken from the current backend config. It's somewhat unclear how well it functions.
+    static func checkComplexityOfPassword(_ password: String) -> Bool {
+        return password.range(of: "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}", options: .regularExpression, range: nil, locale: nil) != nil
+    }
 }
