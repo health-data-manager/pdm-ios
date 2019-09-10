@@ -65,6 +65,8 @@
 		2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98951227CAC8D0034B4B6 /* RESTClient.swift */; };
 		2ED98954227CEAF70034B4B6 /* PDMProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */; };
 		2ED989562280ACB20034B4B6 /* RESTClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED989552280ACB20034B4B6 /* RESTClientTests.swift */; };
+		2EFCD55B230EEF8600932D5F /* FHIRUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFCD55A230EEF8600932D5F /* FHIRUtilities.swift */; };
+		2EFCD55E230EF0AB00932D5F /* Units.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2EFCD55C230EF0AB00932D5F /* Units.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,8 @@
 		2ED98951227CAC8D0034B4B6 /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
 		2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProfileTests.swift; sourceTree = "<group>"; };
 		2ED989552280ACB20034B4B6 /* RESTClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClientTests.swift; sourceTree = "<group>"; };
+		2EFCD55A230EEF8600932D5F /* FHIRUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FHIRUtilities.swift; sourceTree = "<group>"; };
+		2EFCD55D230EF0AB00932D5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Units.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +239,7 @@
 				2E2342A4224291C500045E3A /* Info.plist */,
 				2E5A87BC2245188B00E225D5 /* Settings.plist */,
 				2E23429C224291C300045E3A /* pdm_ui.xcdatamodeld */,
+				2EFCD55C230EF0AB00932D5F /* Units.strings */,
 			);
 			path = "pdm-ui";
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				2EA93701226E406400513F9D /* HTTPExtensions.swift */,
 				2ED98951227CAC8D0034B4B6 /* RESTClient.swift */,
 				2E8468BA228DB04000C8ECB6 /* FHIRBundle.swift */,
+				2EFCD55A230EEF8600932D5F /* FHIRUtilities.swift */,
 				2E5A87BA2244C06000E225D5 /* MessageBundle.swift */,
 			);
 			path = Backend;
@@ -450,6 +456,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EFCD55E230EF0AB00932D5F /* Units.strings in Resources */,
 				2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */,
 				2E2342A0224291C500045E3A /* Assets.xcassets in Resources */,
 				2E6DC43222A04D6C000D8DE4 /* Sources.storyboard in Resources */,
@@ -504,6 +511,7 @@
 				2E7FADFE229EFF6000A766C6 /* PDMProfileSourceDataController.swift in Sources */,
 				2E8468BB228DB04000C8ECB6 /* FHIRBundle.swift in Sources */,
 				2E2342C7224292DC00045E3A /* PatientDataManager.swift in Sources */,
+				2EFCD55B230EEF8600932D5F /* FHIRUtilities.swift in Sources */,
 				2E234298224291C300045E3A /* LoginViewController.swift in Sources */,
 				2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */,
 				2ED1969E2295DCCA001821A8 /* PatientDataManagerKeychain.swift in Sources */,
@@ -601,6 +609,14 @@
 				2EC27F2822B1423500E0DFD2 /* Base */,
 			);
 			name = Account.storyboard;
+			sourceTree = "<group>";
+		};
+		2EFCD55C230EF0AB00932D5F /* Units.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EFCD55D230EF0AB00932D5F /* Base */,
+			);
+			name = Units.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

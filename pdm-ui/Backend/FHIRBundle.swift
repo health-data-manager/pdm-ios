@@ -40,12 +40,15 @@ class FHIRResource {
         return [ "resourceType" : resourceType ]
     }
 
-    /// Attempt to locate a string to describe this resource. The description
+    /// Attempt to locate a string to describe this resource.
     func describe() -> String {
         var result: String?
-        if resourceType == "Condition" || resourceType == "Observation" {
-            // Get the title
+        var suffix: String?
+        if resourceType == "Condition" {
             result = codingToString("code")
+        } else if resourceType == "Observation" {
+            result = codingToString("code")
+            suffix = valueToString("valueQuantity")
         } else if resourceType == "MedicationOrder" {
             result = codingToString("medicationCodeableConcept")
         } else if resourceType == "Immunization" {
@@ -53,7 +56,12 @@ class FHIRResource {
         } else if resourceType == "AllergyIntolerance" {
             result = codingToString("substance")
         }
-        return result ?? resourceType
+        var finalResult = result ?? resourceType
+        if let suffix = suffix {
+            finalResult.append(", ")
+            finalResult.append(suffix)
+        }
+        return finalResult
     }
 
     static func create(fromJSON json: Any) -> FHIRResource? {
@@ -77,6 +85,27 @@ class FHIRResource {
                 return nil
         }
         return firstCoding["display"] as? String
+    }
+
+    private func valueToString(_ valueName: String) -> String? {
+        guard let valueQuantity = getValue(forField: valueName) as? [String: Any],
+            let value = valueQuantity["value"] else { return nil }
+        var result: String
+        if let valueNumber = value as? NSNumber {
+            result = valueNumber.stringValue
+        } else if let valueString = value as? String {
+            result = valueString
+        } else {
+            return nil
+        }
+        if let unit = valueQuantity["unit"] as? String {
+            if let fhirUnit = FHIRUnit(unit) {
+                result.append(fhirUnit.humanReadable())
+            } else {
+                result.append(unit)
+            }
+        }
+        return result
     }
 }
 
