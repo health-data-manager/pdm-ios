@@ -13,7 +13,7 @@
         <!--Sources-->
         <scene sceneID="Zgk-Up-Wwz">
             <objects>
-                <tableViewController id="zaN-An-CJs" customClass="ConnectedSourcesTableViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="zaN-An-CJs" customClass="ConnectedSourcesTableViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FIL-CG-fxK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,7 +60,7 @@
         <!--Add Source-->
         <scene sceneID="zEC-zD-ulp">
             <objects>
-                <tableViewController title="Add Source" id="iee-Eo-OqM" customClass="AddSourceTableViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Add Source" id="iee-Eo-OqM" customClass="AddSourceTableViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Hrw-5S-D37">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -107,7 +107,7 @@
         <!--Connect-->
         <scene sceneID="xMw-wo-bpF">
             <objects>
-                <viewController id="v0K-BG-IVQ" customClass="AddSourceViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="v0K-BG-IVQ" customClass="AddSourceViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AGE-la-VI9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -169,7 +169,7 @@
         <!--OAuth-->
         <scene sceneID="end-nR-gwm">
             <objects>
-                <viewController id="OMr-fp-I5c" customClass="AddSourceOAuthViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OMr-fp-I5c" customClass="AddSourceOAuthViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Yk-tZ-6ZQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

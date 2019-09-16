@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import pdm_ui
+@testable import myPHR
 
 class PDMUserTests: XCTestCase {
 

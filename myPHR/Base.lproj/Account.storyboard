@@ -13,7 +13,7 @@
         <!--Account-->
         <scene sceneID="Sso-NR-ulu">
             <objects>
-                <viewController id="Ua4-zJ-WU9" customClass="AccountInfoViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Ua4-zJ-WU9" customClass="AccountInfoViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MVa-wr-IZ5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +37,7 @@
                                     <segue destination="EGu-Sv-hwl" kind="embed" id="5JX-9i-wcz"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14q-lN-Tix" customClass="PDMButton" customModule="pdm_ui" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14q-lN-Tix" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="755" width="374" height="38"/>
                                 <state key="normal" title="Delete Account &amp; Data"/>
                                 <connections>
@@ -75,7 +75,7 @@
         <!--Account Menu Info Table View Controller-->
         <scene sceneID="uzC-LJ-mdS">
             <objects>
-                <tableViewController id="EGu-Sv-hwl" customClass="AccountMenuInfoTableViewController" customModule="pdm_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="EGu-Sv-hwl" customClass="AccountMenuInfoTableViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5oy-Ej-gmu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

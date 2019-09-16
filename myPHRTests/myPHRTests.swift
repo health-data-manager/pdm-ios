@@ -1,5 +1,5 @@
 //
-//  pdm_uiTests.swift
+//  myPHRTests.swift
 //  pdm-uiTests
 //
 //  Created by Potter, Dan on 3/20/19.
@@ -7,9 +7,9 @@
 //
 
 import XCTest
-@testable import pdm_ui
+@testable import myPHR
 
-class pdm_uiTests: XCTestCase {
+class myPHRTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

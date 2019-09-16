@@ -12,10 +12,10 @@
 		2E17D000227B6DE900AF2FBC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E17CFFF227B6DE900AF2FBC /* HomeViewController.swift */; };
 		2E234296224291C300045E3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E234295224291C300045E3A /* AppDelegate.swift */; };
 		2E234298224291C300045E3A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E234297224291C300045E3A /* LoginViewController.swift */; };
-		2E23429E224291C300045E3A /* pdm_ui.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E23429C224291C300045E3A /* pdm_ui.xcdatamodeld */; };
+		2E23429E224291C300045E3A /* myPHR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E23429C224291C300045E3A /* myPHR.xcdatamodeld */; };
 		2E2342A0224291C500045E3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E23429F224291C500045E3A /* Assets.xcassets */; };
-		2E2342AE224291C500045E3A /* pdm_uiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342AD224291C500045E3A /* pdm_uiTests.swift */; };
-		2E2342B9224291C500045E3A /* pdm_uiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342B8224291C500045E3A /* pdm_uiUITests.swift */; };
+		2E2342AE224291C500045E3A /* myPHRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342AD224291C500045E3A /* myPHRTests.swift */; };
+		2E2342B9224291C500045E3A /* myPHRUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342B8224291C500045E3A /* myPHRUITests.swift */; };
 		2E2342C7224292DC00045E3A /* PatientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342C6224292DC00045E3A /* PatientDataManager.swift */; };
 		2E2342CB2242931600045E3A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2342CA2242931600045E3A /* HealthKit.framework */; };
 		2E2342D12242937700045E3A /* InitializePDMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2342D02242937700045E3A /* InitializePDMViewController.swift */; };
@@ -75,14 +75,14 @@
 			containerPortal = 2E23428A224291C300045E3A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2E234291224291C300045E3A;
-			remoteInfo = "pdm-ui";
+			remoteInfo = "myPHR";
 		};
 		2E2342B5224291C500045E3A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2E23428A224291C300045E3A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2E234291224291C300045E3A;
-			remoteInfo = "pdm-ui";
+			remoteInfo = "myPHR";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -90,20 +90,20 @@
 		2E17CFFA2279529C00AF2FBC /* AccountInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoViewController.swift; sourceTree = "<group>"; };
 		2E17CFFC227A207A00AF2FBC /* PDMProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProfile.swift; sourceTree = "<group>"; };
 		2E17CFFF227B6DE900AF2FBC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		2E234292224291C300045E3A /* pdm-ui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pdm-ui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E234292224291C300045E3A /* myPHR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myPHR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E234295224291C300045E3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E234297224291C300045E3A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		2E23429D224291C300045E3A /* pdm_ui.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pdm_ui.xcdatamodel; sourceTree = "<group>"; };
+		2E23429D224291C300045E3A /* myPHR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myPHR.xcdatamodel; sourceTree = "<group>"; };
 		2E23429F224291C500045E3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E2342A4224291C500045E3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2E2342A9224291C500045E3A /* pdm-uiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pdm-uiTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E2342AD224291C500045E3A /* pdm_uiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdm_uiTests.swift; sourceTree = "<group>"; };
+		2E2342A9224291C500045E3A /* myPHRTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myPHRTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E2342AD224291C500045E3A /* myPHRTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myPHRTests.swift; sourceTree = "<group>"; };
 		2E2342AF224291C500045E3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2E2342B4224291C500045E3A /* pdm-uiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pdm-uiUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E2342B8224291C500045E3A /* pdm_uiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdm_uiUITests.swift; sourceTree = "<group>"; };
+		2E2342B4224291C500045E3A /* myPHRUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myPHRUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E2342B8224291C500045E3A /* myPHRUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myPHRUITests.swift; sourceTree = "<group>"; };
 		2E2342BA224291C500045E3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E2342C6224292DC00045E3A /* PatientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDataManager.swift; sourceTree = "<group>"; };
-		2E2342C82242931600045E3A /* pdm-ui.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pdm-ui.entitlements"; sourceTree = "<group>"; };
+		2E2342C82242931600045E3A /* myPHR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "myPHR.entitlements"; sourceTree = "<group>"; };
 		2E2342CA2242931600045E3A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		2E2342D02242937700045E3A /* InitializePDMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializePDMViewController.swift; sourceTree = "<group>"; };
 		2E26F8D3229708DE00BB1F60 /* AddSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceViewController.swift; sourceTree = "<group>"; };
@@ -122,10 +122,10 @@
 		2E59F022230CCF2800EE7E83 /* HealthCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCategoryTableViewController.swift; sourceTree = "<group>"; };
 		2E5A87BA2244C06000E225D5 /* MessageBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBundle.swift; sourceTree = "<group>"; };
 		2E5A87BC2245188B00E225D5 /* Settings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
-		2E6DC42822A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
-		2E6DC42A22A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/HealthRecord.storyboard"; sourceTree = SOURCE_ROOT; };
-		2E6DC42C22A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
-		2E6DC42E22A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/Sources.storyboard"; sourceTree = SOURCE_ROOT; };
+		2E6DC42822A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "myPHR/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
+		2E6DC42A22A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "myPHR/Base.lproj/HealthRecord.storyboard"; sourceTree = SOURCE_ROOT; };
+		2E6DC42C22A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "myPHR/Base.lproj/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
+		2E6DC42E22A04D6C000D8DE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "myPHR/Base.lproj/Sources.storyboard"; sourceTree = SOURCE_ROOT; };
 		2E777DF02296FE760005250C /* ConnectedSourcesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedSourcesTableViewController.swift; sourceTree = "<group>"; };
 		2E777DF22296FEEB0005250C /* AddSourceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceTableViewController.swift; sourceTree = "<group>"; };
 		2E7FADF9229DA3D600A766C6 /* TableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtensions.swift; sourceTree = "<group>"; };
@@ -141,12 +141,12 @@
 		2EA9370922778BA700513F9D /* TextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtensions.swift; sourceTree = "<group>"; };
 		2EA9370B2277949000513F9D /* PDMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMViewController.swift; sourceTree = "<group>"; };
 		2EA9370D2278914000513F9D /* PDMHealthKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMHealthKit.swift; sourceTree = "<group>"; };
-		2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientDataManagerTests.swift; path = "pdm-uiTests/PatientDataManagerTests.swift"; sourceTree = SOURCE_ROOT; };
+		2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientDataManagerTests.swift; path = "myPHRTests/PatientDataManagerTests.swift"; sourceTree = SOURCE_ROOT; };
 		2EBF772C229321CC00170091 /* PDMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProvider.swift; sourceTree = "<group>"; };
 		2EBF7730229496CB00170091 /* PDMTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMTimeLine.swift; sourceTree = "<group>"; };
-		2EC27F2822B1423500E0DFD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "pdm-ui/Base.lproj/Account.storyboard"; sourceTree = SOURCE_ROOT; };
+		2EC27F2822B1423500E0DFD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "myPHR/Base.lproj/Account.storyboard"; sourceTree = SOURCE_ROOT; };
 		2EC27F2A22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMenuInfoTableViewController.swift; sourceTree = "<group>"; };
-		2ECC873E230CDCAF00AE2315 /* HealthRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HealthRecordViewController.swift; path = "pdm-ui/ViewControllers/HealthRecordViewController.swift"; sourceTree = SOURCE_ROOT; };
+		2ECC873E230CDCAF00AE2315 /* HealthRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecordViewController.swift; sourceTree = "<group>"; };
 		2ED1969D2295DCCA001821A8 /* PatientDataManagerKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDataManagerKeychain.swift; sourceTree = "<group>"; };
 		2ED9894F227B6F320034B4B6 /* PatientHealthRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHealthRecordViewController.swift; sourceTree = "<group>"; };
 		2ED98951227CAC8D0034B4B6 /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
@@ -207,9 +207,9 @@
 		2E234289224291C300045E3A = {
 			isa = PBXGroup;
 			children = (
-				2E234294224291C300045E3A /* pdm-ui */,
-				2E2342AC224291C500045E3A /* pdm-uiTests */,
-				2E2342B7224291C500045E3A /* pdm-uiUITests */,
+				2E234294224291C300045E3A /* myPHR */,
+				2E2342AC224291C500045E3A /* myPHRTests */,
+				2E2342B7224291C500045E3A /* myPHRUITests */,
 				2E234293224291C300045E3A /* Products */,
 				2E2342C92242931600045E3A /* Frameworks */,
 			);
@@ -218,18 +218,18 @@
 		2E234293224291C300045E3A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2E234292224291C300045E3A /* pdm-ui.app */,
-				2E2342A9224291C500045E3A /* pdm-uiTests.xctest */,
-				2E2342B4224291C500045E3A /* pdm-uiUITests.xctest */,
+				2E234292224291C300045E3A /* myPHR.app */,
+				2E2342A9224291C500045E3A /* myPHRTests.xctest */,
+				2E2342B4224291C500045E3A /* myPHRUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2E234294224291C300045E3A /* pdm-ui */ = {
+		2E234294224291C300045E3A /* myPHR */ = {
 			isa = PBXGroup;
 			children = (
 				2E395EC92267882500A9A7D6 /* Backend */,
-				2E2342C82242931600045E3A /* pdm-ui.entitlements */,
+				2E2342C82242931600045E3A /* myPHR.entitlements */,
 				2E234295224291C300045E3A /* AppDelegate.swift */,
 				2E23429F224291C500045E3A /* Assets.xcassets */,
 				2E8468B5228BCF3D00C8ECB6 /* Patient View */,
@@ -238,16 +238,16 @@
 				2EA937122279481F00513F9D /* UI */,
 				2E2342A4224291C500045E3A /* Info.plist */,
 				2E5A87BC2245188B00E225D5 /* Settings.plist */,
-				2E23429C224291C300045E3A /* pdm_ui.xcdatamodeld */,
+				2E23429C224291C300045E3A /* myPHR.xcdatamodeld */,
 				2EFCD55C230EF0AB00932D5F /* Units.strings */,
 			);
-			path = "pdm-ui";
+			path = myPHR;
 			sourceTree = "<group>";
 		};
-		2E2342AC224291C500045E3A /* pdm-uiTests */ = {
+		2E2342AC224291C500045E3A /* myPHRTests */ = {
 			isa = PBXGroup;
 			children = (
-				2E2342AD224291C500045E3A /* pdm_uiTests.swift */,
+				2E2342AD224291C500045E3A /* myPHRTests.swift */,
 				2E2342AF224291C500045E3A /* Info.plist */,
 				2EA93703226F60E100513F9D /* HTTPExtensionsTests.swift */,
 				2EA9370F2278AC6700513F9D /* PatientDataManagerTests.swift */,
@@ -255,17 +255,17 @@
 				2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */,
 				2ED989552280ACB20034B4B6 /* RESTClientTests.swift */,
 			);
-			path = "pdm-uiTests";
+			path = "myPHRTests";
 			sourceTree = "<group>";
 		};
-		2E2342B7224291C500045E3A /* pdm-uiUITests */ = {
+		2E2342B7224291C500045E3A /* myPHRUITests */ = {
 			isa = PBXGroup;
 			children = (
-				2E2342B8224291C500045E3A /* pdm_uiUITests.swift */,
+				2E2342B8224291C500045E3A /* myPHRUITests.swift */,
 				2E4A2AB72326CC6C0019C6A8 /* CreateAccountTests.swift */,
 				2E2342BA224291C500045E3A /* Info.plist */,
 			);
-			path = "pdm-uiUITests";
+			path = "myPHRUITests";
 			sourceTree = "<group>";
 		};
 		2E2342C92242931600045E3A /* Frameworks */ = {
@@ -302,7 +302,8 @@
 				2E6DC42D22A04D6C000D8DE4 /* Sources.storyboard */,
 				2EC27F2722B1423500E0DFD2 /* Account.storyboard */,
 			);
-			path = Storyboards;
+			name = Storyboards;
+			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 		2E8468B5228BCF3D00C8ECB6 /* Patient View */ = {
@@ -347,9 +348,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2E234291224291C300045E3A /* pdm-ui */ = {
+		2E234291224291C300045E3A /* myPHR */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2E2342BD224291C500045E3A /* Build configuration list for PBXNativeTarget "pdm-ui" */;
+			buildConfigurationList = 2E2342BD224291C500045E3A /* Build configuration list for PBXNativeTarget "myPHR" */;
 			buildPhases = (
 				2E23428E224291C300045E3A /* Sources */,
 				2E23428F224291C300045E3A /* Frameworks */,
@@ -359,14 +360,14 @@
 			);
 			dependencies = (
 			);
-			name = "pdm-ui";
-			productName = "pdm-ui";
-			productReference = 2E234292224291C300045E3A /* pdm-ui.app */;
+			name = myPHR;
+			productName = "myPHR";
+			productReference = 2E234292224291C300045E3A /* myPHR.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2E2342A8224291C500045E3A /* pdm-uiTests */ = {
+		2E2342A8224291C500045E3A /* myPHRTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2E2342C0224291C500045E3A /* Build configuration list for PBXNativeTarget "pdm-uiTests" */;
+			buildConfigurationList = 2E2342C0224291C500045E3A /* Build configuration list for PBXNativeTarget "myPHRTests" */;
 			buildPhases = (
 				2E2342A5224291C500045E3A /* Sources */,
 				2E2342A6224291C500045E3A /* Frameworks */,
@@ -377,14 +378,14 @@
 			dependencies = (
 				2E2342AB224291C500045E3A /* PBXTargetDependency */,
 			);
-			name = "pdm-uiTests";
-			productName = "pdm-uiTests";
-			productReference = 2E2342A9224291C500045E3A /* pdm-uiTests.xctest */;
+			name = myPHRTests;
+			productName = "myPHRTests";
+			productReference = 2E2342A9224291C500045E3A /* myPHRTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2E2342B3224291C500045E3A /* pdm-uiUITests */ = {
+		2E2342B3224291C500045E3A /* myPHRUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2E2342C3224291C500045E3A /* Build configuration list for PBXNativeTarget "pdm-uiUITests" */;
+			buildConfigurationList = 2E2342C3224291C500045E3A /* Build configuration list for PBXNativeTarget "myPHRUITests" */;
 			buildPhases = (
 				2E2342B0224291C500045E3A /* Sources */,
 				2E2342B1224291C500045E3A /* Frameworks */,
@@ -395,9 +396,9 @@
 			dependencies = (
 				2E2342B6224291C500045E3A /* PBXTargetDependency */,
 			);
-			name = "pdm-uiUITests";
-			productName = "pdm-uiUITests";
-			productReference = 2E2342B4224291C500045E3A /* pdm-uiUITests.xctest */;
+			name = myPHRUITests;
+			productName = "myPHRUITests";
+			productReference = 2E2342B4224291C500045E3A /* myPHRUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -431,7 +432,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2E23428D224291C300045E3A /* Build configuration list for PBXProject "pdm-ui" */;
+			buildConfigurationList = 2E23428D224291C300045E3A /* Build configuration list for PBXProject "myPHR" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -444,9 +445,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2E234291224291C300045E3A /* pdm-ui */,
-				2E2342A8224291C500045E3A /* pdm-uiTests */,
-				2E2342B3224291C500045E3A /* pdm-uiUITests */,
+				2E234291224291C300045E3A /* myPHR */,
+				2E2342A8224291C500045E3A /* myPHRTests */,
+				2E2342B3224291C500045E3A /* myPHRUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -507,7 +508,7 @@
 				2EA9370C2277949000513F9D /* PDMViewController.swift in Sources */,
 				2EA937062277580700513F9D /* PDMUser.swift in Sources */,
 				2ED98950227B6F320034B4B6 /* PatientHealthRecordViewController.swift in Sources */,
-				2E23429E224291C300045E3A /* pdm_ui.xcdatamodeld in Sources */,
+				2E23429E224291C300045E3A /* myPHR.xcdatamodeld in Sources */,
 				2E7FADFE229EFF6000A766C6 /* PDMProfileSourceDataController.swift in Sources */,
 				2E8468BB228DB04000C8ECB6 /* FHIRBundle.swift in Sources */,
 				2E2342C7224292DC00045E3A /* PatientDataManager.swift in Sources */,
@@ -537,7 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E2342AE224291C500045E3A /* pdm_uiTests.swift in Sources */,
+				2E2342AE224291C500045E3A /* myPHRTests.swift in Sources */,
 				2ED98954227CEAF70034B4B6 /* PDMProfileTests.swift in Sources */,
 				2EA93704226F60E100513F9D /* HTTPExtensionsTests.swift in Sources */,
 				2ED989562280ACB20034B4B6 /* RESTClientTests.swift in Sources */,
@@ -550,7 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E2342B9224291C500045E3A /* pdm_uiUITests.swift in Sources */,
+				2E2342B9224291C500045E3A /* myPHRUITests.swift in Sources */,
 				2E4A2AB82326CC6C0019C6A8 /* CreateAccountTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,12 +561,12 @@
 /* Begin PBXTargetDependency section */
 		2E2342AB224291C500045E3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2E234291224291C300045E3A /* pdm-ui */;
+			target = 2E234291224291C300045E3A /* myPHR */;
 			targetProxy = 2E2342AA224291C500045E3A /* PBXContainerItemProxy */;
 		};
 		2E2342B6224291C500045E3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2E234291224291C300045E3A /* pdm-ui */;
+			target = 2E234291224291C300045E3A /* myPHR */;
 			targetProxy = 2E2342B5224291C500045E3A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -577,7 +578,8 @@
 				2E6DC42822A04D6C000D8DE4 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
+			path = myPHR;
+			sourceTree = SOURCE_ROOT;
 		};
 		2E6DC42922A04D6C000D8DE4 /* HealthRecord.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -585,7 +587,8 @@
 				2E6DC42A22A04D6C000D8DE4 /* Base */,
 			);
 			name = HealthRecord.storyboard;
-			sourceTree = "<group>";
+			path = myPHR;
+			sourceTree = SOURCE_ROOT;
 		};
 		2E6DC42B22A04D6C000D8DE4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -601,7 +604,8 @@
 				2E6DC42E22A04D6C000D8DE4 /* Base */,
 			);
 			name = Sources.storyboard;
-			sourceTree = "<group>";
+			path = myPHR;
+			sourceTree = SOURCE_ROOT;
 		};
 		2EC27F2722B1423500E0DFD2 /* Account.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -742,15 +746,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "pdm-ui/pdm-ui.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "myPHR/myPHR.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M9BLEU3LFV;
-				INFOPLIST_FILE = "pdm-ui/Info.plist";
+				INFOPLIST_FILE = "myPHR/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-ui";
+				PRODUCT_BUNDLE_IDENTIFIER = org.mitre.myphr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -761,15 +765,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "pdm-ui/pdm-ui.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "myPHR/myPHR.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M9BLEU3LFV;
-				INFOPLIST_FILE = "pdm-ui/Info.plist";
+				INFOPLIST_FILE = "myPHR/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-ui";
+				PRODUCT_BUNDLE_IDENTIFIER = org.mitre.myphr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -783,17 +787,17 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M9BLEU3LFV;
-				INFOPLIST_FILE = "pdm-uiTests/Info.plist";
+				INFOPLIST_FILE = "myPHRTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-uiTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.myPHRTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pdm-ui.app/pdm-ui";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myPHR.app/myPHR";
 			};
 			name = Debug;
 		};
@@ -804,17 +808,17 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M9BLEU3LFV;
-				INFOPLIST_FILE = "pdm-uiTests/Info.plist";
+				INFOPLIST_FILE = "myPHRTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-uiTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.myPHRTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pdm-ui.app/pdm-ui";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myPHR.app/myPHR";
 			};
 			name = Release;
 		};
@@ -824,17 +828,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M9BLEU3LFV;
-				INFOPLIST_FILE = "pdm-uiUITests/Info.plist";
+				INFOPLIST_FILE = "myPHRUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-uiUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.myPHRUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "pdm-ui";
+				TEST_TARGET_NAME = "myPHR";
 			};
 			name = Debug;
 		};
@@ -844,24 +848,24 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M9BLEU3LFV;
-				INFOPLIST_FILE = "pdm-uiUITests/Info.plist";
+				INFOPLIST_FILE = "myPHRUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.pdm-uiUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.mitre.myPHRUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "pdm-ui";
+				TEST_TARGET_NAME = "myPHR";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2E23428D224291C300045E3A /* Build configuration list for PBXProject "pdm-ui" */ = {
+		2E23428D224291C300045E3A /* Build configuration list for PBXProject "myPHR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2E2342BB224291C500045E3A /* Debug */,
@@ -870,7 +874,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2E2342BD224291C500045E3A /* Build configuration list for PBXNativeTarget "pdm-ui" */ = {
+		2E2342BD224291C500045E3A /* Build configuration list for PBXNativeTarget "myPHR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2E2342BE224291C500045E3A /* Debug */,
@@ -879,7 +883,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2E2342C0224291C500045E3A /* Build configuration list for PBXNativeTarget "pdm-uiTests" */ = {
+		2E2342C0224291C500045E3A /* Build configuration list for PBXNativeTarget "myPHRTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2E2342C1224291C500045E3A /* Debug */,
@@ -888,7 +892,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2E2342C3224291C500045E3A /* Build configuration list for PBXNativeTarget "pdm-uiUITests" */ = {
+		2E2342C3224291C500045E3A /* Build configuration list for PBXNativeTarget "myPHRUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2E2342C4224291C500045E3A /* Debug */,
@@ -900,13 +904,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2E23429C224291C300045E3A /* pdm_ui.xcdatamodeld */ = {
+		2E23429C224291C300045E3A /* myPHR.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2E23429D224291C300045E3A /* pdm_ui.xcdatamodel */,
+				2E23429D224291C300045E3A /* myPHR.xcdatamodel */,
 			);
-			currentVersion = 2E23429D224291C300045E3A /* pdm_ui.xcdatamodel */;
-			path = pdm_ui.xcdatamodeld;
+			currentVersion = 2E23429D224291C300045E3A /* myPHR.xcdatamodel */;
+			path = myPHR.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

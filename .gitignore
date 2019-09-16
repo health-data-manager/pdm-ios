@@ -1,6 +1,6 @@
 # Ignore local settings
-/pdm-ui/Settings.plist
+/myPHR/Settings.plist
 
 # Ignore user settings
-/pdm-ui.xcodeproj/xcuserdata
-/pdm-ui.xcodeproj/project.xcworkspace/xcuserdata
+/myPHR.xcodeproj/xcuserdata
+/myPHR.xcodeproj/project.xcworkspace/xcuserdata

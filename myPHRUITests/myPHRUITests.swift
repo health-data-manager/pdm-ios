@@ -1,5 +1,5 @@
 //
-//  pdm_uiUITests.swift
+//  myPHRUITests.swift
 //  pdm-uiUITests
 //
 //  Created by Potter, Dan on 3/20/19.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class pdm_uiUITests: XCTestCase {
+class myPHRUITests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
