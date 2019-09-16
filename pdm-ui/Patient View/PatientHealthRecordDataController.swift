@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Various categories that could contain PHR data.
+/// Various categories that could contain PHR data. These represent the categories that appear within the health record UI.
 enum PHRCategory: String, CaseIterable {
     case allergies
     case diseases
@@ -39,10 +39,17 @@ enum PHRCategory: String, CaseIterable {
         }
     }
 
+    /// Gets the category from the path component of a URL. (Every other part of the URL is ignored: this is equivalent to calling categoryFromPath() with the path itself.)
+    ///
+    /// If there is no matching category, this returns nil.
     static func categoryFromURLPath(_ url: URL) -> PHRCategory? {
         return categoryFromPath(url.path)
     }
 
+    /// Gets the category from the path component of a URL. Currently this simply removes any leading slash and looks up the name of the category based on the name of the enum. A future version might look at only the first component of the path.
+    ///
+    /// - Parameter path: the path to look up
+    /// - Returns: the catgory for that path, if there is one
     static func categoryFromPath(_ path: String) -> PHRCategory? {
         var lookupPath = path
         if (path.starts(with: "/")) {
@@ -52,7 +59,9 @@ enum PHRCategory: String, CaseIterable {
     }
 }
 
-/// Manages determining the data to show based on a user's health records.
+/// Manages computing and finding the data to show based on a user's health records. Currently this requires a record bundle.
+///
+/// It also seems likely that a future version of this will become asynchronous, as it seems likely data lookups will be moved to happen when a request for data is first made. This may in the future cache responses.
 class PatientHealthRecordDataController {
     /// Current method of setting the records to use. This may change in the future.
     var records: FHIRBundle?
@@ -102,6 +111,7 @@ class PatientHealthRecordDataController {
         return result
     }
 
+    /// Calculates the care plan. This is pretty likely to change in the future.
     func calculateCarePlan() -> CarePlan {
         // See if there is a cancer resource
         let cancerResources = records?.search([
@@ -120,9 +130,11 @@ class PatientHealthRecordDataController {
         }
     }
 
+    /// Finds matching records for a given category.
     func findRecordsForCategory(_ category: PHRCategory) -> [FHIRResource] {
         // If there are no records, then return an empty list
         guard let records = records else { return [] }
+        // TODO (maybe): Sort these in some fashion here?
         switch category {
         case .allergies:
             return records.search(["resourceType" : "AllergyIntolerance"])
