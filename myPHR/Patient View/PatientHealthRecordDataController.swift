@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FHIR
 
 /// Various categories that could contain PHR data. These represent the categories that appear within the health record UI.
 enum PHRCategory: String, CaseIterable {

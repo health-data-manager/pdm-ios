@@ -6,8 +6,52 @@
 //
 
 import UIKit
+import FHIR
 
-/// For showing health category information
+/// A table view cell showing a health record's details.
+class HealthCategoryTableViewCell : UITableViewCell {
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var severityLabel: UILabel!
+
+    var resource: FHIRResource? {
+        didSet {
+            updateLabels()
+        }
+    }
+
+    func updateLabels() {
+        if let resource = resource {
+            // First do the defaults
+            nameLabel.text = resource.describe()
+            descriptionLabel.isHidden = true
+            dateLabel.isHidden = true
+            severityLabel.isHidden = true
+            // Check to see if we can do anything with this resource
+            if let allergyIntolerance = resource as? AllergyIntolerance {
+                // For now, just use the first reaction
+                if let reactions = allergyIntolerance.reaction, let reaction = reactions.first {
+                    if let severity = reaction.severity {
+                        severityLabel.isHidden = false
+                        severityLabel.text = severity.rawValue
+                    }
+                    if let manifestations = reaction.manifestation, let manifestation = manifestations.first {
+                        descriptionLabel.text = manifestation.describe()
+                        descriptionLabel.isHidden = false
+                    }
+                }
+            }
+        } else {
+            nameLabel.text = "Nil"
+            descriptionLabel.text = "(An internal error is preventing this instance from being displayed)"
+            dateLabel.isHidden = true
+            severityLabel.isHidden = true
+        }
+    }
+}
+
+/// For showing health category information. The same view controller is used for each category, although the exact reuse cell can be changed based on category.
 class HealthCategoryTableViewController: UITableViewController {
     var category: PHRCategory?
     var records: [FHIRResource]?
@@ -49,17 +93,17 @@ class HealthCategoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasicItem", for: indexPath)
 
-        guard let records = records else {
+        guard let resourceCell = cell as? HealthCategoryTableViewCell else {
+            // This prevents us from showing data
+            return cell
+        }
+        guard let records = records, indexPath.row >= 0, indexPath.row < records.count else {
             // This is a degenerate case, cells should never be displayed if records is nil
+            resourceCell.resource = nil
             return cell
         }
 
-        guard indexPath.row >= 0, indexPath.row < records.count else {
-            cell.textLabel?.text = "Unknown"
-            return cell
-        }
-
-        cell.textLabel?.text = records[indexPath.row].describe()
+        resourceCell.resource = records[indexPath.row]
 
         return cell
     }

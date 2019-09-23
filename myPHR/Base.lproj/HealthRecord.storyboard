@@ -157,23 +157,58 @@ What will treatment cost? Is this treatment plan covered by my insurance plan?</
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BasicItem" textLabel="6Tf-Gp-LDA" style="IBUITableViewCellStyleDefault" id="EPa-6p-iJW">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BasicItem" rowHeight="108" id="EPa-6p-iJW" customClass="HealthCategoryTableViewCell" customModule="myPHR" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="108"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EPa-6p-iJW" id="ea5-tC-EAb">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="107.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Tf-Gp-LDA">
-                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0Q-sk-jSb">
+                                            <rect key="frame" x="20" y="11" width="54" height="26"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKb-of-Z31">
+                                            <rect key="frame" x="20" y="45" width="374" height="23"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Severity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o38-2p-Zax">
+                                            <rect key="frame" x="332" y="11" width="62" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRB-WH-7Pq">
+                                            <rect key="frame" x="20" y="76" width="374" height="21"/>
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="aKb-of-Z31" firstAttribute="leading" secondItem="ea5-tC-EAb" secondAttribute="leadingMargin" id="2nd-Dq-zYz"/>
+                                        <constraint firstItem="o38-2p-Zax" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="P0Q-sk-jSb" secondAttribute="trailing" constant="8" id="3VT-HR-odR"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="FRB-WH-7Pq" secondAttribute="trailing" id="4Y9-Be-ynU"/>
+                                        <constraint firstItem="FRB-WH-7Pq" firstAttribute="leading" secondItem="ea5-tC-EAb" secondAttribute="leadingMargin" id="5SA-6t-j9N"/>
+                                        <constraint firstItem="o38-2p-Zax" firstAttribute="trailing" secondItem="ea5-tC-EAb" secondAttribute="trailingMargin" id="I6h-8X-ccy"/>
+                                        <constraint firstItem="P0Q-sk-jSb" firstAttribute="top" secondItem="ea5-tC-EAb" secondAttribute="topMargin" id="JD1-kz-IiD"/>
+                                        <constraint firstItem="P0Q-sk-jSb" firstAttribute="leading" secondItem="ea5-tC-EAb" secondAttribute="leadingMargin" id="OZ4-St-Nkd"/>
+                                        <constraint firstItem="FRB-WH-7Pq" firstAttribute="top" secondItem="aKb-of-Z31" secondAttribute="bottom" constant="8" id="UkO-jw-iMV"/>
+                                        <constraint firstItem="aKb-of-Z31" firstAttribute="top" secondItem="P0Q-sk-jSb" secondAttribute="bottom" constant="8" id="bla-mn-Q6P"/>
+                                        <constraint firstItem="aKb-of-Z31" firstAttribute="trailing" secondItem="ea5-tC-EAb" secondAttribute="trailingMargin" id="lj3-fd-UOL"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="FRB-WH-7Pq" secondAttribute="bottom" id="rSz-uf-32I"/>
+                                        <constraint firstItem="o38-2p-Zax" firstAttribute="top" secondItem="ea5-tC-EAb" secondAttribute="topMargin" id="x3P-N0-BpV"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="dateLabel" destination="FRB-WH-7Pq" id="jXd-73-qa7"/>
+                                    <outlet property="descriptionLabel" destination="aKb-of-Z31" id="357-Ae-ej6"/>
+                                    <outlet property="nameLabel" destination="P0Q-sk-jSb" id="8LG-ak-Qs4"/>
+                                    <outlet property="severityLabel" destination="o38-2p-Zax" id="3fK-7o-tFa"/>
                                     <segue destination="Gui-ti-Tt2" kind="show" identifier="Details" id="owK-Qi-RCu"/>
                                 </connections>
                             </tableViewCell>
@@ -186,7 +221,7 @@ What will treatment cost? Is this treatment plan covered by my insurance plan?</
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QVm-34-fsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-19" y="1515"/>
+            <point key="canvasLocation" x="-20.289855072463769" y="1514.7321428571429"/>
         </scene>
         <!--Health Record View Controller-->
         <scene sceneID="d9L-g7-dqq">
@@ -380,10 +415,10 @@ with </string>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="UjF-sB-njT">
-                                <rect key="frame" x="16" y="510.5" width="382" height="30"/>
+                                <rect key="frame" x="16" y="510.5" width="382" height="38"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZK8-zA-u3l" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="183" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="183" height="38"/>
                                         <state key="normal" title="Comment"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -391,7 +426,7 @@ with </string>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuP-CC-foX" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                        <rect key="frame" x="199" y="0.0" width="183" height="30"/>
+                                        <rect key="frame" x="199" y="0.0" width="183" height="38"/>
                                         <state key="normal" title="Share"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -401,7 +436,7 @@ with </string>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vg-8a-Z7a" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="16" y="556.5" width="382" height="30"/>
+                                <rect key="frame" x="16" y="564.5" width="382" height="38"/>
                                 <state key="normal" title="Make Correction"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -416,7 +451,7 @@ with </string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMc-v5-AdU" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="16" y="602.5" width="382" height="48"/>
+                                <rect key="frame" x="16" y="618.5" width="382" height="56"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="How are you feeling?">

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FHIR
 
 /// This is currently mostly a placeholder view controller
 class HealthRecordViewController: UIViewController {
@@ -25,7 +26,7 @@ class HealthRecordViewController: UIViewController {
             return
         }
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: record.asJSON(), options: [.prettyPrinted,.sortedKeys])
+            let jsonData = try JSONSerialization.data(withJSONObject: record.resource, options: [.prettyPrinted,.sortedKeys])
             jsonTextView.text = String(data: jsonData, encoding: .utf8)
         } catch {
             jsonTextView.text = "Could not convert record to JSON"

@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// A tile showing data within the patient health record view.
+/// A data contained within a tile showing data within the patient health record view.
 class PatientHealthTile {
     var title: String
     var measurement: String

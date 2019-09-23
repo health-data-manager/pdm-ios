@@ -8,6 +8,7 @@
 import Foundation
 import HealthKit
 import os.log
+import FHIR
 
 /// Various errors that can occur within the Patient Data Manager.
 enum PatientDataManagerError: Error, LocalizedError {

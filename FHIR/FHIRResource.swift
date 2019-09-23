@@ -1,47 +1,50 @@
 //
-//  FHIRBundle.swift
-//  pdm-ui
+//  Resource.swift
+//  FHIR
 //
 //  Copyright © 2019 MITRE. All rights reserved.
 //
 
 import Foundation
 
-/// Base class of FHIR resources.
-class FHIRResource {
-    /// The type of this resource. Conceptually this could be an enum but for now it's a string.
-    var resourceType: String
+/// Base class for FHIR resources.
+///
+/// The generic FHIR resource maintains the original JSON record, to maintain extended fields.
+public class FHIRResource {
+    /// The type of this resource. Conceptually this could be an enum but for now it's a string. This is currently optional, although if it's left blank, it generates an invalid object.
+    public var resourceType: String?
+    /// The original JSON data. Note that modifying this will NOT change the underlying view and, at present, changing the model will NOT change the JSON data.
+    public var resource: [String: Any]
 
-    init(_ resourceType: String) {
+    public init(_ resourceType: String) {
         self.resourceType = resourceType
+        self.resource = [String: Any]()
     }
 
-    /// Checks to see if this object matches the query. The default implementation only checks to see if the type matches.
-    func matches(_ query: [String: Any]) -> Bool {
-        return query.count == 1 && query["resourceType"] as? String == resourceType
+    /// Generate the basic resource from the JSON object. Note that this will always succeed and may generate a somewhat useless object.
+    public init(fromJSON json: [String: Any]) {
+        self.resourceType = json["resourceType"] as? String
+        self.resource = json
+    }
+
+    /// Checks to see if this object matches the query object.
+    public func matches(_ query: [String: Any]) -> Bool {
+        return matchDicts(document: resource, query: query)
     }
 
     /// Handles getting a value for resourceType. Otherwise returns nil.
-    func getValue(forField field: String) -> Any? {
-        if field == "resourceType" {
-            return resourceType
-        } else {
-            return nil
-        }
+    public func getValue(forField field: String) -> Any? {
+        return lookupValue(forField: field, inDict: resource)
     }
 
     /// Gets a string based on a field name.
-    func getString(forField field: String) -> String? {
+    public func getString(forField field: String) -> String? {
         return getValue(forField: field) as? String
     }
 
-    /// Convert this element to JSON
-    func asJSON() -> [String: Any] {
-        return [ "resourceType" : resourceType ]
-    }
-
     /// Attempt to locate a string to describe this resource.
-    func describe() -> String {
+    public func describe() -> String {
+        // TODO: As the various resource types are implemented, this code will be moved there
         var result: String?
         var suffix: String?
         if resourceType == "Condition" {
@@ -56,7 +59,7 @@ class FHIRResource {
         } else if resourceType == "AllergyIntolerance" {
             result = codingToString("substance")
         }
-        var finalResult = result ?? resourceType
+        var finalResult = result ?? resourceType ?? "Unknown"
         if let suffix = suffix {
             finalResult.append(", ")
             finalResult.append(suffix)
@@ -64,10 +67,16 @@ class FHIRResource {
         return finalResult
     }
 
-    static func create(fromJSON json: Any) -> FHIRResource? {
+    public static func create(fromJSON json: Any) -> FHIRResource? {
         // For now just always create the generic objects.
         // Eventually this might special-case some types.
-        return GenericFHIRResource(fromJSON: json)
+        guard let resourceJson = getResourceFromJSON(json) else { return nil }
+        if let resourceType = resourceJson["resourceType"] as? String {
+            if resourceType == AllergyIntolerance.resourceType {
+                return AllergyIntolerance(fromJSON: resourceJson)
+            }
+        }
+        return FHIRResource(fromJSON: resourceJson)
     }
 
     private func codingToString(_ conceptName: String) -> String? {
@@ -179,71 +188,5 @@ func lookupValue(forField field: String, inDict dict: [String: Any]) -> Any? {
     } else {
         // Otherwise return whatever we got
         return dict[field]
-    }
-}
-
-/// A generic FHIR resource. Rather than try and implement a true FHIR library, this implements just enough to allow access to the contents of FHIR objects.
-class GenericFHIRResource: FHIRResource {
-    var resource: [String: Any]
-    init?(fromJSON json: Any) {
-        guard let resource = getResourceFromJSON(json),
-            let resourceType = resource["resourceType"] as? String else {
-                return nil
-        }
-        self.resource = resource
-        super.init(resourceType)
-    }
-
-    /// Override to check if the fields match
-    override func matches(_ query: [String: Any]) -> Bool {
-        return matchDicts(document: resource, query: query)
-    }
-
-    override func getValue(forField field: String) -> Any? {
-        return lookupValue(forField: field, inDict: resource)
-    }
-
-    override func asJSON() -> [String: Any] {
-        return resource
-    }
-}
-
-/// A FHIR Bundle. Eventually this should likely be replaced with an actual FHIR library but at present this exists as a place-holder.
-class FHIRBundle: FHIRResource {
-    var entries = [FHIRResource]()
-
-    init?(fromJSON json: Any) {
-        guard let jsonObj = json as? [String: Any], let resourceType = jsonObj["resourceType"] as? String, resourceType == "Bundle" else {
-            return nil
-        }
-        // For now, just jam the entire thing into an entry
-        guard let entries = jsonObj["entry"] as? [Any] else {
-            return nil
-        }
-        // Go through the entries and create whatever resources we can
-        for entry in entries {
-            if let resource = FHIRResource.create(fromJSON: entry) {
-                self.entries.append(resource)
-            }
-        }
-        super.init("Bundle")
-    }
-
-    /**
-     Very basic search that looks for any resource that matches the given object - that is, has fields that match the given JSON object. There's no special logic here, and everything has to be an exact match.
-
-     This is **not** designed to be well optimized! It operates at O(n) speed. If there are a ton of resources, a better searching mechanism should be used. This will likely not be changed any time in the future.
-
-     - Parameter query: an object containing fields that must match (exactly) to return a document
-     - Returns: a list of all matching resources
-     */
-    func search(_ query: [String: Any]) -> [FHIRResource] {
-        var result = [FHIRResource]()
-        for resource in entries {
-            if resource.matches(query) {
-                result.append(resource)
-            }
-        }
-        return result
     }
 }
