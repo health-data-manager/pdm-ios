@@ -46,19 +46,14 @@ class PDMTheme {
     /// Time format string used for formatting times
     static let timeFormat = "HH:mm"
 
-    private static let dateFormatter = { () -> DateFormatter in
-        let formatter = DateFormatter()
-        formatter.dateFormat = dateFormat
-        formatter.timeStyle = .none
-        return formatter
-    }()
-
     /// Format the date in a standard app-specific fashion.
     ///
     /// - Parameter date: the date to format
     /// - Returns: the formatted date
     static func formatDate(_ date: Date) -> String {
-        // It's unclear to me what the overhead of initializing the date formatter is versus keeping it around.
-        return dateFormatter.string(from: date)
+        // The documentation doesn't make this clear, but formatters appear to need to be instantiated per-instance
+        let formatter = DateFormatter()
+        formatter.dateFormat = dateFormat
+        return formatter.string(from: date)
     }
 }

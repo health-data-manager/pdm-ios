@@ -31,4 +31,19 @@ class FHIRTests: XCTestCase {
         }
     }
 
+    func testParseDate() {
+        guard let testDate = DateTime("2019-10-31") else {
+            XCTFail("Date parse failed")
+            return
+        }
+        XCTAssertNotNil(testDate.date)
+        let calendar = Calendar(identifier: .gregorian)
+        let parts = calendar.dateComponents([.year, .month, .day], from: testDate.date)
+        XCTAssertNotNil(parts.year)
+        XCTAssertEqual(parts.year, 2019)
+        XCTAssertNotNil(parts.month)
+        XCTAssertEqual(parts.month, 10)
+        XCTAssertNotNil(parts.day)
+        XCTAssertEqual(parts.day, 31)
+    }
 }

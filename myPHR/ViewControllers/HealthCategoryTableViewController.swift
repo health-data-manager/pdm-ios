@@ -41,6 +41,10 @@ class HealthCategoryTableViewCell : UITableViewCell {
                         descriptionLabel.isHidden = false
                     }
                 }
+                if let recordedDate = allergyIntolerance.recordedDate {
+                    dateLabel.text = PDMTheme.formatDate(recordedDate.date)
+                    dateLabel.isHidden = false
+                }
             }
         } else {
             nameLabel.text = "Nil"

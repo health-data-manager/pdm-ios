@@ -11,7 +11,7 @@ public class AllergyIntolerance : FHIRResource {
     public static let resourceType = "AllergyIntolerance"
     public var id: Identifier?
     public var onset: Date?
-    public var recordedDate: Date?
+    public var recordedDate: DateTime?
     //public var recorder: Reference(Practitioner | Patient)    Who recorded the sensitivity
     //public var patient: Reference(Patient)    Who the sensitivity is for
     //public var reporter: Reference(Patient | RelatedPerson | Practitioner)    Source of the information about the allergy
@@ -26,6 +26,9 @@ public class AllergyIntolerance : FHIRResource {
 
     override init(fromJSON json: [String : Any]) {
         super.init(fromJSON: json)
+        if let recordedDate = json["recordedDate"] as? String {
+            self.recordedDate = DateTime(recordedDate)
+        }
         if let substance = json["substance"] as? [String : Any] {
             self.substance = CodeableConcept(fromJSON: substance)
         }

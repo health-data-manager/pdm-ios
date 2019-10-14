@@ -82,6 +82,42 @@ public struct CodeableConcept {
     }
 }
 
+/// Represents a FHIR DateTime field. FHIR date times are somewhat annoying in that they can be less precise than "real" Dates.
+public struct DateTime {
+    public var precision: Precision
+    public var date: Date
+    // TODO: Implement this public var timezone: TimeZone?
+
+    public init?(_ value: String) {
+        // For now, cheap out and only parse dates and dateTimes
+        let parser = ISO8601DateFormatter()
+        parser.formatOptions = [.withFullDate, .withFullTime, .withDashSeparatorInDate]
+        if let date = parser.date(from: value) {
+            self.date = date
+            self.precision = .dateTime
+            return
+        }
+        parser.formatOptions.remove(.withFullTime)
+        if let date = parser.date(from: value) {
+            self.date = date
+            self.precision = .date
+            return
+        }
+        return nil
+    }
+
+    public enum Precision {
+        /// Only the year part of the date is valid
+        case year
+        /// Only the year and month part of the date is valid
+        case yearMonth
+        /// Only the date (year, month, and day) part of the date is valid
+        case date
+        /// The entire thing is valid
+        case dateTime
+    }
+}
+
 public struct Period {
     var start: Date?
     var end: Date?
