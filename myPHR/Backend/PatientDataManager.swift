@@ -8,7 +8,6 @@
 import Foundation
 import HealthKit
 import os.log
-import FHIR
 
 /// Various errors that can occur within the Patient Data Manager.
 enum PatientDataManagerError: Error, LocalizedError {
@@ -160,9 +159,6 @@ class PatientDataManager {
      */
     var activeProfile: PDMProfile?
 
-    /// A bundle of loaded records from the server. This will probably be changed at some future point.
-    var serverRecords: FHIRBundle?
-
     // Generated URLs.
 
     /// The OAuth token URL (relative to the root URL)
@@ -261,7 +257,6 @@ class PatientDataManager {
         user = nil
         restClient.bearerToken = nil
         activeProfile = nil
-        serverRecords = nil
         // For now, just instantly "complete" - in the future this should try and expire the session on the server, too
         completionHandler(nil)
     }
@@ -421,42 +416,6 @@ class PatientDataManager {
                 return
             }
             self.uploadHealthRecords(records, completionCallback: completionCallback)
-        }
-    }
-
-    /**
-     Load health records from the patient data manager.
-     - Parameters:
-         - completionCallback: the completion handler invoked when the operation completes
-         - bundle: the resulting FHIR bundle if the load was successful
-         - error: an error object describing why the load failed
-     - Returns: a URLSessionTask describing the load progress
-     */
-    @discardableResult func loadHealthRecords(completionCallback: @escaping (_ bundle: FHIRBundle?, _ error: Error?) -> Void) -> URLSessionTask? {
-        guard restClient.hasBearerToken else {
-            completionCallback(nil, PatientDataManagerError.notLoggedIn)
-            return nil
-        }
-        guard let profile = activeProfile else {
-            completionCallback(nil, PatientDataManagerError.noActiveProfile)
-            return nil
-        }
-        return restClient.getJSONObject(from: rootURL.appendingPathComponent("api/v1/Patient/\(profile.profileId)/$everything")) { data, response, error in
-            if let error = error {
-                completionCallback(nil, error)
-            } else {
-                guard let json = data else {
-                    completionCallback(nil, PatientDataManagerError.noResultFromServer)
-                    return
-                }
-                guard let bundle = FHIRBundle(fromJSON: json) else {
-                    print("Could not parse FHIR bundle")
-                    completionCallback(nil, PatientDataManagerError.couldNotUnderstandResponse)
-                    return
-                }
-                self.serverRecords = bundle
-                completionCallback(bundle, nil)
-            }
         }
     }
 

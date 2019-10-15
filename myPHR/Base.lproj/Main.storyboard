@@ -190,7 +190,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TL-5A-ouP" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="16" y="282" width="343" height="30"/>
+                                <rect key="frame" x="16" y="282" width="343" height="38"/>
                                 <state key="normal" title="Retry"/>
                                 <connections>
                                     <action selector="retry:" destination="3dG-5s-UAs" eventType="primaryActionTriggered" id="Wbm-t2-e8r"/>
@@ -238,90 +238,27 @@
                         <outlet property="loadingLabel" destination="xYT-vw-FI4" id="hO9-4h-uhw"/>
                         <outlet property="retryButton" destination="7TL-5A-ouP" id="Aeh-2h-1cD"/>
                         <outlet property="titleLabel" destination="QYg-c6-4XA" id="Cc2-B4-MEf"/>
-                        <segue destination="NKh-ni-LcR" kind="showDetail" identifier="Home" id="sDh-JN-vse"/>
+                        <segue destination="ecH-ZH-5RI" kind="showDetail" identifier="Home" id="yki-Ft-Bds"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5AF-Cq-2Oa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1772" y="18"/>
         </scene>
-        <!--Account-->
-        <scene sceneID="Cmm-ZI-MCP">
+        <!--View Controller-->
+        <scene sceneID="rQg-0R-1bq">
             <objects>
-                <viewControllerPlaceholder storyboardName="Account" id="tT7-ja-7hz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="0RQ-s8-ft7"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="odO-kw-gy2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="564" y="1092"/>
-        </scene>
-        <!--Sharing-->
-        <scene sceneID="3ee-8C-8uw">
-            <objects>
-                <viewController id="MSP-lQ-Brj" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nnP-Ae-KHQ">
+                <viewController id="ecH-ZH-5RI" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XqG-1v-4lq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Implemented" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wx-nx-wxj">
-                                <rect key="frame" x="76" y="315.5" width="223" height="36"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="6wx-nx-wxj" firstAttribute="centerX" secondItem="nnP-Ae-KHQ" secondAttribute="centerX" id="2mf-gd-dDX"/>
-                            <constraint firstItem="6wx-nx-wxj" firstAttribute="centerY" secondItem="nnP-Ae-KHQ" secondAttribute="centerY" id="g2e-3W-I8z"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="TAh-zt-BOu"/>
+                        <viewLayoutGuide key="safeArea" id="vdR-8F-X0x"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Sharing" image="SharingTabIcon" id="LXu-rB-Apt"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4p4-lD-bdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iQx-RZ-8uP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="257" y="1513"/>
-        </scene>
-        <!--Sources-->
-        <scene sceneID="cX3-lS-xaO">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Sources" id="k4B-Wd-ICH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="54e-ve-9uX"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hyo-t2-NNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-696" y="1227"/>
-        </scene>
-        <!--HealthRecord-->
-        <scene sceneID="isA-x2-VIh">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HealthRecord" id="Bau-Cl-sBT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="XZV-GQ-r9D"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3iv-6d-AuD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-391" y="1225"/>
-        </scene>
-        <!--Home View Controller-->
-        <scene sceneID="K2z-PB-OWu">
-            <objects>
-                <tabBarController storyboardIdentifier="HomeView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NKh-ni-LcR" customClass="HomeViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hYA-WC-GwT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="k4B-Wd-ICH" kind="relationship" relationship="viewControllers" id="slr-rY-gZI"/>
-                        <segue destination="Bau-Cl-sBT" kind="relationship" relationship="viewControllers" id="gfY-Rk-EcC"/>
-                        <segue destination="MSP-lQ-Brj" kind="relationship" relationship="viewControllers" id="uGk-m4-lDx"/>
-                        <segue destination="tT7-ja-7hz" kind="relationship" relationship="viewControllers" id="PmA-3l-aex"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZmI-Sn-0dM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-391" y="753"/>
+            <point key="canvasLocation" x="1772" y="752"/>
         </scene>
         <!--Login Navigation-->
         <scene sceneID="VJf-ZJ-Ipn">
@@ -506,7 +443,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SharingTabIcon" width="23" height="23"/>
         <namedColor name="LandingBackground">
             <color red="0.51372549019607838" green="0.85490196078431369" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

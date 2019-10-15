@@ -94,7 +94,7 @@ class InitializePDMViewController: UIViewController {
         }
         guard pdm.healthKit != nil else {
             // If HealthKit isn't available, skip ahead to loading the records back from the PDM
-            loadHealthRecords()
+            segueToHome()
             return
         }
         showSendingHealthKit("Loading local health records...")
@@ -104,21 +104,8 @@ class InitializePDMViewController: UIViewController {
                     self.handleError(error, title: "Could not load health records")
                     return
                 } else {
-                    self.loadHealthRecords()
+                    self.segueToHome()
                 }
-            }
-        }
-    }
-
-    func loadHealthRecords() {
-        guard let pdm = patientDataManager else {
-            pdmNotAvailable()
-            return
-        }
-        showLoadingProfile("Fetching health records...")
-        pdm.loadHealthRecords() { json, error in
-            DispatchQueue.main.async {
-                self.segueToHome()
             }
         }
     }
