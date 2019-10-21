@@ -183,33 +183,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYT-vw-FI4">
-                                <rect key="frame" x="52" y="213" width="307" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYT-vw-FI4">
+                                <rect key="frame" x="52" y="233" width="307" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TL-5A-ouP" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="16" y="282" width="343" height="38"/>
-                                <state key="normal" title="Retry"/>
+                                <rect key="frame" x="16" y="301.5" width="343" height="38"/>
+                                <state key="normal" title="Send my Health Records"/>
                                 <connections>
                                     <action selector="retry:" destination="3dG-5s-UAs" eventType="primaryActionTriggered" id="Wbm-t2-e8r"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This text should explain what is happening here." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEU-Cj-JoO">
-                                <rect key="frame" x="16" y="140" width="343" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the myPHR trial. When you are ready, tap the &quot;send my health records&quot; button to upload your HealthKit records." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEU-Cj-JoO">
+                                <rect key="frame" x="16" y="140" width="343" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connecting to HealthKit" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-c6-4XA">
-                                <rect key="frame" x="16" y="80" width="308" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to myPHR" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-c6-4XA">
+                                <rect key="frame" x="16" y="80" width="256" height="36"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Wh-v2G">
-                                <rect key="frame" x="16" y="213" width="20" height="20"/>
+                                <rect key="frame" x="16" y="233" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -225,7 +225,7 @@
                             <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="xYT-vw-FI4" secondAttribute="trailing" constant="16" id="e7I-ln-q1u"/>
                             <constraint firstItem="z5W-Wh-v2G" firstAttribute="top" secondItem="tEU-Cj-JoO" secondAttribute="bottom" constant="32" id="gfL-VK-URL"/>
                             <constraint firstItem="7TL-5A-ouP" firstAttribute="top" secondItem="xYT-vw-FI4" secondAttribute="bottom" constant="48" id="jay-wU-afa"/>
-                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7TL-5A-ouP" secondAttribute="bottom" constant="347" id="l3q-bK-Xcx"/>
+                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7TL-5A-ouP" secondAttribute="bottom" constant="16" id="l3q-bK-Xcx"/>
                             <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="tEU-Cj-JoO" secondAttribute="trailing" constant="16" id="oA6-Xa-uyP"/>
                             <constraint firstItem="xYT-vw-FI4" firstAttribute="top" secondItem="tEU-Cj-JoO" secondAttribute="bottom" constant="32" id="r6d-dB-yPU"/>
                             <constraint firstItem="xYT-vw-FI4" firstAttribute="leading" secondItem="z5W-Wh-v2G" secondAttribute="trailing" constant="16" id="tic-A5-iy2"/>
@@ -252,7 +252,29 @@
                     <view key="view" contentMode="scaleToFill" id="XqG-1v-4lq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Uploaded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffc-sa-xPO">
+                                <rect key="frame" x="16" y="36" width="193.5" height="36"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for sending your data to the PDM. The following was sent:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lnz-qt-09b">
+                                <rect key="frame" x="16" y="80" width="343" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Lnz-qt-09b" secondAttribute="trailing" constant="16" id="34G-53-XVO"/>
+                            <constraint firstItem="Lnz-qt-09b" firstAttribute="leading" secondItem="vdR-8F-X0x" secondAttribute="leading" constant="16" id="Acd-mX-PmZ"/>
+                            <constraint firstItem="ffc-sa-xPO" firstAttribute="top" secondItem="vdR-8F-X0x" secondAttribute="top" constant="16" id="D7D-H1-ALO"/>
+                            <constraint firstItem="ffc-sa-xPO" firstAttribute="leading" secondItem="vdR-8F-X0x" secondAttribute="leading" constant="16" id="PZB-UO-Twa"/>
+                            <constraint firstItem="vdR-8F-X0x" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ffc-sa-xPO" secondAttribute="trailing" constant="16" id="kcm-y7-8kg"/>
+                            <constraint firstItem="Lnz-qt-09b" firstAttribute="top" secondItem="ffc-sa-xPO" secondAttribute="bottom" constant="8" id="o8h-fB-iNp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vdR-8F-X0x"/>
                     </view>
                 </viewController>
@@ -290,7 +312,7 @@
                                 <rect key="frame" x="0.0" y="128" width="375" height="539"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H7B-ms-tn3">
-                                        <rect key="frame" x="10" y="0.0" width="354" height="417.5"/>
+                                        <rect key="frame" x="10" y="0.0" width="354" height="409.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izf-cj-xCp">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
@@ -385,7 +407,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-qU-IHV" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="379.5" width="354" height="38"/>
+                                                <rect key="frame" x="0.0" y="379.5" width="354" height="30"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
                                                 <state key="normal" title="Create Account"/>
                                                 <userDefinedRuntimeAttributes>
@@ -451,6 +473,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XFW-u4-nzc"/>
+        <segue reference="lhz-BI-xji"/>
     </inferredMetricsTieBreakers>
 </document>

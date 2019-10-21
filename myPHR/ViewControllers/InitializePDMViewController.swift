@@ -18,7 +18,6 @@ class InitializePDMViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        retryButton.isHidden = true
         // Prepare the views while we're loaded
         guard let pdm = patientDataManager else {
             // If the PDM is not available, there is nothing to do. Stop immediately.
@@ -26,15 +25,11 @@ class InitializePDMViewController: UIViewController {
             return
         }
         guard pdm.healthKit != nil else {
-            showLoadingProfile()
+            showNoHealthKit()
             return
         }
-        showInitializingHealthKit()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        // Once the view has appeared, check if we have HealthKit
-        checkHealthKitAccess()
+        activityIndicator.stopAnimating()
+        loadingLabel.text = ""
     }
 
     func checkHealthKitAccess() {
@@ -46,7 +41,7 @@ class InitializePDMViewController: UIViewController {
 
         guard let healthKit = pdm.healthKit else {
             // If we have no HealthKit, skip ahead to loading data from the PDM
-            loadProfile()
+            showNoHealthKit()
             return
         }
 
@@ -66,7 +61,7 @@ class InitializePDMViewController: UIViewController {
     }
 
     @IBAction func retry(_ sender: Any) {
-        //checkHealthKitAccess()
+        checkHealthKitAccess()
     }
 
     func loadProfile() {
@@ -123,6 +118,10 @@ class InitializePDMViewController: UIViewController {
         showLoadingMessage(title: "PDM Not Available", description: "The Patient Data Manager was not configured correctly.")
     }
 
+    func showNoHealthKit() {
+        showLoadingMessage(title: "HealthKit Not Available", description: "HealthKit health records are not available on this device, so no health records can be loaded.")
+    }
+
     func showInitializingHealthKit() {
         showLoadingMessage(title: "Checking for HealthKit", description: "Requesting accessing to your health records via HealthKit...", loading: "Checking if HealthKit is available...")
     }
@@ -143,6 +142,9 @@ class InitializePDMViewController: UIViewController {
             loadingLabel.text = loadingText
         }
         activityIndicator.isHidden = loading == nil
+        if loading != nil && !activityIndicator.isAnimating {
+            activityIndicator.startAnimating()
+        }
         retryButton.isHidden = true
     }
 
