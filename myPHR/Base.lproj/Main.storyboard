@@ -20,19 +20,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient Data Manager" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDd-X6-beO">
-                                <rect key="frame" x="37" y="373" width="301" height="36"/>
+                                <rect key="frame" x="37" y="357" width="301" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" name="SelectedNav"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect your health data for sharing with anyone you want." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chf-KJ-HHe">
-                                <rect key="frame" x="32" y="457" width="311" height="41"/>
+                                <rect key="frame" x="32" y="441" width="311" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-Pp-QvB" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="8" y="629" width="359" height="30"/>
+                                <rect key="frame" x="8" y="621" width="359" height="38"/>
                                 <state key="normal" title="Sign In"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -42,13 +42,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An open source project by MITRE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZx-sf-pUU">
-                                <rect key="frame" x="60" y="530" width="255" height="21"/>
+                                <rect key="frame" x="60" y="514" width="255" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtT-uw-y5F" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="8" y="583" width="359" height="30"/>
+                                <rect key="frame" x="8" y="567" width="359" height="38"/>
                                 <state key="normal" title="Create Account"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="YES"/>
@@ -95,7 +95,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-9Y-rYY">
-                                <rect key="frame" x="16" y="148" width="343" height="171"/>
+                                <rect key="frame" x="16" y="148" width="343" height="179"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okf-Ss-tCp">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -134,7 +134,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9N-hh-f85" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="141" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="141" width="343" height="38"/>
                                         <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
                                         <state key="normal" title="Sign In"/>
                                         <userDefinedRuntimeAttributes>
@@ -245,10 +245,10 @@
             </objects>
             <point key="canvasLocation" x="1772" y="18"/>
         </scene>
-        <!--View Controller-->
+        <!--Summary View Controller-->
         <scene sceneID="rQg-0R-1bq">
             <objects>
-                <viewController id="ecH-ZH-5RI" sceneMemberID="viewController">
+                <viewController id="ecH-ZH-5RI" customClass="SummaryViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XqG-1v-4lq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -265,18 +265,43 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBr-wL-Hjs" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
+                                <rect key="frame" x="149" y="609" width="77" height="38"/>
+                                <state key="normal" title="Log Out"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logOut:" destination="ecH-ZH-5RI" eventType="primaryActionTriggered" id="Q4K-CU-9zX"/>
+                                </connections>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M9I-0j-v9j">
+                                <rect key="frame" x="16" y="137" width="343" height="456"/>
+                                <connections>
+                                    <segue destination="th2-EW-KYi" kind="embed" id="Ctq-iJ-xEI"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="M9I-0j-v9j" firstAttribute="top" secondItem="Lnz-qt-09b" secondAttribute="bottom" constant="16" id="1Pm-S7-rsd"/>
+                            <constraint firstItem="vdR-8F-X0x" firstAttribute="trailing" secondItem="M9I-0j-v9j" secondAttribute="trailing" constant="16" id="1f2-Pu-U5v"/>
                             <constraint firstAttribute="trailing" secondItem="Lnz-qt-09b" secondAttribute="trailing" constant="16" id="34G-53-XVO"/>
                             <constraint firstItem="Lnz-qt-09b" firstAttribute="leading" secondItem="vdR-8F-X0x" secondAttribute="leading" constant="16" id="Acd-mX-PmZ"/>
                             <constraint firstItem="ffc-sa-xPO" firstAttribute="top" secondItem="vdR-8F-X0x" secondAttribute="top" constant="16" id="D7D-H1-ALO"/>
                             <constraint firstItem="ffc-sa-xPO" firstAttribute="leading" secondItem="vdR-8F-X0x" secondAttribute="leading" constant="16" id="PZB-UO-Twa"/>
+                            <constraint firstItem="M9I-0j-v9j" firstAttribute="leading" secondItem="vdR-8F-X0x" secondAttribute="leading" constant="16" id="Pq6-9J-NHo"/>
+                            <constraint firstItem="rBr-wL-Hjs" firstAttribute="centerX" secondItem="XqG-1v-4lq" secondAttribute="centerX" id="k2h-Wk-ErY"/>
                             <constraint firstItem="vdR-8F-X0x" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ffc-sa-xPO" secondAttribute="trailing" constant="16" id="kcm-y7-8kg"/>
                             <constraint firstItem="Lnz-qt-09b" firstAttribute="top" secondItem="ffc-sa-xPO" secondAttribute="bottom" constant="8" id="o8h-fB-iNp"/>
+                            <constraint firstItem="vdR-8F-X0x" firstAttribute="bottom" secondItem="rBr-wL-Hjs" secondAttribute="bottom" constant="20" id="tIA-ch-K0J"/>
+                            <constraint firstItem="rBr-wL-Hjs" firstAttribute="top" secondItem="M9I-0j-v9j" secondAttribute="bottom" constant="16" id="vhN-EP-RTB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vdR-8F-X0x"/>
                     </view>
+                    <connections>
+                        <outlet property="tableViewContainer" destination="M9I-0j-v9j" id="fsj-aH-JRf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQx-RZ-8uP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -312,7 +337,7 @@
                                 <rect key="frame" x="0.0" y="128" width="375" height="539"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H7B-ms-tn3">
-                                        <rect key="frame" x="10" y="0.0" width="354" height="409.5"/>
+                                        <rect key="frame" x="10" y="0.0" width="354" height="417.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izf-cj-xCp">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
@@ -407,7 +432,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-qU-IHV" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="379.5" width="354" height="30"/>
+                                                <rect key="frame" x="0.0" y="379.5" width="354" height="38"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
                                                 <state key="normal" title="Create Account"/>
                                                 <userDefinedRuntimeAttributes>
@@ -462,6 +487,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rxr-UA-Tvg" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="993" y="-750"/>
+        </scene>
+        <!--Category Summary Table View Controller-->
+        <scene sceneID="Xuc-Nb-Aut">
+            <objects>
+                <tableViewController id="th2-EW-KYi" customClass="CategorySummaryTableViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="UnY-Tn-Uhp">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="456"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="KSG-Lc-3ys">
+                            <rect key="frame" x="0.0" y="72" width="343" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="Tma-3E-kEl" detailTextLabel="kLp-Zd-XY8" style="IBUITableViewCellStyleValue1" id="DBP-Kf-N2y">
+                                <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DBP-Kf-N2y" id="khq-vs-Snc">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tma-3E-kEl">
+                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kLp-Zd-XY8">
+                                            <rect key="frame" x="283" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="th2-EW-KYi" id="I3o-7w-Gfj"/>
+                            <outlet property="delegate" destination="th2-EW-KYi" id="oQm-nd-mWu"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Npo-QX-Ahv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2487" y="751"/>
         </scene>
     </scenes>
     <resources>

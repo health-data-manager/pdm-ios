@@ -16,6 +16,8 @@ class InitializePDMViewController: UIViewController {
     @IBOutlet weak var retryButton: PDMButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    var uploadResults: PDMUploadResults?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Prepare the views while we're loaded
@@ -93,12 +95,13 @@ class InitializePDMViewController: UIViewController {
             return
         }
         showSendingHealthKit("Loading local health records...")
-        pdm.uploadHealthRecordsFromHealthKit() { error in
+        pdm.uploadHealthRecordsFromHealthKit() { (error, result) in
             DispatchQueue.main.async {
                 if let error = error {
                     self.handleError(error, title: "Could not load health records")
                     return
                 } else {
+                    self.uploadResults = result
                     self.segueToHome()
                 }
             }
@@ -157,8 +160,12 @@ class InitializePDMViewController: UIViewController {
         // TODO: Enable the retry button
     }
 
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        super.prepare(for: segue, sender: sender)
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let destination = segue.destination as? SummaryViewController {
+            print("Passing summary \(String(describing: uploadResults))")
+            destination.results = uploadResults
+        }
+    }
 }
 

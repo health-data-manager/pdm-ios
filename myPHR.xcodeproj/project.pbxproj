@@ -47,6 +47,9 @@
 		2EBF772D229321CC00170091 /* PDMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF772C229321CC00170091 /* PDMProvider.swift */; };
 		2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF7730229496CB00170091 /* PDMTimeLine.swift */; };
 		2EC27F2B22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC27F2A22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift */; };
+		2EC82C9C235F767C00DBC061 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC82C9B235F767C00DBC061 /* SummaryViewController.swift */; };
+		2EC82C9E235F768D00DBC061 /* CategorySummaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC82C9D235F768D00DBC061 /* CategorySummaryTableViewController.swift */; };
+		2EC82CA0235F76CC00DBC061 /* PDMUploadResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC82C9F235F76CC00DBC061 /* PDMUploadResults.swift */; };
 		2ED1969E2295DCCA001821A8 /* PatientDataManagerKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1969D2295DCCA001821A8 /* PatientDataManagerKeychain.swift */; };
 		2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98951227CAC8D0034B4B6 /* RESTClient.swift */; };
 		2ED98954227CEAF70034B4B6 /* PDMProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */; };
@@ -132,6 +135,9 @@
 		2EBF772C229321CC00170091 /* PDMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProvider.swift; sourceTree = "<group>"; };
 		2EBF7730229496CB00170091 /* PDMTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMTimeLine.swift; sourceTree = "<group>"; };
 		2EC27F2A22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMenuInfoTableViewController.swift; sourceTree = "<group>"; };
+		2EC82C9B235F767C00DBC061 /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		2EC82C9D235F768D00DBC061 /* CategorySummaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySummaryTableViewController.swift; sourceTree = "<group>"; };
+		2EC82C9F235F76CC00DBC061 /* PDMUploadResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMUploadResults.swift; sourceTree = "<group>"; };
 		2ED1969D2295DCCA001821A8 /* PatientDataManagerKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDataManagerKeychain.swift; sourceTree = "<group>"; };
 		2ED98951227CAC8D0034B4B6 /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
 		2ED98953227CEAF70034B4B6 /* PDMProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMProfileTests.swift; sourceTree = "<group>"; };
@@ -176,6 +182,8 @@
 				2EC27F2A22B2C07500E0DFD2 /* AccountMenuInfoTableViewController.swift */,
 				2E17CFFF227B6DE900AF2FBC /* HomeViewController.swift */,
 				2E2342D02242937700045E3A /* InitializePDMViewController.swift */,
+				2EC82C9B235F767C00DBC061 /* SummaryViewController.swift */,
+				2EC82C9D235F768D00DBC061 /* CategorySummaryTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -301,6 +309,7 @@
 				2EBF772C229321CC00170091 /* PDMProvider.swift */,
 				2E7FADFB229EF13000A766C6 /* PDMProviderCollection.swift */,
 				2E7FADFD229EFF6000A766C6 /* PDMProfileSourceDataController.swift */,
+				2EC82C9F235F76CC00DBC061 /* PDMUploadResults.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -456,6 +465,7 @@
 				2EA93702226E406400513F9D /* HTTPExtensions.swift in Sources */,
 				2ED98952227CAC8D0034B4B6 /* RESTClient.swift in Sources */,
 				2E40233022B7DE4500E525C7 /* PDMBorderedView.swift in Sources */,
+				2EC82CA0235F76CC00DBC061 /* PDMUploadResults.swift in Sources */,
 				2E465FBA233A94CD00087B1E /* PDMBadge.swift in Sources */,
 				2E3C3349229892DD0013A712 /* PDMMiniBrowserViewController.swift in Sources */,
 				2E2342D12242937700045E3A /* InitializePDMViewController.swift in Sources */,
@@ -469,6 +479,8 @@
 				2E395EC7226783B600A9A7D6 /* PDMTheme.swift in Sources */,
 				2ED1969E2295DCCA001821A8 /* PatientDataManagerKeychain.swift in Sources */,
 				2EA9370E2278914000513F9D /* PDMHealthKit.swift in Sources */,
+				2EC82C9E235F768D00DBC061 /* CategorySummaryTableViewController.swift in Sources */,
+				2EC82C9C235F767C00DBC061 /* SummaryViewController.swift in Sources */,
 				2EBF7731229496CB00170091 /* PDMTimeLine.swift in Sources */,
 				2E7FADFC229EF13000A766C6 /* PDMProviderCollection.swift in Sources */,
 				2E5A87BB2244C06000E225D5 /* MessageBundle.swift in Sources */,

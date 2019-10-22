@@ -375,44 +375,50 @@ class PatientDataManager {
         }
     }
 
-    @discardableResult func uploadHealthRecords(_ records: [HKClinicalRecord], completionCallback: @escaping (Error?) -> Void) -> URLSessionDataTask? {
+    @discardableResult func uploadHealthRecords(_ records: [HKClinicalRecord], completionCallback: @escaping (Error?, PDMUploadResults?) -> Void) -> URLSessionDataTask? {
         guard restClient.hasBearerToken else {
-            completionCallback(PatientDataManagerError.notLoggedIn)
+            completionCallback(PatientDataManagerError.notLoggedIn, nil)
             return nil
         }
         let url = rootURL.appendingPathComponent("api/v1/$process-message")
         // The data should be a single resource which needs to be wrapped into a bundle
         let bundle = MessageBundle()
         guard let pID = activeProfile?.profileId else {
-            completionCallback(PatientDataManagerError.noActiveProfile)
+            completionCallback(PatientDataManagerError.noActiveProfile, nil)
             return nil
         }
         bundle.addPatientId(String(pID))
         do {
             try bundle.addRecordsAsEntry(records)
             return restClient.post(to: url, withJSON: bundle.createJSON()) { data, response, error in
-                completionCallback(error)
+                if error == nil {
+                    // If we have a success, generate a result object
+                    // (It might make sense to generate the result from the data receipt but whatever)
+                    completionCallback(nil, PDMUploadResults(records))
+                } else {
+                    completionCallback(error, nil)
+                }
             }
         } catch {
             // Q: Is this really an error?
-            completionCallback(error)
+            completionCallback(error, nil)
             return nil
         }
     }
 
     /// Attempts to upload any health records.
-    func uploadHealthRecordsFromHealthKit(completionCallback: @escaping (Error?) -> Void) {
+    func uploadHealthRecordsFromHealthKit(completionCallback: @escaping (Error?, PDMUploadResults?) -> Void) {
         guard let healthKit = healthKit else {
-            completionCallback(PatientDataManagerError.healthKitNotAvailable)
+            completionCallback(PatientDataManagerError.healthKitNotAvailable, nil)
             return
         }
         healthKit.queryAllHealthRecords() { records, error in
             if let error = error {
-                completionCallback(error)
+                completionCallback(error, nil)
                 return
             }
             guard let records = records else {
-                completionCallback(PatientDataManagerError.internalError)
+                completionCallback(PatientDataManagerError.internalError, nil)
                 return
             }
             self.uploadHealthRecords(records, completionCallback: completionCallback)
