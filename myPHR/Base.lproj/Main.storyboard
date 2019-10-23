@@ -168,7 +168,7 @@
                         <outlet property="emailTextField" destination="N5z-Tn-Q3A" id="qCF-bk-aUL"/>
                         <outlet property="passwordTextField" destination="tLq-ej-tpp" id="eoB-vr-aaX"/>
                         <outlet property="signInButton" destination="o9N-hh-f85" id="4sW-gI-1za"/>
-                        <segue destination="3dG-5s-UAs" kind="show" identifier="Login" id="hjD-yb-PQI"/>
+                        <segue destination="3dG-5s-UAs" kind="showDetail" identifier="Login" id="hjD-yb-PQI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -184,32 +184,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYT-vw-FI4">
-                                <rect key="frame" x="52" y="233" width="307" height="20.5"/>
+                                <rect key="frame" x="52" y="189" width="307" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TL-5A-ouP" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="16" y="301.5" width="343" height="38"/>
+                                <rect key="frame" x="16" y="257.5" width="343" height="38"/>
                                 <state key="normal" title="Send my Health Records"/>
                                 <connections>
                                     <action selector="retry:" destination="3dG-5s-UAs" eventType="primaryActionTriggered" id="Wbm-t2-e8r"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the myPHR trial. When you are ready, tap the &quot;send my health records&quot; button to upload your HealthKit records." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEU-Cj-JoO">
-                                <rect key="frame" x="16" y="140" width="343" height="61"/>
+                                <rect key="frame" x="16" y="96" width="343" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to myPHR" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-c6-4XA">
-                                <rect key="frame" x="16" y="80" width="256" height="36"/>
+                                <rect key="frame" x="16" y="36" width="256" height="36"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Wh-v2G">
-                                <rect key="frame" x="16" y="233" width="20" height="20"/>
+                                <rect key="frame" x="16" y="189" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -481,7 +481,7 @@
                         <outlet property="passwordField" destination="BOe-QD-foS" id="hRw-of-F48"/>
                         <outlet property="passwordStatusLabel" destination="T07-eX-wHd" id="piY-V1-Etw"/>
                         <outlet property="scrollView" destination="Xek-l9-Qxc" id="UNK-TJ-PXU"/>
-                        <segue destination="3dG-5s-UAs" kind="show" identifier="AccountCreated" id="XFW-u4-nzc"/>
+                        <segue destination="3dG-5s-UAs" kind="showDetail" identifier="AccountCreated" id="XFW-u4-nzc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rxr-UA-Tvg" sceneMemberID="firstResponder"/>
@@ -496,7 +496,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="343" height="456"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="KSG-Lc-3ys">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="KSG-Lc-3ys">
                             <rect key="frame" x="0.0" y="72" width="343" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -547,6 +547,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lhz-BI-xji"/>
+        <segue reference="XFW-u4-nzc"/>
     </inferredMetricsTieBreakers>
 </document>
