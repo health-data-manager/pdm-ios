@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qka-tD-UK2">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qka-tD-UK2">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -95,7 +93,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-9Y-rYY">
-                                <rect key="frame" x="16" y="148" width="343" height="179"/>
+                                <rect key="frame" x="16" y="133" width="343" height="179"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okf-Ss-tCp">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -104,9 +102,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N5z-Tn-Q3A">
-                                        <rect key="frame" x="0.0" y="30.5" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="30.5" width="343" height="34"/>
                                         <accessibility key="accessibilityConfiguration" label="Email"/>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="username"/>
                                         <connections>
@@ -116,15 +113,14 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pj-uL-yp0">
-                                        <rect key="frame" x="0.0" y="70.5" width="343" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="74.5" width="343" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tLq-ej-tpp">
-                                        <rect key="frame" x="0.0" y="101" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="105" width="343" height="34"/>
                                         <accessibility key="accessibilityConfiguration" hint="Your PDM account password" label="Password"/>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                         <connections>
@@ -134,7 +130,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9N-hh-f85" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="141" width="343" height="38"/>
+                                        <rect key="frame" x="0.0" y="149" width="343" height="30"/>
                                         <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
                                         <state key="normal" title="Sign In"/>
                                         <userDefinedRuntimeAttributes>
@@ -147,7 +143,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvB-Vy-xaj">
-                                <rect key="frame" x="16" y="80" width="87.5" height="36"/>
+                                <rect key="frame" x="16" y="60" width="99" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -178,38 +174,38 @@
         <!--InitializePDM View Controller-->
         <scene sceneID="1CS-wp-M2B">
             <objects>
-                <viewController id="3dG-5s-UAs" customClass="InitializePDMViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="3dG-5s-UAs" customClass="InitializePDMViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bG9-bJ-06g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYT-vw-FI4">
-                                <rect key="frame" x="52" y="189" width="307" height="20.5"/>
+                                <rect key="frame" x="52" y="174" width="307" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TL-5A-ouP" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="16" y="257.5" width="343" height="38"/>
+                                <rect key="frame" x="16" y="242.5" width="343" height="38"/>
                                 <state key="normal" title="Send my Health Records"/>
                                 <connections>
                                     <action selector="retry:" destination="3dG-5s-UAs" eventType="primaryActionTriggered" id="Wbm-t2-e8r"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the myPHR trial. When you are ready, tap the &quot;send my health records&quot; button to upload your HealthKit records." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEU-Cj-JoO">
-                                <rect key="frame" x="16" y="96" width="343" height="61"/>
+                                <rect key="frame" x="16" y="81" width="343" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Welcome to myPHR" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-c6-4XA">
-                                <rect key="frame" x="16" y="36" width="256" height="36"/>
+                                <rect key="frame" x="16" y="16" width="289.5" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Wh-v2G">
-                                <rect key="frame" x="16" y="189" width="20" height="20"/>
+                                <rect key="frame" x="16" y="174" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -248,19 +244,19 @@
         <!--Summary View Controller-->
         <scene sceneID="rQg-0R-1bq">
             <objects>
-                <viewController id="ecH-ZH-5RI" customClass="SummaryViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="ecH-ZH-5RI" customClass="SummaryViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XqG-1v-4lq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Uploaded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffc-sa-xPO">
-                                <rect key="frame" x="16" y="36" width="193.5" height="36"/>
+                                <rect key="frame" x="16" y="16" width="219" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for sending your data to the PDM. The following was sent:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lnz-qt-09b">
-                                <rect key="frame" x="16" y="80" width="343" height="41"/>
+                                <rect key="frame" x="16" y="65" width="343" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -276,7 +272,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M9I-0j-v9j">
-                                <rect key="frame" x="16" y="137" width="343" height="456"/>
+                                <rect key="frame" x="16" y="122" width="343" height="471"/>
                                 <connections>
                                     <segue destination="th2-EW-KYi" kind="embed" id="Ctq-iJ-xEI"/>
                                 </connections>
@@ -313,7 +309,7 @@
                 <navigationController title="Login Navigation" automaticallyAdjustsScrollViewInsets="NO" id="qka-tD-UK2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PWn-wN-zYd">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -334,10 +330,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xek-l9-Qxc">
-                                <rect key="frame" x="0.0" y="128" width="375" height="539"/>
+                                <rect key="frame" x="0.0" y="113" width="375" height="554"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H7B-ms-tn3">
-                                        <rect key="frame" x="10" y="0.0" width="354" height="417.5"/>
+                                        <rect key="frame" x="10" y="0.0" width="354" height="429.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izf-cj-xCp">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
@@ -346,9 +342,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbo-yy-txM">
-                                                <rect key="frame" x="0.0" y="30.5" width="354" height="30"/>
+                                                <rect key="frame" x="0.0" y="30.5" width="354" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" label="Email"/>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="given-name"/>
                                                 <connections>
@@ -357,15 +352,14 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkz-bi-wV3">
-                                                <rect key="frame" x="0.0" y="70.5" width="354" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="74.5" width="354" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bdw-1g-BbB">
-                                                <rect key="frame" x="0.0" y="101" width="354" height="30"/>
+                                                <rect key="frame" x="0.0" y="105" width="354" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" label="Email"/>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="family-name"/>
                                                 <connections>
@@ -374,15 +368,14 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPe-5U-MJ7">
-                                                <rect key="frame" x="0.0" y="141" width="354" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="149" width="354" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fIK-Nr-zeA">
-                                                <rect key="frame" x="0.0" y="171.5" width="354" height="30"/>
+                                                <rect key="frame" x="0.0" y="179.5" width="354" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" label="Email"/>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="username"/>
                                                 <connections>
@@ -391,15 +384,14 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N20-WS-H0h">
-                                                <rect key="frame" x="0.0" y="211.5" width="354" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="223.5" width="354" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BOe-QD-foS">
-                                                <rect key="frame" x="0.0" y="242" width="354" height="30"/>
+                                                <rect key="frame" x="0.0" y="254" width="354" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Your PDM account password" label="Password"/>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES" textContentType="new-password"/>
                                                 <connections>
@@ -408,15 +400,14 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBq-Q7-RcK">
-                                                <rect key="frame" x="0.0" y="282" width="354" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="298" width="354" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KwR-VZ-c9J">
-                                                <rect key="frame" x="0.0" y="312.5" width="354" height="30"/>
+                                                <rect key="frame" x="0.0" y="328.5" width="354" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Your PDM account password" label="Password"/>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="new-password"/>
                                                 <connections>
@@ -425,14 +416,14 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T07-eX-wHd">
-                                                <rect key="frame" x="0.0" y="352.5" width="354" height="17"/>
+                                                <rect key="frame" x="0.0" y="372.5" width="354" height="17"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="passwordStatus"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-qU-IHV" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="379.5" width="354" height="38"/>
+                                                <rect key="frame" x="0.0" y="399.5" width="354" height="30"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
                                                 <state key="normal" title="Create Account"/>
                                                 <userDefinedRuntimeAttributes>
@@ -454,7 +445,7 @@
                                 </constraints>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mX-yM-C93">
-                                <rect key="frame" x="16" y="80" width="200.5" height="36"/>
+                                <rect key="frame" x="16" y="60" width="226.5" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -493,17 +484,17 @@
             <objects>
                 <tableViewController id="th2-EW-KYi" customClass="CategorySummaryTableViewController" customModule="myPHR" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="UnY-Tn-Uhp">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="456"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="451"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="KSG-Lc-3ys">
-                            <rect key="frame" x="0.0" y="72" width="343" height="44"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="KSG-Lc-3ys">
+                            <rect key="frame" x="0.0" y="99.5" width="343" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="Tma-3E-kEl" detailTextLabel="kLp-Zd-XY8" style="IBUITableViewCellStyleValue1" id="DBP-Kf-N2y">
-                                <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="343" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DBP-Kf-N2y" id="khq-vs-Snc">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
