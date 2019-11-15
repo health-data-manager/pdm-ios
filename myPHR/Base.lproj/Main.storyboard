@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,19 +18,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient Data Manager" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDd-X6-beO">
-                                <rect key="frame" x="37" y="373" width="301" height="36"/>
+                                <rect key="frame" x="37" y="357" width="301" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" name="SelectedNav"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect your health data for sharing with anyone you want." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chf-KJ-HHe">
-                                <rect key="frame" x="32" y="457" width="311" height="41"/>
+                                <rect key="frame" x="32" y="441" width="311" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-Pp-QvB" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="8" y="629" width="359" height="30"/>
+                                <rect key="frame" x="8" y="621" width="359" height="38"/>
                                 <state key="normal" title="Sign In"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="NO"/>
@@ -40,13 +40,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An open source project by MITRE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZx-sf-pUU">
-                                <rect key="frame" x="60" y="530" width="255" height="21"/>
+                                <rect key="frame" x="60" y="514" width="255" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtT-uw-y5F" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="8" y="583" width="359" height="30"/>
+                                <rect key="frame" x="8" y="567" width="359" height="38"/>
                                 <state key="normal" title="Create Account"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isButtonActive" value="YES"/>
@@ -93,7 +93,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-9Y-rYY">
-                                <rect key="frame" x="16" y="133" width="343" height="187"/>
+                                <rect key="frame" x="16" y="133" width="343" height="179"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okf-Ss-tCp">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -130,7 +130,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9N-hh-f85" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="149" width="343" height="38"/>
+                                        <rect key="frame" x="0.0" y="149" width="343" height="30"/>
                                         <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
                                         <state key="normal" title="Sign In"/>
                                         <userDefinedRuntimeAttributes>
@@ -179,52 +179,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYT-vw-FI4">
-                                <rect key="frame" x="52" y="213" width="307" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This text should explain what is happening here." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEU-Cj-JoO">
+                                <rect key="frame" x="16" y="158" width="343" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TL-5A-ouP" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                <rect key="frame" x="16" y="282" width="343" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connecting to HealthKit" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-c6-4XA">
+                                <rect key="frame" x="16" y="60" width="343" height="82"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TL-5A-ouP" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
+                                <rect key="frame" x="16" y="285.5" width="343" height="30"/>
                                 <state key="normal" title="Retry"/>
                                 <connections>
                                     <action selector="retry:" destination="3dG-5s-UAs" eventType="primaryActionTriggered" id="Wbm-t2-e8r"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="This text should explain what is happening here." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEU-Cj-JoO">
-                                <rect key="frame" x="16" y="140" width="343" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Connecting to HealthKit" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-c6-4XA">
-                                <rect key="frame" x="16" y="80" width="177" height="36"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Wh-v2G">
-                                <rect key="frame" x="16" y="213" width="20" height="20"/>
-                            </activityIndicatorView>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nx9-Ku-M30">
+                                <rect key="frame" x="16" y="219" width="343" height="20.5"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Wh-v2G">
+                                        <rect key="frame" x="0.0" y="0.5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYT-vw-FI4">
+                                        <rect key="frame" x="30" y="0.0" width="313" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="w25-4h-HR1">
+                                <rect key="frame" x="16" y="261.5" width="343" height="2"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="7TL-5A-ouP" secondAttribute="trailing" constant="16" id="0rI-9n-mGV"/>
-                            <constraint firstItem="tEU-Cj-JoO" firstAttribute="top" secondItem="QYg-c6-4XA" secondAttribute="bottom" constant="24" id="4og-zb-nFO"/>
-                            <constraint firstItem="QYg-c6-4XA" firstAttribute="top" secondItem="NWe-fk-1YZ" secondAttribute="top" constant="16" id="GrW-Rd-BVO"/>
-                            <constraint firstItem="7TL-5A-ouP" firstAttribute="leading" secondItem="NWe-fk-1YZ" secondAttribute="leading" constant="16" id="IxA-dq-omE"/>
-                            <constraint firstItem="QYg-c6-4XA" firstAttribute="leading" secondItem="NWe-fk-1YZ" secondAttribute="leading" constant="16" id="Nts-eS-gJj"/>
-                            <constraint firstItem="tEU-Cj-JoO" firstAttribute="leading" secondItem="NWe-fk-1YZ" secondAttribute="leading" constant="16" id="UgB-z6-ybZ"/>
-                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QYg-c6-4XA" secondAttribute="trailing" constant="16" id="WSt-ur-mqz"/>
-                            <constraint firstItem="z5W-Wh-v2G" firstAttribute="leading" secondItem="NWe-fk-1YZ" secondAttribute="leading" constant="16" id="db7-k1-sZo"/>
-                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="xYT-vw-FI4" secondAttribute="trailing" constant="16" id="e7I-ln-q1u"/>
-                            <constraint firstItem="z5W-Wh-v2G" firstAttribute="top" secondItem="tEU-Cj-JoO" secondAttribute="bottom" constant="32" id="gfL-VK-URL"/>
-                            <constraint firstItem="7TL-5A-ouP" firstAttribute="top" secondItem="xYT-vw-FI4" secondAttribute="bottom" constant="48" id="jay-wU-afa"/>
-                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7TL-5A-ouP" secondAttribute="bottom" constant="347" id="l3q-bK-Xcx"/>
-                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="tEU-Cj-JoO" secondAttribute="trailing" constant="16" id="oA6-Xa-uyP"/>
-                            <constraint firstItem="xYT-vw-FI4" firstAttribute="top" secondItem="tEU-Cj-JoO" secondAttribute="bottom" constant="32" id="r6d-dB-yPU"/>
-                            <constraint firstItem="xYT-vw-FI4" firstAttribute="leading" secondItem="z5W-Wh-v2G" secondAttribute="trailing" constant="16" id="tic-A5-iy2"/>
+                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="7TL-5A-ouP" secondAttribute="trailing" constant="16" id="1ae-B2-wh3"/>
+                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="nx9-Ku-M30" secondAttribute="trailing" constant="16" id="2el-Ut-Da7"/>
+                            <constraint firstItem="w25-4h-HR1" firstAttribute="top" secondItem="nx9-Ku-M30" secondAttribute="bottom" constant="22" id="3uC-5S-dBp"/>
+                            <constraint firstItem="7TL-5A-ouP" firstAttribute="leading" secondItem="NWe-fk-1YZ" secondAttribute="leading" constant="16" id="AOM-aW-AFZ"/>
+                            <constraint firstItem="tEU-Cj-JoO" firstAttribute="leading" secondItem="NWe-fk-1YZ" secondAttribute="leading" constant="16" id="DSm-5a-2BG"/>
+                            <constraint firstItem="w25-4h-HR1" firstAttribute="leading" secondItem="bG9-bJ-06g" secondAttribute="leading" constant="16" id="GYe-iT-DJb"/>
+                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="QYg-c6-4XA" secondAttribute="trailing" constant="16" id="Leg-P7-gfc"/>
+                            <constraint firstItem="nx9-Ku-M30" firstAttribute="leading" secondItem="NWe-fk-1YZ" secondAttribute="leading" constant="16" id="MJG-TA-8LC"/>
+                            <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="tEU-Cj-JoO" secondAttribute="trailing" constant="16" id="Svz-He-sf0"/>
+                            <constraint firstItem="QYg-c6-4XA" firstAttribute="leading" secondItem="NWe-fk-1YZ" secondAttribute="leading" constant="16" id="jId-v6-kfb"/>
+                            <constraint firstItem="nx9-Ku-M30" firstAttribute="top" secondItem="tEU-Cj-JoO" secondAttribute="bottom" constant="20" id="jYK-69-SP8"/>
+                            <constraint firstAttribute="trailing" secondItem="w25-4h-HR1" secondAttribute="trailing" constant="16" id="qhY-kL-Iuy"/>
+                            <constraint firstItem="7TL-5A-ouP" firstAttribute="top" secondItem="w25-4h-HR1" secondAttribute="bottom" constant="22" id="w2T-oF-OWw"/>
+                            <constraint firstItem="QYg-c6-4XA" firstAttribute="top" secondItem="NWe-fk-1YZ" secondAttribute="top" constant="16" id="xn7-4e-5Kp"/>
+                            <constraint firstItem="tEU-Cj-JoO" firstAttribute="top" secondItem="QYg-c6-4XA" secondAttribute="bottom" constant="16" id="zqU-ia-zoa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NWe-fk-1YZ"/>
                     </view>
@@ -232,6 +240,7 @@
                         <outlet property="activityIndicator" destination="z5W-Wh-v2G" id="aq0-YK-41B"/>
                         <outlet property="descriptionLabel" destination="tEU-Cj-JoO" id="XrE-8M-Yrz"/>
                         <outlet property="loadingLabel" destination="xYT-vw-FI4" id="hO9-4h-uhw"/>
+                        <outlet property="progressView" destination="w25-4h-HR1" id="grE-4h-lth"/>
                         <outlet property="retryButton" destination="7TL-5A-ouP" id="Aeh-2h-1cD"/>
                         <outlet property="titleLabel" destination="QYg-c6-4XA" id="Cc2-B4-MEf"/>
                         <segue destination="NKh-ni-LcR" kind="showDetail" identifier="Home" id="sDh-JN-vse"/>
@@ -349,7 +358,7 @@
                                 <rect key="frame" x="0.0" y="113" width="375" height="554"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="1000" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H7B-ms-tn3">
-                                        <rect key="frame" x="10" y="0.0" width="354" height="519.5"/>
+                                        <rect key="frame" x="10" y="0.0" width="354" height="511.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izf-cj-xCp">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
@@ -456,7 +465,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-qU-IHV" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="481.5" width="354" height="38"/>
+                                                <rect key="frame" x="0.0" y="481.5" width="354" height="30"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Sign in to PDM"/>
                                                 <state key="normal" title="Create Account"/>
                                                 <userDefinedRuntimeAttributes>
