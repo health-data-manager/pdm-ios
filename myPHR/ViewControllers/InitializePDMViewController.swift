@@ -133,16 +133,6 @@ class InitializePDMViewController: UIViewController {
                 self.progressView.isHidden = false
             }
         }
-        pdm.uploadHealthRecordsFromHealthKit() { error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self.handleError(error, title: "Could not load health records")
-                    return
-                } else {
-                    self.loadHealthRecords()
-                }
-            }
-        }
     }
 
     func loadHealthRecords() {

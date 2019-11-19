@@ -381,27 +381,46 @@ class PatientDataManager {
     }
 
     @discardableResult func uploadHealthRecords(_ records: [HKClinicalRecord], completionCallback: @escaping (Error?) -> Void) -> URLSessionDataTask? {
+        // A couple of "fast-fail" guards
         guard restClient.hasBearerToken else {
             completionCallback(PatientDataManagerError.notLoggedIn)
             return nil
         }
-        let url = rootURL.appendingPathComponent("api/v1/$process-message")
+        guard activeProfile?.profileId != nil else {
+            completionCallback(PatientDataManagerError.noActiveProfile)
+            return nil
+        }
         // The data should be a single resource which needs to be wrapped into a bundle
         let bundle = MessageBundle()
+        do {
+            try bundle.addRecordsAsEntry(records)
+        } catch {
+            // Q: Is this really an error?
+            completionCallback(error)
+            return nil
+        }
+        return uploadMessageBundle(bundle, completionCallback: completionCallback)
+    }
+
+    /// Uploads a message bundle. Currently will always add a patient ID to the bundle.
+    @discardableResult func uploadMessageBundle(_ bundle: MessageBundle, completionCallback: @escaping (Error?) -> Void) -> URLSessionDataTask? {
         guard let pID = activeProfile?.profileId else {
             completionCallback(PatientDataManagerError.noActiveProfile)
             return nil
         }
         bundle.addPatientId(String(pID))
-        do {
-            try bundle.addRecordsAsEntry(records)
-            return restClient.post(to: url, withJSON: bundle.createJSON()) { data, response, error in
-                completionCallback(error)
-            }
-        } catch {
-            // Q: Is this really an error?
-            completionCallback(error)
+        return uploadHealthRecords(withJSON: bundle.createJSON(), completionCallback: completionCallback)
+    }
+    
+    /// Uploads a given JSON object directly to the health records endpoint within the PDM server. This does no verification of the JSON object.
+    @discardableResult func uploadHealthRecords(withJSON json: Any, completionCallback: @escaping (Error?) -> Void) -> URLSessionDataTask? {
+        guard restClient.hasBearerToken else {
+            completionCallback(PatientDataManagerError.notLoggedIn)
             return nil
+        }
+        let url = rootURL.appendingPathComponent("api/v1/$process-message")
+        return restClient.post(to: url, withJSON: json) { data, response, error in
+            completionCallback(error)
         }
     }
 
