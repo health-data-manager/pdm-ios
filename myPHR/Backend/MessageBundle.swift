@@ -15,9 +15,11 @@ enum MessageBundleError: Error {
     case missingFhirData
 }
 
+/// A FHIR message bundle.
 class MessageBundle {
     var entries = [[String: Any?]]()
 
+    /// Adds an HKClinicalRecord object as an entry within this message bundle.
     func addRecordAsEntry(_ record: HKClinicalRecord) throws {
         if let fhir = record.fhirResource {
             let json = try JSONSerialization.jsonObject(with: fhir.data, options: [])
@@ -52,13 +54,13 @@ class MessageBundle {
         entries.append([ "resourceType": "MessageHeader" ])
     }
 
-    func addPatientId(_ patientId: String) {
+    func addPatientId(_ newPatientId: String) {
         addEntry([
             "resourceType": "Parameters",
             "parameter": [
                 [
                     "name": "health_data_manager_profile_id",
-                    "valueString": patientId
+                    "valueString": newPatientId
                 ]
             ]
         ], fullUrl: "")

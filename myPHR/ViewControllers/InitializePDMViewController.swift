@@ -15,6 +15,7 @@ class InitializePDMViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var retryButton: PDMButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var progressView: UIProgressView!
 
     var uploadResults: PDMUploadResults?
 
@@ -89,21 +90,45 @@ class InitializePDMViewController: UIViewController {
             pdmNotAvailable()
             return
         }
-        guard pdm.healthKit != nil else {
+        guard let healthKit = pdm.healthKit else {
             // If HealthKit isn't available, skip ahead to loading the records back from the PDM
             segueToHome()
             return
         }
-        showSendingHealthKit("Loading local health records...")
-        pdm.uploadHealthRecordsFromHealthKit() { (error, result) in
+        showSendingHealthKit("Loading records from HealthKit...")
+        healthKit.queryAllHealthRecords() { records, error in
             DispatchQueue.main.async {
                 if let error = error {
                     self.handleError(error, title: "Could not load health records")
                     return
-                } else {
-                    self.uploadResults = result
-                    self.segueToHome()
                 }
+                guard let records = records else {
+                    self.handleError(PatientDataManagerError.internalError, title: "Unable to load records from HealthKit")
+                    return
+                }
+                // Otherwise, we're ready to try and upload them.
+                self.showSendingHealthKit("Sending health records to PDM...")
+                let task = pdm.uploadHealthRecords(records) { error, result in
+                    DispatchQueue.main.async {
+                        if let error = error {
+                            self.handleError(error, title: "Could not upload health records")
+                            return
+                        } else {
+                            self.uploadResults = result
+                            self.segueToHome()
+                        }
+                    }
+                }
+                guard let unwrappedTask = task else {
+                    // If the task is nil, an error will have been raised to the completion handler
+                    return
+                }
+                // Tell the progress view to watch the observed progress
+                self.progressView.observedProgress = unwrappedTask.progress
+                // Hide the activity indicator (the spinner)...
+                self.activityIndicator.isHidden = true
+                // ...and show the progress bar
+                self.progressView.isHidden = false
             }
         }
     }
@@ -149,6 +174,8 @@ class InitializePDMViewController: UIViewController {
             activityIndicator.startAnimating()
         }
         retryButton.isHidden = true
+        // Also reset the progress indicator
+        progressView.isHidden = true
     }
 
     func handleError(_ error: Error, title: String) {

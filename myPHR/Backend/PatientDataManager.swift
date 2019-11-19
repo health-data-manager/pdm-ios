@@ -376,33 +376,52 @@ class PatientDataManager {
     }
 
     @discardableResult func uploadHealthRecords(_ records: [HKClinicalRecord], completionCallback: @escaping (Error?, PDMUploadResults?) -> Void) -> URLSessionDataTask? {
+        // A couple of "fast-fail" guards
         guard restClient.hasBearerToken else {
             completionCallback(PatientDataManagerError.notLoggedIn, nil)
             return nil
         }
-        let url = rootURL.appendingPathComponent("api/v1/$process-message")
-        // The data should be a single resource which needs to be wrapped into a bundle
-        let bundle = MessageBundle()
-        guard let pID = activeProfile?.profileId else {
+        guard activeProfile?.profileId != nil else {
             completionCallback(PatientDataManagerError.noActiveProfile, nil)
             return nil
         }
-        bundle.addPatientId(String(pID))
+        // The data should be a single resource which needs to be wrapped into a bundle
+        let bundle = MessageBundle()
         do {
             try bundle.addRecordsAsEntry(records)
-            return restClient.post(to: url, withJSON: bundle.createJSON()) { data, response, error in
-                if error == nil {
-                    // If we have a success, generate a result object
-                    // (It might make sense to generate the result from the data receipt but whatever)
-                    completionCallback(nil, PDMUploadResults(records))
-                } else {
-                    completionCallback(error, nil)
-                }
-            }
         } catch {
             // Q: Is this really an error?
             completionCallback(error, nil)
             return nil
+        }
+        return uploadMessageBundle(bundle) { error in
+            if error != nil {
+                completionCallback(error, nil)
+            } else {
+                completionCallback(nil, PDMUploadResults(records))
+            }
+        }
+    }
+
+    /// Uploads a message bundle. Currently will always add a patient ID to the bundle.
+    @discardableResult func uploadMessageBundle(_ bundle: MessageBundle, completionCallback: @escaping (Error?) -> Void) -> URLSessionDataTask? {
+        guard let pID = activeProfile?.profileId else {
+            completionCallback(PatientDataManagerError.noActiveProfile)
+            return nil
+        }
+        bundle.addPatientId(String(pID))
+        return uploadHealthRecords(withJSON: bundle.createJSON(), completionCallback: completionCallback)
+    }
+
+    /// Uploads a given JSON object directly to the health records endpoint within the PDM server. This does no verification of the JSON object.
+    @discardableResult func uploadHealthRecords(withJSON json: Any, completionCallback: @escaping (Error?) -> Void) -> URLSessionDataTask? {
+        guard restClient.hasBearerToken else {
+            completionCallback(PatientDataManagerError.notLoggedIn)
+            return nil
+        }
+        let url = rootURL.appendingPathComponent("api/v1/$process-message")
+        return restClient.post(to: url, withJSON: json) { data, response, error in
+            completionCallback(error)
         }
     }
 
