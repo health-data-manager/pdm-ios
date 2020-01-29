@@ -11,3 +11,7 @@ This is a simplified variant that removes the health data visualization views to
 Copyright (c) 2019 by MITRE.
 
 Licensed under the [Apache 2.0 License](LICENSE).
+
+# Open Font License
+
+The included Karla font files (in myPHR/Resources) are licensed under the [Open Font License 1.1](OFL.txt).

@@ -24,6 +24,10 @@
 		2E3C3349229892DD0013A712 /* PDMMiniBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */; };
 		2E40233022B7DE4500E525C7 /* PDMBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40232F22B7DE4400E525C7 /* PDMBorderedView.swift */; };
 		2E465FBA233A94CD00087B1E /* PDMBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E465FB9233A94CD00087B1E /* PDMBadge.swift */; };
+		2E4910312398021B00A5AB8E /* Karla-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E49102D2398021B00A5AB8E /* Karla-Italic.ttf */; };
+		2E4910322398021B00A5AB8E /* Karla-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E49102E2398021B00A5AB8E /* Karla-BoldItalic.ttf */; };
+		2E4910332398021B00A5AB8E /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E49102F2398021B00A5AB8E /* Karla-Bold.ttf */; };
+		2E4910342398021B00A5AB8E /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E4910302398021B00A5AB8E /* Karla-Regular.ttf */; };
 		2E4A2AB62326C26F0019C6A8 /* PDMUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4A2AB52326C26F0019C6A8 /* PDMUserTests.swift */; };
 		2E4A2AB82326CC6C0019C6A8 /* CreateAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4A2AB72326CC6C0019C6A8 /* CreateAccountTests.swift */; };
 		2E5088F22267B6DA009FF808 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */; };
@@ -112,6 +116,10 @@
 		2E3C3348229892DD0013A712 /* PDMMiniBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMMiniBrowserViewController.swift; sourceTree = "<group>"; };
 		2E40232F22B7DE4400E525C7 /* PDMBorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDMBorderedView.swift; sourceTree = "<group>"; };
 		2E465FB9233A94CD00087B1E /* PDMBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMBadge.swift; sourceTree = "<group>"; };
+		2E49102D2398021B00A5AB8E /* Karla-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Italic.ttf"; sourceTree = "<group>"; };
+		2E49102E2398021B00A5AB8E /* Karla-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-BoldItalic.ttf"; sourceTree = "<group>"; };
+		2E49102F2398021B00A5AB8E /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Bold.ttf"; sourceTree = "<group>"; };
+		2E4910302398021B00A5AB8E /* Karla-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Regular.ttf"; sourceTree = "<group>"; };
 		2E4A2AB52326C26F0019C6A8 /* PDMUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMUserTests.swift; sourceTree = "<group>"; };
 		2E4A2AB72326CC6C0019C6A8 /* CreateAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTests.swift; sourceTree = "<group>"; };
 		2E5088F12267B6DA009FF808 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +227,7 @@
 				2E6DC42622A04A3F000D8DE4 /* Storyboards */,
 				2E17CFFE227B6C9000AF2FBC /* ViewControllers */,
 				2EA937122279481F00513F9D /* UI */,
+				2E49101E2396C57C00A5AB8E /* Resources */,
 				2E2342A4224291C500045E3A /* Info.plist */,
 				2E5A87BC2245188B00E225D5 /* Settings.plist */,
 				2E23429C224291C300045E3A /* myPHR.xcdatamodeld */,
@@ -272,6 +281,17 @@
 				2E5A87BA2244C06000E225D5 /* MessageBundle.swift */,
 			);
 			path = Backend;
+			sourceTree = "<group>";
+		};
+		2E49101E2396C57C00A5AB8E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2E49102F2398021B00A5AB8E /* Karla-Bold.ttf */,
+				2E49102E2398021B00A5AB8E /* Karla-BoldItalic.ttf */,
+				2E49102D2398021B00A5AB8E /* Karla-Italic.ttf */,
+				2E4910302398021B00A5AB8E /* Karla-Regular.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		2E6DC42622A04A3F000D8DE4 /* Storyboards */ = {
@@ -429,6 +449,10 @@
 			files = (
 				2EFCD55E230EF0AB00932D5F /* Units.strings in Resources */,
 				2E5A87BD2245188B00E225D5 /* Settings.plist in Resources */,
+				2E4910312398021B00A5AB8E /* Karla-Italic.ttf in Resources */,
+				2E4910332398021B00A5AB8E /* Karla-Bold.ttf in Resources */,
+				2E4910322398021B00A5AB8E /* Karla-BoldItalic.ttf in Resources */,
+				2E4910342398021B00A5AB8E /* Karla-Regular.ttf in Resources */,
 				2E2342A0224291C500045E3A /* Assets.xcassets in Resources */,
 				2E6DC43122A04D6C000D8DE4 /* LaunchScreen.storyboard in Resources */,
 				2E6DC42F22A04D6C000D8DE4 /* Main.storyboard in Resources */,
