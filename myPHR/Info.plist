@@ -39,7 +39,11 @@
 		</dict>
 	</dict>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>The Patient Data Manager provides a method for reviewing the health records and sending them to a centralized store.</string>
+	<string>myPHR provides a method for reviewing the health records and sending them to a centralized store.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>myPHR provides a method for reviewing the health records and sending them to a centralized store.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>myPHR should not require access to write data.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
