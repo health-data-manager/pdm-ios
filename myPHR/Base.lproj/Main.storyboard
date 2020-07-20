@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qka-tD-UK2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qka-tD-UK2">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -34,7 +34,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect your health data for sharing with anyone you want." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chf-KJ-HHe">
                                 <rect key="frame" x="32" y="443" width="311" height="40"/>
                                 <fontDescription key="fontDescription" name="Karla-Regular" family="Karla" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="Text"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-Pp-QvB" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
@@ -51,7 +51,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An open source project by MITRE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZx-sf-pUU">
                                 <rect key="frame" x="61.5" y="515" width="252.5" height="20"/>
                                 <fontDescription key="fontDescription" name="Karla-Regular" family="Karla" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="Text"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtT-uw-y5F" customClass="PDMButton" customModule="myPHR" customModuleProvider="target">
@@ -160,7 +160,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="xvB-Vy-xaj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Sku-we-0dS"/>
                             <constraint firstItem="QoG-9Y-rYY" firstAttribute="top" secondItem="xvB-Vy-xaj" secondAttribute="bottom" constant="32" id="ZHi-bT-0JQ"/>
@@ -228,7 +228,7 @@
                                 <rect key="frame" x="16" y="233.5" width="343" height="2"/>
                             </progressView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="7TL-5A-ouP" secondAttribute="trailing" constant="16" id="1ae-B2-wh3"/>
                             <constraint firstItem="NWe-fk-1YZ" firstAttribute="trailing" secondItem="nx9-Ku-M30" secondAttribute="trailing" constant="16" id="2el-Ut-Da7"/>
@@ -300,7 +300,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="M9I-0j-v9j" firstAttribute="top" secondItem="Lnz-qt-09b" secondAttribute="bottom" constant="16" id="1Pm-S7-rsd"/>
                             <constraint firstItem="vdR-8F-X0x" firstAttribute="trailing" secondItem="M9I-0j-v9j" secondAttribute="trailing" constant="16" id="1f2-Pu-U5v"/>
@@ -428,7 +428,7 @@
 • At least one number
 • At least one symbol (the characters #?!@$%^&amp;*-)</string>
                                                 <fontDescription key="fontDescription" name="Karla-Regular" family="Karla" pointSize="15"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBq-Q7-RcK">
@@ -484,7 +484,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Cuf-o1-0QJ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6mX-yM-C93" secondAttribute="trailing" constant="16" id="7TF-E6-gfd"/>
                             <constraint firstItem="6mX-yM-C93" firstAttribute="leading" secondItem="Cuf-o1-0QJ" secondAttribute="leading" constant="16" id="B9B-wh-cfP"/>
@@ -523,7 +523,7 @@
                         <view key="tableFooterView" contentMode="scaleToFill" id="KSG-Lc-3ys">
                             <rect key="frame" x="0.0" y="99.5" width="343" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="Tma-3E-kEl" detailTextLabel="kLp-Zd-XY8" style="IBUITableViewCellStyleValue1" id="DBP-Kf-N2y">
@@ -562,12 +562,15 @@
             <point key="canvasLocation" x="2487" y="751"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="XFW-u4-nzc"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="SelectedNav">
             <color red="0.25900000333786011" green="0.54900002479553223" blue="0.88999998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Text">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="lhz-BI-xji"/>
-    </inferredMetricsTieBreakers>
 </document>
